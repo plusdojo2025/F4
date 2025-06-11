@@ -1,0 +1,49 @@
+/* 目標設定 */
+.goalSettingText {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 50px;
+}
+/* ------------------------------------------------- */
+
+
+/* テキスト */
+.goalSettingTextH3 h3{
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+/* ------------------------------------------------- */
+
+
+/* 警告文 */
+.goalSettingWarning ul {
+    list-style: none; /* デフォルトのリストスタイルを削除 */
+    padding-left: 0; /* 左の余白も削除 */
+    margin: 0 20px;
+}
+
+.goalSettingWarning li::before {
+    content: "※ "; /* 疑似要素で指定 */
+}
+
+.goalSettingWarning li {
+    line-height: 2; /* 行間を広く */
+    text-indent: -1.5em;
+    margin-bottom: 20px; /* 各項目の間隔を広く */
+}
+
+.goalSettingWarning span {
+    color: #FF0000; /* 赤色 */
+    font-size: 16px;
+}
+/* ------------------------------------------------- */
+
+
+/* ボタンコンテナの設定 */
+.buttonContainer {
+    margin-top: 30px; /* 上部の余白 */
+    
+}
+/* ------------------------------------------------- */

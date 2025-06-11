@@ -1,0 +1,172 @@
+body {
+    min-width: 320px;
+    max-width: 414px;
+    margin: 0 auto;
+    font-family: 'Manrope', sans-serif;
+    padding: 0px 20px;
+}
+
+span {
+    font-size: 14px;
+    color: #5C788A;
+}
+/* ------------------------------------------------- */
+
+
+/* ヘッダー */
+.headerH1 {
+    margin: 120px 0 10px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+.headerH2 {
+    margin: 70px 0 30px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+/* ------------------------------------------------- */
+
+
+/* 進捗率表示 */
+.progressContainer {
+    text-align: left;
+    padding: 30px 0px;
+}
+
+.progressBar {
+  height: 10px;
+  background: #D4DEE3;
+  border-radius: 5px;
+  overflow: hidden; /* はみ出したら隠れるようにする */
+}
+
+.progressBarFill {
+  height: 100%;
+  background: #B2D1E5;
+  transition: width 0.3s ease-in-out; /* アニメーション効果を追加　どちらでも可 */
+}
+
+.goalTimeContainer {
+    text-align-last: left;
+    padding: 20px 0px;
+}
+/* ------------------------------------------------- */
+
+
+/* 目標時間表示 */
+.goalTimeContainer h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.goalTimeItem {
+    padding: 15px 0px;
+    display: flex;
+}
+
+.icon {
+    background-color: #EBEDF2;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goalTimeText {
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.goalTimeText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.goalTimeText p {
+    margin: 0;
+    font-size: 16px;
+}
+/* ------------------------------------------------- */
+
+
+/* フッターメニュー */
+.footerMenu {
+  position: fixed;
+  left: 0;                
+  right: 0;               
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #ccc;
+  z-index: 1000;          /* 最前面に表示 */
+}
+
+.menuContainer {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;/* 上下中央揃え　必要に応じて */
+}
+
+.menuContainer a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;  /* リンクの下線を消す */
+}
+
+.menuContainer svg {
+    display: block;
+    margin: 25px 0 8px; 
+}
+
+.menuContainer span {
+    font-size: 12px;        
+    color: #5C788A;         
+    margin-bottom: 20px;
+}
+/* ------------------------------------------------- */
+
+
+/* 入力フィールド */
+.input {
+    background-color: #EBEDF2;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 25px;
+    font-size: 16px;
+    border: 1px solid #DDDDDD;
+    width: 100%;
+}
+
+.form {
+  text-align: center;
+}
+
+/* ------------------------------------------------- */
+
+
+/* ボタン */
+.button {
+    background-color: #B2D1E5;
+    border-radius: 50px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0F1417;
+    border: none;
+    width: 100%;
+    
+}
+/* ------------------------------------------------- */
