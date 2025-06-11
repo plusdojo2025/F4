@@ -67,3 +67,4 @@ public class doTimesDTO implements Serializable {
         this.sleep_do = sleep_do;
     }
 
+}
