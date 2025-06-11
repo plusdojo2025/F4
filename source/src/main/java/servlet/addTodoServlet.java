@@ -29,7 +29,7 @@ public class addTodoServlet extends HttpServlet {
             dao.insertToDo(todo);//インサート関数呼び出し
         }
 
-        response.sendRedirect("todo.jsp"); // 画面を再読み込み（一覧へ戻る）
+        response.sendRedirect("todoList.jsp"); // 画面を再読み込み（一覧へ戻る）
     }
 }
 

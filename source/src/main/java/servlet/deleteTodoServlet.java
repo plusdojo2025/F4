@@ -22,7 +22,7 @@ public class deleteTodoServlet extends HttpServlet {
         todoListsDAO dao = new todoListsDAO();//dao呼び出し
         dao.deleteToDo(todo_list_id);//デリート処理呼び出し
 
-        response.sendRedirect("todo.jsp");//ページ更新
+        response.sendRedirect("todoList.jsp");//ページ更新
     }
 }
 
