@@ -2,7 +2,7 @@ package dto;
 
 import java.io.Serializable;
 
-public class goals implements Serializable {
+public class goalsDTO implements Serializable {
 	private int goals_id;           // 目標時間id
     private int id;                 // ユーザーid(外部キー)
 	private double exercise_goal;    // 運動時間目標
@@ -10,7 +10,7 @@ public class goals implements Serializable {
 	private double sleep_goal;       // 睡眠時間目標
 	
 
-	public goals(int goals_id, int id, double exercise_goal, double study_goal, double sleep_goal) {
+	public goalsDTO(int goals_id, int id, double exercise_goal, double study_goal, double sleep_goal) {
 		this.goals_id = goals_id;
         this.id = id;
 		this.exercise_goal = exercise_goal; 	
@@ -18,7 +18,7 @@ public class goals implements Serializable {
 		this.sleep_goal = sleep_goal;
 	}
 
-	public goals() {
+	public goalsDTO() {
 		this.goals_id = 0; 
         this.id = 0;
 		this.exercise_goal = 0; 	
