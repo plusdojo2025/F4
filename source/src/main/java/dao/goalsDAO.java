@@ -13,7 +13,7 @@ import dto.goalsDTO;
 public class goalsDAO {
 
 	// 目標を登録
-	public void insert(goalsDTO goal) {
+	public void insertGoal(goalsDTO goal) {
 		try {
 			// データベースに接続する
 			Connection conn = dbConnectionDAO.getConnection();
@@ -37,7 +37,7 @@ public class goalsDAO {
 	}
 	
 	// ユーザーの目標を取得
-	public List<goalsDTO> select(int userId) {
+	public List<goalsDTO> selectGoal(int userId) {
 		List<goalsDTO> goalList = new ArrayList<>();
 		try {
 			// データベースに接続する
@@ -63,7 +63,6 @@ public class goalsDAO {
 				
 				goalList.add(goal);
 			}
-  
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,11 +71,5 @@ public class goalsDAO {
 		return goalList;
 	}
 }
-
-	
-	
-
-
-
 
 
