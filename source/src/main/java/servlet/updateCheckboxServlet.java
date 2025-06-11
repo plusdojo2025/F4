@@ -30,6 +30,6 @@ public class updateCheckboxServlet extends HttpServlet {
         // 状態を更新
         dao.updateCheckbox(todo_list_id, newStatus);
 
-        response.sendRedirect("todo.jsp");
+        response.sendRedirect("todoList.jsp");
     }
 }
