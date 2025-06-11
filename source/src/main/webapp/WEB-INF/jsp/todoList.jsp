@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!-- <%@ page contentType="text/html;charset=UTF-8" language="java" %> -->
 <html>
 <head>
@@ -41,17 +40,4 @@
     <!-- フッター -->
     <!-- <jsp:include page="footerMenu.jsp" /> -->
 </body>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
->>>>>>> branch 'main' of https://github.com/plusdojo2025/F4.git
 </html>
