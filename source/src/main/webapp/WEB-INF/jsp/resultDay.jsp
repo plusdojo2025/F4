@@ -7,10 +7,9 @@
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="resultDay.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <!-- header -->
+    <!-- ヘッダー -->
     <div class="headerH2">
         <h2>本日の評価</h2>
     </div>   
@@ -58,6 +57,7 @@
         <p><span>jsp%</span></p>
     </div>
 
+    <!-- フィードバック -->
     <div>
         <p>全体の達成率は58.3%で、特に睡眠は比較的確保できていますが、勉強と運動はやや不足しているため、無理のない小さな目標から習慣化を目指すと効果的です。完璧を求めず、少しずつでも継続することが成長につながります。</p>
     </div>
