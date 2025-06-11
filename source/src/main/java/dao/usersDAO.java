@@ -50,4 +50,51 @@ public class usersDAO {
         // 結果を返す
 		return loginResult;
     }
+ // 引数userInfoで指定されたユーザー情報を登録し、成功したらtrueを返す
+    public boolean insert(usersDTO userInfo) {
+        Connection conn = null;
+        boolean result = false;
+
+        try {
+            // データベースに接続する
+            conn = dbConnectionDAO.getConnection();
+
+            // SQL文を準備する
+            String sql = "INSERT INTO users VALUES (0, ?, ?, ?)";
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            if (userInfo.getUser_name() != null) {
+				pStmt.setString(1, userInfo.getUser_name());
+			} else {
+				pStmt.setString(1, "");
+			}
+            if (userInfo.getMail() != null) {
+				pStmt.setString(2, userInfo.getMail());
+			} else {
+				pStmt.setString(2, "");
+			}
+            if (userInfo.getPw() != null) {
+				pStmt.setString(3, userInfo.getPw());
+			} else {
+				pStmt.setString(3, "");
+			}
+            // SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+        } catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+    }
 }
