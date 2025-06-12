@@ -9,14 +9,13 @@ import dto.usersDTO;
 
 public class usersDAO {
     // 引数で指定されたmailPwでログイン成功ならtrueを返す
-    public boolean isLoginOK(usersDTO mailPw) {
-     
-    	Connection conn = null;
+    /* public boolean isLoginOK(usersDTO mailPw) {
+        Connection conn = null;
         boolean loginResult = false;
 
         try {
             // データベースに接続する
-            conn = dbConnectionDAO.getConnection();
+            Connection conn = dbConnectionDAO.getConnection();
 
             // SELECT文を準備する
             String sql = "SELECT count(*) FROM users WHERE mail=? AND pw=?";
@@ -35,7 +34,10 @@ public class usersDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             loginResult = false;
-        } finally {
+        }catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			loginResult = false;
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
@@ -49,8 +51,8 @@ public class usersDAO {
 
         // 結果を返す
 		return loginResult;
-    }
- // 引数userInfoで指定されたユーザー情報を登録し、成功したらtrueを返す
+    } */
+    // 引数userInfoで指定されたユーザー情報を登録し、成功したらtrueを返す
     public boolean insert(usersDTO userInfo) {
         Connection conn = null;
         boolean result = false;
@@ -97,4 +99,58 @@ public class usersDAO {
 		// 結果を返す
 		return result;
     }
+
+	public usersDTO login(String mail, String pw) {
+		Connection conn = null;
+		usersDTO selectdto = new usersDTO();
+		usersDTO user = new usersDTO();
+
+		try {
+            // データベースに接続する
+            conn = dbConnectionDAO.getConnection();
+
+            // SELECT文を準備する
+            String sql = "SELECT count(*) FROM users WHERE mail=? AND pw=?";
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, selectdto.getMail());
+			pStmt.setString(2, selectdto.getPw());
+
+            // SELECT文を実行し、結果票を取得する
+            ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+				user = new usersDTO(
+					rs.getInt("id"),
+					rs.getString("user_name"),
+					rs.getString("mail"),
+					rs.getString("pw")
+				);	
+			}
+			else {
+				user = null;
+			}
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return user;
+	}
+
 }
+
+
+
+
+
+
+
+
+
