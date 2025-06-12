@@ -12,24 +12,32 @@ import dao.todoListsDAO;
 
 @WebServlet("/updateCheckbox")
 public class updateCheckboxServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
 
-        int todo_list_id = Integer.parseInt(request.getParameter("todo_list_id"));//jspよりリストidを取得
+        // パラメータ取得
+        String idStr = request.getParameter("todoId");
+        String checkedStr = request.getParameter("checked");
+        
+        // パラメータが欠けている場合は400
+        if (idStr == null || checkedStr == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
-        todoListsDAO dao = new todoListsDAO();
+        // 数値・真偽値へ変換
+        int todoId = Integer.parseInt(idStr);
+        boolean checked = Boolean.parseBoolean(checkedStr);
 
-        // 現在の状態を取得
-        boolean currentStatus = dao.getCheckboxStatus(todo_list_id);//チェックボックスの状態判定処理を呼び出し
+        // DAOを使ってチェック状態を更新
+        new todoListsDAO().updateCheckbox(todoId, checked);
 
-        // 状態を反転
-        boolean newStatus = !currentStatus;
-
-        // 状態を更新
-        dao.updateCheckbox(todo_list_id, newStatus);
-
-        response.sendRedirect("todoList.jsp");
+        // 更新成功のレスポンスを返すよー
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

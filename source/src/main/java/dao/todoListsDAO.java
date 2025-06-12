@@ -12,8 +12,8 @@ import dto.todoListsDTO;
 public class todoListsDAO {
 
     // 1. リストを追加
-    public void insertToDo(todoListsDTO todo) {//todolist型のtodoを引数として受け取り処理
-        String sql = "INSERT INTO todo_lists (id, list_content) VALUES (?, ?)";//SQL文を準備
+    public static void insertToDo(todoListsDTO todo) {
+        String sql = "INSERT INTO todo_lists (id, list_content) VALUES (?, ?)";
 
         try (Connection conn = dbConnectionDAO.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -29,24 +29,27 @@ public class todoListsDAO {
     }
 
     // 2. リストを削除
-    public void deleteToDo(int todo_list_id) {
-        String sql = "DELETE FROM todo_lists WHERE todo_list_id = ?";//SQL文を準備
+    public static int deleteToDo(int todo_list_id) {
+        String sql = "DELETE FROM todo_lists WHERE todo_list_id = ?";
+        int rowsAffected = 0;
 
         try (Connection conn = dbConnectionDAO.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, todo_list_id);
-            ps.executeUpdate();
+            rowsAffected = ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return rowsAffected;
     }
 
+
     // 3. 指定ユーザーのToDoリストを取得
-    public List<todoListsDTO> getToDoListByUserId(int userId) {
+    public static List<todoListsDTO> getToDoListByUserId(int userId) {
         List<todoListsDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM todo_lists WHERE id = ?";//SQL文を準備
+        String sql = "SELECT * FROM todo_lists WHERE id = ?";
 
         try (Connection conn = dbConnectionDAO.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -90,7 +93,7 @@ public class todoListsDAO {
     public boolean getCheckboxStatus(int todo_list_id) {
     boolean status = false;
     try (Connection conn = dbConnectionDAO.getConnection();
-         PreparedStatement stmt = conn.prepareStatement("SELECT checkbox FROM todo_lists WHERE list_id = ?")) {
+         PreparedStatement stmt = conn.prepareStatement("SELECT checkbox FROM todo_lists WHERE todo_list_id = ?")) {
         stmt.setInt(1, todo_list_id);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
