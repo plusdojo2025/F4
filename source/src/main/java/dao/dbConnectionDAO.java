@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class dbConnectionDAO {
-    private static final String URL = "jdbc:mysql://localhost:3306/your_db_name?serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/f4?serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PASSWORD = "password";
 
