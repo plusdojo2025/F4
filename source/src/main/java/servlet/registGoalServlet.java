@@ -24,11 +24,12 @@ public class registGoalServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// フォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
-		dispatcher.forward(request, response);
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+	    System.out.println("✅ registGoalServlet にアクセスがありました");
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+	    dispatcher.forward(request, response);
 	}
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -58,11 +58,12 @@ public class loginServlet extends HttpServlet {
 
 			if (gdto != null) {
 				// ホームサーブレットにリダイレクトする
-				response.sendRedirect("/webapp/homeServlet");
+				response.sendRedirect(request.getContextPath() + "/homeServlet");
+
 			}
 			else if (gdto == null){
 				// 目標サーブレットにリダイレクトする
-				response.sendRedirect("/webapp/registGoalServlet");
+				response.sendRedirect(request.getContextPath() + "/registGoalServlet");
 			}
 		}
 	}
