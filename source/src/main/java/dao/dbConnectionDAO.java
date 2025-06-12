@@ -10,12 +10,15 @@ public class dbConnectionDAO {
     private static final String PASSWORD = "password";
 
     public static Connection getConnection() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // ドライバの読み込み
+    	try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // ドライバのロード
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
-            throw new SQLException("JDBC Driver not found", e);
+            System.err.println("JDBCドライバが見つかりません: " + e.getMessage());
+            throw new SQLException("ドライバロード失敗", e);
+        } catch (SQLException e) {
+            System.err.println("DB接続失敗: " + e.getMessage());
+            throw e; // 呼び出し元で再処理できるように再スロー
         }
-
-        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
