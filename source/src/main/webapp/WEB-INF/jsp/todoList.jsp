@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODOリスト</title>
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="todo_list.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/global.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/todoList.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <!-- header -->
+    <!-- ヘッダー -->
     <div class="headerH2">
         <h2>Todoリスト</h2>
     </div>
@@ -38,6 +37,6 @@
     </div>
 
     <!-- フッター -->
-    <!-- <jsp:include page="footerMenu.jsp" /> -->
+    <jsp:include page="footerMenu.jsp" />
 </body>
 </html>

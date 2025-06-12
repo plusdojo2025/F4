@@ -1,0 +1,9 @@
+/* 目標時間表示 */
+.goalTimeContainer {
+    padding: 0 0;
+}
+
+/* 進捗率表示 */
+.progressContainer {
+    padding: 0 0 10px 0;
+}

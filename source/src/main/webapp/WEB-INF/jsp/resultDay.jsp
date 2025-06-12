@@ -3,30 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ホーム</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/global.css">
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/home.css">
+    <title>本日の評価</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="resultDay.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- ヘッダー -->
     <div class="headerH2">
-        <h2>ようこそJSPさん</h2>
+        <h2>本日の評価</h2>
     </div>   
-    
-    <!-- 進捗率表示 -->
-    <div class="progressContainer">
-        <p>一週間の進捗率</p>
-        <!-- ここのwidthをjspで変更してください -->
-        <div class="progressBar">
-            <div class="progressBarFill" style="width: 25.5%;"></div>
-        </div>
-        <p><span>jsp%</span></p>
-    </div>
 
     <!-- 目標時間表示 -->
     <div class="goalTimeContainer">
-        <h1>一日の目標時間</h1>
+        <h1>本日の活動</h1>
         <!-- 運動時間 -->
         <div class="goalTimeItem">
             <div class="icon">
@@ -54,17 +44,23 @@
             </div>
             <div class="goalTimeText"><p>睡眠時間</p><span>jsp時間</span></div>
         </div>
+        <h1>達成率</h1>
     </div>
 
-    <!-- ログアウト -->
-     <div class="logoutContainer">
-         <p>ログアウトする</p>
-         <div class="logoutIcon">
-            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 3.49996H6C3.643 3.49996 2.464 3.49996 1.732 4.23196C1 4.96396 1 6.14296 1 8.49996V8.99996M7 18.5H6C3.643 18.5 2.464 18.5 1.732 17.768C1 17.035 1 15.857 1 13.5V13M11.658 1.34696C9.496 0.969964 8.415 0.781964 7.708 1.40896C7.001 2.03596 7 3.18296 7 5.47596V16.524C7 18.817 7 19.964 7.707 20.591C8.414 21.218 9.495 21.03 11.657 20.653L13.987 20.247C16.381 19.829 17.578 19.62 18.289 18.742C19 17.863 19 16.593 19 14.052V7.94796C19 5.40796 19 4.13796 18.29 3.25896C17.814 2.67196 17.122 2.38396 16 2.13296M10 9.99996V12" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-         </div>
-     </div>
+    <!-- 進捗率表示 -->
+    <div class="progressContainer">
+        <p>今日の進捗率</p>
+        <!-- ここのwidthをjspで変更してください -->
+        <div class="progressBar">
+            <div class="progressBarFill" style="width: 75.5%;"></div>
+        </div>
+        <p><span>jsp%</span></p>
+    </div>
+
+    <!-- フィードバック -->
+    <div>
+        <p>全体の達成率は58.3%で、特に睡眠は比較的確保できていますが、勉強と運動はやや不足しているため、無理のない小さな目標から習慣化を目指すと効果的です。完璧を求めず、少しずつでも継続することが成長につながります。</p>
+    </div>
 
     <!-- フッター -->
     <jsp:include page="footerMenu.jsp" />
