@@ -53,7 +53,7 @@ public class usersDAO {
 		return loginResult;
     } */
     // 引数userInfoで指定されたユーザー情報を登録し、成功したらtrueを返す
-    public boolean insert(usersDTO userInfo) {
+    public boolean insert(usersDTO userRegist) {
         Connection conn = null;
         boolean result = false;
 
@@ -64,18 +64,18 @@ public class usersDAO {
             // SQL文を準備する
             String sql = "INSERT INTO users VALUES (0, ?, ?, ?)";
             PreparedStatement pStmt = conn.prepareStatement(sql);
-            if (userInfo.getUser_name() != null) {
-				pStmt.setString(1, userInfo.getUser_name());
+            if (userRegist.getUser_name() != null) {
+				pStmt.setString(1, userRegist.getUser_name());
 			} else {
 				pStmt.setString(1, "");
 			}
-            if (userInfo.getMail() != null) {
-				pStmt.setString(2, userInfo.getMail());
+            if (userRegist.getMail() != null) {
+				pStmt.setString(2, userRegist.getMail());
 			} else {
 				pStmt.setString(2, "");
 			}
-            if (userInfo.getPw() != null) {
-				pStmt.setString(3, userInfo.getPw());
+            if (userRegist.getPw() != null) {
+				pStmt.setString(3, userRegist.getPw());
 			} else {
 				pStmt.setString(3, "");
 			}
@@ -103,7 +103,7 @@ public class usersDAO {
 	public usersDTO login(String mail, String pw) {
 		Connection conn = null;
 		usersDTO selectdto = new usersDTO();
-		usersDTO user = new usersDTO();
+		//usersDTO user = new usersDTO();
 
 		try {
             // データベースに接続する
@@ -118,7 +118,7 @@ public class usersDAO {
             // SELECT文を実行し、結果票を取得する
             ResultSet rs = pStmt.executeQuery();
 			if (rs.next()) {
-				user = new usersDTO(
+				usersDTO user = new usersDTO(
 					rs.getInt("id"),
 					rs.getString("user_name"),
 					rs.getString("mail"),
@@ -126,9 +126,9 @@ public class usersDAO {
 				);	
 			}
 			else {
-				user = null;
+				return null;
 			}
-			return user;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -141,7 +141,7 @@ public class usersDAO {
 				}
 			}
 		}
-		return user;
+		return null;
 	}
 
 }
