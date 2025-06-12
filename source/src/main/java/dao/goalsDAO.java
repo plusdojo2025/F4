@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import dto.goalsDTO;
 
@@ -37,11 +35,13 @@ public class goalsDAO {
 	}
 	
 	// ユーザーの目標を取得
-	public List<goalsDTO> selectGoal(int userId) {
-		List<goalsDTO> goalList = new ArrayList<>();
+	public goalsDTO selectGoal(int userId) {
+		goalsDTO goal = new goalsDTO();
+		Connection conn = null;
 		try {
 			// データベースに接続する
-			Connection conn = dbConnectionDAO.getConnection();
+			
+			conn = dbConnectionDAO.getConnection();
 				
 			// INSET文を準備する
 			String sql = "SELECT * FROM goals WHERE id = ?";
@@ -51,9 +51,9 @@ public class goalsDAO {
             ResultSet rs = pStmt.executeQuery();
 
 			
-			while (rs.next()) {
+			if (rs.next()) {
 				
-				goalsDTO goal = new goalsDTO(
+				goal = new goalsDTO(
 						rs.getInt("goals_id"),
 						rs.getInt("id"),
 						rs.getDouble("exercise_goal"),
@@ -61,15 +61,23 @@ public class goalsDAO {
 						rs.getDouble("sleep_goal")
 						);
 				
-				goalList.add(goal);
+			} else {
+				goal = null;
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
-		return goalList;
+		return goal;
 	}
 }
-
 
