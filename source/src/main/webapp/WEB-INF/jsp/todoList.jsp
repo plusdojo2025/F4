@@ -37,6 +37,6 @@
     </div>
 
     <!-- フッター -->
-    <!-- <jsp:include page="footerMenu.jsp" /> -->
+    <jsp:include page="footerMenu.jsp" />
 </body>
 </html>

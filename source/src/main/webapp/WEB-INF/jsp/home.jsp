@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ホーム</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/global.css">
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/home.css.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
