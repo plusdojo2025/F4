@@ -49,22 +49,23 @@ public class loginServlet extends HttpServlet {
 		usersDAO udao = new usersDAO();
 		usersDTO udto = udao.login(mail, pw);
 
-		goalsDAO gdao = new goalsDAO();
-		goalsDTO gdto = gdao.selectGoal(udto.getId()); 
-
 		if (udto != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("userinfo", udto);
+		    goalsDAO gdao = new goalsDAO();
+		    goalsDTO gdto = gdao.selectGoal(udto.getId());
 
-			if (gdto != null) {
-				// ホームサーブレットにリダイレクトする
-				response.sendRedirect(request.getContextPath() + "/homeServlet");
+		    HttpSession session = request.getSession();
+		    session.setAttribute("userinfo", udto);
 
-			}
-			else if (gdto == null){
-				// 目標サーブレットにリダイレクトする
-				response.sendRedirect(request.getContextPath() + "/registGoalServlet");
-			}
+		    if (gdto != null) {
+		        response.sendRedirect(request.getContextPath() + "/homeServlet");
+		    } else {
+		        response.sendRedirect(request.getContextPath() + "/registGoalServlet");
+		    }
+		    
+		} else {
+		    request.setAttribute("errorMessage", "ユーザー名またはパスワードが間違っています。");
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+		    dispatcher.forward(request, response);
 		}
 	}
 

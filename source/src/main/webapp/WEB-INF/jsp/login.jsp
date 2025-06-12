@@ -23,8 +23,8 @@
      <!-- こことボタンに処理を記入 -->
     <div class="form">
         <form action="/F4/loginServlet" method="post">
-            <input type="text" class="input" name="email" placeholder="メールアドレス" required>
-            <input type="password" class="input" name="password" placeholder="パスワード" required>
+            <input type="text" class="input" name="mail" placeholder="メールアドレス" required>
+            <input type="password" class="input" name="pw" placeholder="パスワード" required>
             <!-- ボタン -->
     		<div class="buttonContainer">
         		<button type="submit" class="button">ログイン</button>

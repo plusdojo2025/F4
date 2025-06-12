@@ -100,51 +100,50 @@ public class usersDAO {
 		return result;
     }
 
-	public usersDTO login(String mail, String pw) {
-		Connection conn = null;
-		usersDTO selectdto = new usersDTO();
-		//usersDTO user = new usersDTO();
+    public usersDTO login(String mail, String pw) {
+        Connection conn = null;
+        PreparedStatement pStmt = null;
+        ResultSet rs = null;
+        usersDTO user = null;  // 最初はnullで初期化
 
-		try {
-            // データベースに接続する
+        try {
             conn = dbConnectionDAO.getConnection();
 
-            // SELECT文を準備する
-            String sql = "SELECT count(*) FROM users WHERE mail=? AND pw=?";
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1, selectdto.getMail());
-			pStmt.setString(2, selectdto.getPw());
+            String sql = "SELECT id, user_name, mail, pw FROM users WHERE mail=? AND pw=?";
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, mail);
+            pStmt.setString(2, pw);
 
-            // SELECT文を実行し、結果票を取得する
-            ResultSet rs = pStmt.executeQuery();
-			if (rs.next()) {
-				usersDTO user = new usersDTO(
-					rs.getInt("id"),
-					rs.getString("user_name"),
-					rs.getString("mail"),
-					rs.getString("pw")
-				);	
-			}
-			else {
-				return null;
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return null;
-	}
+            rs = pStmt.executeQuery();
+
+            if (rs.next()) {
+                user = new usersDTO(
+                    rs.getInt("id"),
+                    rs.getString("user_name"),
+                    rs.getString("mail"),
+                    rs.getString("pw")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+              // 例外時はnullを返す
+        } finally {
+            // ResultSet, PreparedStatement, Connection を忘れずに閉じる
+            try {
+                if (rs != null) rs.close();
+                if (pStmt != null) pStmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return user;
+    }
+
 
 }
+
+
 
 
 
