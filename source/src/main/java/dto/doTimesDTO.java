@@ -18,6 +18,13 @@ public class doTimesDTO implements Serializable {
 		this.sleep_do = sleep_do;
 	}
 
+    public doTimesDTO(int id, double exercise_do, double study_do, double sleep_do) {
+        this.id = id;
+		this.exercise_do = exercise_do; 	
+		this.study_do = study_do;
+		this.sleep_do = sleep_do;
+	}
+    
 	public doTimesDTO() {
 		this.do_time_id = 0; 
         this.id = 0;
@@ -25,6 +32,7 @@ public class doTimesDTO implements Serializable {
 		this.study_do = 0;
 		this.sleep_do = 0;
 	}
+	
 
     // Getter / Setter
     public int getDo_time_id() {
