@@ -23,25 +23,27 @@ public class registTimeServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public registTimeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// リクエストパラメータを取得する
+		//セッションからユーザー情報を取得する
         request.setCharacterEncoding("UTF-8");
         usersDTO user = (usersDTO) request.getSession().getAttribute("user");
-        Integer id = (Integer)user.getId();
         
+        // userオブジェクトからユーザーIDを取得し、Integer型の変数idに代入
+        int id = user.getId();
+        
+        //resultDAOクラスのインスタンスを作成
 		resultsDAO rdao = new resultsDAO();
+		
+		//指定したユーザーIDに対して、resultsテーブルに登録されているデータの件数を取得
 	    int count = rdao.countResult(id);
 	        
 	    if(count == 0) {
+	    	//評価のデータベースが0の時デフォルト画面にフォアード
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp");
 			dispatcher.forward(request, response);
 	     }
@@ -55,25 +57,31 @@ public class registTimeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        //セッションからユーザー情報を取得する
 		request.setCharacterEncoding("UTF-8");
         usersDTO user = (usersDTO) request.getSession().getAttribute("user");
+        // userオブジェクトからユーザーIDを取得し、Integer型の変数idに代入
         Integer id = (Integer)user.getId();
         
+        //resultDAOクラスのインスタンスを作成
 		resultsDAO rdao = new resultsDAO();
+		//指定したユーザーIDに対して、resultsテーブルに登録されているデータの件数を取得
 	    int count = rdao.countResult(id);
 		
-        Double exercise_do = (double)0;
-        Double study_do = (double)0;
-        Double sleep_do = (double)0;
+	    //それぞれの実施時間を宣言する
+        Double exercise_do = (double)0;			//運動時間
+        Double study_do = (double)0;			//勉強時間
+        Double sleep_do = (double)0;			//睡眠時間
         
         if(id != null) {
+        	//jspから入力したデータを受け取る
         	exercise_do = Double.parseDouble(request.getParameter("exercise_do"));
             study_do = Double.parseDouble(request.getParameter("study_do"));
             sleep_do = Double.parseDouble(request.getParameter("sleep_do"));
         }
         
         doTimesDAO dTDao = new doTimesDAO();
+        
         doTimesDTO dTDto = new doTimesDTO(id, exercise_do, study_do, sleep_do);
         
         boolean result = dTDao.insert(dTDto);
