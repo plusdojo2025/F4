@@ -16,18 +16,20 @@
 
     <!-- アカウント作成フォーム -->
     <div class="form">
-        <form action="#" method="post">
+        <form action="/F4/registUserServlet" method="post">
             <input type="text" class="input" name="username" placeholder="ユーザー名" required>
             <input type="email" class="input" name="email" placeholder="メールアドレス" required>
             <input type="password" class="input" name="password" placeholder="パスワード" required>
             <input type="password" class="input" name="confirm_password" placeholder="パスワード確認" required>
+            
+            <!-- アカウント作成ボタン -->
+    		<div class="buttonContainer">
+        		<button type="submit" class="button">サインアップ</button>
+    		</div>
         </form>
     </div>
 
-    <!-- アカウント作成ボタン -->
-    <div class="buttonContainer">
-        <button type="submit" class="button">サインアップ</button>
-    </div>
+
 
     <!-- ログインリンク -->
     <div class="loginLink">
