@@ -33,7 +33,7 @@ public class todoListServlet extends HttpServlet {
 		}
 
 		int userId = loginUser.getId(); // セッションからユーザーIDを取得
-		System.out.println("セッションから取得したユーザーID: " + userId); // ← これで確認できる
+		//System.out.println("セッションから取得したユーザーID: " + userId);
 
 		// ユーザーIDに対応するToDoリストを取得
 		List<todoListsDTO> todoList = todoListsDAO.getToDoListByUserId(userId);
