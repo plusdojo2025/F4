@@ -26,13 +26,15 @@
             <input type="number" class="input" name="exercise" placeholder="運動時間" required>
             <input type="number" class="input" name="study" placeholder="勉強時間" required>
             <input type="number" class="input" name="sleep" placeholder="睡眠時間" required>
+            
+            <!-- 登録ボタン -->
+     		<div class="buttonContainer">
+        		<button type="submit" class="button">登録</button>
+     		</div>
         </form>
      </div>
 
-    <!-- 登録ボタン -->
-     <div class="buttonContainer">
-        <button type="submit" class="button">登録</button>
-     </div>
+    
 
      <!-- フッター -->
     <jsp:include page="footerMenu.jsp" />

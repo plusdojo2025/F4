@@ -9,7 +9,7 @@ import dto.doTimesDTO;
 public class doTimesDAO {
 
     // 実施時間の登録
-    public boolean insert(doTimesDTO time) {
+    public static boolean insert(doTimesDTO time) {
         Connection conn = null;
         boolean result = false;
 
