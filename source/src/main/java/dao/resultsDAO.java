@@ -11,7 +11,7 @@ public class resultsDAO {
 
     // 進捗率とフィードバックを保存
     public void setResults(int userId, double level, String feedback) {
-        String sql = "INSERT INTO results (user_id, level, feedback) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO results (user_id, day_toward, feedback) VALUES (?, ?, ?)";
 
         try (Connection conn = dbConnectionDAO.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -28,7 +28,7 @@ public class resultsDAO {
 
     public List<Double> getAllLevel(int userId){
         List<Double> levelList = new ArrayList<>();
-        String sql = "SELECT level FROM results WHERE user_id = ? ORDER BY date ASC LIMIT 6";//１～６日までの達成度取得
+        String sql = "SELECT day_toward FROM results WHERE user_id = ? ORDER BY results_id ASC LIMIT 6";//１～６日までの達成度取得
 
         try (Connection conn = dbConnectionDAO.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -37,7 +37,7 @@ public class resultsDAO {
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
-                levelList.add(rs.getDouble("level"));//データベースのカラム名を参照
+                levelList.add(rs.getDouble("day_toward"));//データベースのカラム名を参照
             }
 
         }catch(SQLException e){
