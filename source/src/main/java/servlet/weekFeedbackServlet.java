@@ -62,7 +62,7 @@ public class weekFeedbackServlet extends HttpServlet {
         }
         //forwardで値をセットしたまま画面遷移
         RequestDispatcher dispatcher = request.getRequestDispatcher("resultWeek.jsp");
-        dispatcher.forward(request, response);
+        dispatcher.forward(request, response);//ff
     }
 }
 
