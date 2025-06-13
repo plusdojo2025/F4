@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.goalsDAO;
 import dto.goalsDTO;
@@ -33,40 +32,42 @@ public class homeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		
+		//セッションからユーザー情報を所得する
+		usersDTO user = (usersDTO) request.getSession().getAttribute("user");
+		String name=null;
+		Integer userId=null;
+		
+		if(user!=null) {
+			//名前を取得
+	        name = (String)(user.getUser_name());
+	        //ユーザーのIDの取得
+	        userId = (Integer)(user.getId());
+		}
+		
+		
 				
-				//名前を取得セッションからとる
-				usersDTO user = new usersDTO();
-				String name= user.getUser_name();
-				
-				//名前を格納
-		        request.setAttribute("name",name);
-		        
-		        //ユーザーのIDの取得
-		        request.setCharacterEncoding("UTF-8");
-		        	HttpSession session = request.getSession();
-		        	Integer userId = (Integer)(session.getAttribute("user_id"));
-		 
-		        //実施時間を格納する変数の宣言
-		        	 Double exercise_do;
-		        	 Double  study_do;
-		        	 Double  sleep_do;
-		        	 
-		        if(userId != null) {
-			        //目標の取得
-			        goalsDAO gDao = new goalsDAO();
-			        goalsDTO goal = gDao.selectGoal(userId);
-			        
-			        exercise_do = goal.getExercise_goal();
-			        study_do = goal.getExercise_goal();
-			        sleep_do = goal.getExercise_goal();
-		        }else {
-		        	//ユーザーのIDを取得できなかった時の処理
-		        	exercise_do = (double)0;
-		        	study_do = (double)0;
-		        	sleep_do = (double)0;
-		        }
-		        
+		//名前を格納
+        request.setAttribute("name",name);
 
+		
+        //実施時間を格納する変数の宣言
+		 Double exercise_do = (double)0;
+		 Double  study_do = (double)0;
+		 Double  sleep_do = (double)0;
+		        	 
+		 if(user != null) {
+			 //目標の取得
+			 goalsDAO gDao = new goalsDAO();
+			 goalsDTO goal = gDao.selectGoal(userId);
+			        
+			 exercise_do = goal.getExercise_goal();
+			 study_do = goal.getStudy_goal();
+			 sleep_do = goal.getSleep_goal();
+		 }
 		        
 		        //目標の格納
 		        request.setAttribute("exercise_do", exercise_do);
