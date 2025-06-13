@@ -60,4 +60,25 @@ public class resultsDAO {
             e.printStackTrace();
         }
     }
+    
+    public int countResult(int userId) {
+        String sql = "SELECT COUNT(*) FROM results WHERE user_id = ?";
+        int count = 0;
+
+        try (Connection conn = dbConnectionDAO.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
 }
