@@ -8,25 +8,39 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.todoListsDAO;
 import dto.todoListsDTO;
+import dto.usersDTO;
 
 @WebServlet("/todoList")
 public class todoListServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private todoListsDAO todoListDAO;
-    
-//    表示ですよーーー！
-//    これはただ表示するだけですよー！
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    	int id = 1;
-    	List<todoListsDTO> todoList = todoListsDAO.getToDoListByUserId(id);
-    	request.setAttribute("todoList", todoList);
-        // JSP にフォワード
-        request.getRequestDispatcher("/WEB-INF/jsp/todoList.jsp").forward(request, response);
-    }
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// セッションからユーザー情報を取得
+		HttpSession session = request.getSession(false); // false → セッションが無ければ null を返す
+		usersDTO loginUser = (usersDTO) session.getAttribute("userinfo");
+
+		if (loginUser == null) {
+			System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
+			response.sendRedirect(request.getContextPath() + "/loginServlet");
+			return;
+		}
+
+		int userId = loginUser.getId(); // セッションからユーザーIDを取得
+		System.out.println("セッションから取得したユーザーID: " + userId); // ← これで確認できる
+
+		// ユーザーIDに対応するToDoリストを取得
+		List<todoListsDTO> todoList = todoListsDAO.getToDoListByUserId(userId);
+		request.setAttribute("todoList", todoList);
+
+		// JSP にフォワード
+		request.getRequestDispatcher("/WEB-INF/jsp/todoList.jsp").forward(request, response);
+	}
+
 }
