@@ -59,7 +59,7 @@ public class feedbackServlet extends HttpServlet {
 
         }
         //forwardで値をセットしたまま画面遷移
-        RequestDispatcher dispatcher = request.getRequestDispatcher("feedback.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("resultDay.jsp");
         dispatcher.forward(request, response);
     }
 }

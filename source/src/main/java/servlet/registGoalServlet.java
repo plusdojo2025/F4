@@ -27,7 +27,7 @@ public class registGoalServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
-	    System.out.println("✅ registGoalServlet にアクセスがありました");
+	    //System.out.println("✅ registGoalServlet にアクセスがありました");
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
 	    dispatcher.forward(request, response);
 	}

@@ -12,9 +12,10 @@ public class goalsDAO {
 
 	// 目標を登録
 	public void insertGoal(goalsDTO goal) {
+		Connection conn = null;
 		try {
 			// データベースに接続する
-			Connection conn = dbConnectionDAO.getConnection();
+			conn = dbConnectionDAO.getConnection();
 			
 			// INSET文を準備する
 			String sql = "INSERT INTO goals VALUES(0, ?, ?, ?, ?)";
@@ -79,5 +80,30 @@ public class goalsDAO {
 		
 		return goal;
 	}
+	
+	public void deleteGoal(int userId){
+        String sql = "DELETE FROM goals WHERE user_id = ?";
+        Connection conn = null;
+
+        try {
+        	conn = dbConnectionDAO.getConnection();
+        	PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+    }
+
 }
 
