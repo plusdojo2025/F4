@@ -39,9 +39,9 @@ public class registGoalServlet extends HttpServlet {
 	        request.setCharacterEncoding("UTF-8");
 	        HttpSession session = request.getSession(false);
 	        
-	        usersDTO userdto = (usersDTO) session.getAttribute("userInfo");
+	        usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
 	        int userId = userdto.getId();
-	        System.out.println(userId);
+	        //System.out.println("userId:"+userId);
 
 	        if (userId >= 1) {
 	            double exercise_goal = Double.parseDouble(request.getParameter("exercise"));
