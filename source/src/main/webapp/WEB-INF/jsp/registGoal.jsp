@@ -46,9 +46,6 @@
      		</div>
         </form>
      </div>
-     
-     <!-- フッター -->
-     <jsp:include page="footerMenu.jsp" />
 
 </body>
 </html>

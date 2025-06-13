@@ -19,3 +19,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.home path {
+	fill: black;
+}
+.home span {
+	color: black;
+}

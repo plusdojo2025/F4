@@ -40,3 +40,14 @@
 .buttonContainer {
     margin-top: 80px;
 }
+/* ------------------------------------------------- */
+
+
+/*バー */
+.feedback path {
+	fill: black;
+}
+.feedback span {
+	color: black;
+}
+/* ------------------------------------------------- */
