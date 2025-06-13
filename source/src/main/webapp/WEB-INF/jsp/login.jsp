@@ -39,7 +39,7 @@
         <div class="line">
             <span>または</span>
         </div>
-        <a href="#">アカウントを作成する</a>
+        <a href="/F4/registUserServlet">アカウントを作成する</a>
     </div>
 </body>
 </html>
