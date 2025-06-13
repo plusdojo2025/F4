@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.goalsDAO;
+import dto.goalsDTO;
 import dto.usersDTO;
-import dao.usersDAO;
 
 
 /**
@@ -36,12 +37,12 @@ public class registGoalServlet extends HttpServlet {
 	        throws ServletException, IOException {
 
 	        request.setCharacterEncoding("UTF-8");
-	        HttpSession session = request.getSession();
+	        HttpSession session = request.getSession(false);
 	        
-	        usersDTO userdto = (usersDTO)session.getAttribute("userInfo");
+	        usersDTO userdto = (usersDTO) session.getAttribute("userInfo");
 	        int userId = userdto.getId();
 	        System.out.println(userId);
-/*
+
 	        if (userId >= 1) {
 	            double exercise_goal = Double.parseDouble(request.getParameter("exercise"));
 	            double study_goal = Double.parseDouble(request.getParameter("study"));
@@ -58,7 +59,7 @@ public class registGoalServlet extends HttpServlet {
 	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
 	        	dispatcher.forward(request, response);
 	        }
-	        */
+	        
     }
 }
 
