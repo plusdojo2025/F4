@@ -40,8 +40,15 @@ public class registGoalServlet extends HttpServlet {
 	        HttpSession session = request.getSession(false);
 	        
 	        usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
+	        
+	        if (userdto == null) {
+				System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
+				response.sendRedirect(request.getContextPath() + "/loginServlet");
+				return;
+			}
+	        
 	        int userId = userdto.getId();
-	        //System.out.println("userId:"+userId);
+	        System.out.println("userId:"+userId);
 
 	        if (userId >= 1) {
 	            double exercise_goal = Double.parseDouble(request.getParameter("exercise"));
