@@ -47,3 +47,13 @@
     box-shadow: none;
     padding: 10px 20px;
 }
+/* ------------------------------------------------- */
+
+
+/*バー */
+.todoListColor path {
+	fill: black;
+}
+.todoListColor span {
+	color: black;
+}
