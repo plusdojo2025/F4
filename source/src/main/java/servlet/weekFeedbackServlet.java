@@ -70,7 +70,7 @@ public class weekFeedbackServlet extends HttpServlet {
             return;
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("lastfeedback.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("resultWeek.jsp");
         dispatcher.forward(request, response);
     }
 }
