@@ -18,7 +18,13 @@ public class doTimesDAO {
             // データベースと接続
             conn = dbConnectionDAO.getConnection();
             // SQL文を準備する
-            String sql = "INSERT INTO do_times (do_time_id, id, exercise_do, study_do, sleep_do) VALUES (0, ?, ?, ?, ?)";
+            String sql = "INSERT INTO do_times (id, date, exercise_do, study_do, sleep_do)"
+            		+ " VALUES (?, CURDATE(), ?, ?, ?)"
+            		+ " ON DUPLICATE KEY UPDATE"
+            		+ " exercise_do = VALUES(exercise_do),"
+            		+ " study_do = VALUES(study_do),"
+            		+ " sleep_do = VALUES(sleep_do)";
+
             PreparedStatement pStmt = conn.prepareStatement(sql);
             // SQL文を完成させる
             pStmt.setInt(1, time.getId());

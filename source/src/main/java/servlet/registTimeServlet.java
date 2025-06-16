@@ -22,6 +22,8 @@ public class registTimeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         HttpSession session = request.getSession(false);
+        if(session == null) {
+        	System.out.println("セッションnull");        }
         usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
         int id = userdto.getId();
         System.out.println("userId:"+id);
@@ -30,7 +32,7 @@ public class registTimeServlet extends HttpServlet {
         double study_do = Double.parseDouble(request.getParameter("study"));
         double sleep_do = Double.parseDouble(request.getParameter("sleep"));
 
-        doTimesDTO doTime = new doTimesDTO(0, id, exercise_do, study_do, sleep_do);
+        doTimesDTO doTime = new doTimesDTO(id, exercise_do, study_do, sleep_do);
         doTimesDAO.insert(doTime);
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

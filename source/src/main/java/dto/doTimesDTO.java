@@ -12,8 +12,8 @@ public class doTimesDTO implements Serializable {
     private double sleep_do;      // 睡眠時間（Not null）
     private Date date;
 
-    public doTimesDTO(int do_time_id, int id, double exercise_do, double study_do, double sleep_do) {
-		this.do_time_id = do_time_id;
+    public doTimesDTO(int id, double exercise_do, double study_do, double sleep_do) {
+		this.do_time_id = 0;
         this.id = id;
 		this.exercise_do = exercise_do; 	
 		this.study_do = study_do;
