@@ -18,9 +18,27 @@ public class goalsDAOTest {
 			System.out.println("登録失敗！");
 		}
 		
-		// insert()のテスト
+		// select()のテスト
+		System.out.println("---------- select()のテスト ----------");
+		goalsDTO goalSelect = new goalsDTO();
+		goalSelect = dao.selectGoal(1);
+		if (goalSelect == null) {
+			System.out.println("null");
+		} else {
+			System.out.println("OK:" + goalSelect);
+		}
+		
+		
+
+
+		// delete()のテスト
 		System.out.println("---------- delete()のテスト ----------");
-		dao.deleteGoal(1);
+		if (dao.deleteGoal(1)) {
+			System.out.println("削除成功！");
+			
+		} else {
+			System.out.println("削除失敗！");
+		}
 		
 	}
 

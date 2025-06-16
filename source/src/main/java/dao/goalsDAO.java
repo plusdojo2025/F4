@@ -35,7 +35,15 @@ public class goalsDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -85,16 +93,19 @@ public class goalsDAO {
 		return goal;
 	}
 	
-	public void deleteGoal(int userId){
+	public boolean deleteGoal(int userId){
         String sql = "DELETE FROM goals WHERE id = ?";
         Connection conn = null;
+        boolean result = false;
 
         try {
         	conn = dbConnectionDAO.getConnection();
         	PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, userId);
-            ps.executeUpdate();
+            if ( ps.executeUpdate() == 1) {
+            	result = true;
+            }
 
         } catch (SQLException e) {
 			e.printStackTrace();
@@ -107,6 +118,7 @@ public class goalsDAO {
 				}
 			}
 		}
+        return result;
     }
 
 }

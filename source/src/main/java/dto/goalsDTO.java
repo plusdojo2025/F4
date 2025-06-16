@@ -2,7 +2,24 @@ package dto;
 
 import java.io.Serializable;
 
+
+
 public class goalsDTO implements Serializable {
+	
+	/*
+	@Override
+	public String toString() {
+	    return "goalsDTO{" +
+	           "goals_id=" + goals_id +
+	           ", id=" + id +
+	           ", exercise_goal=" + exercise_goal +
+	           ", study_goal=" + study_goal +
+	           ", sleep_goal=" + sleep_goal +
+	           '}';
+	}
+	*/
+	
+	
 	private int goals_id;           // 目標時間id
     private int id;                 // ユーザーid(外部キー)
 	private double exercise_goal;    // 運動時間目標
@@ -25,6 +42,8 @@ public class goalsDTO implements Serializable {
 		this.study_goal = 0;
 		this.sleep_goal = 0;
 	}
+	
+	
 
     // goals_idのゲッター、セッター
 	public int getGoals_id() {
