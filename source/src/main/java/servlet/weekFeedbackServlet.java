@@ -14,55 +14,63 @@ import javax.servlet.http.HttpSession;
 import dao.goalsDAO;
 import dao.resultsDAO;
 import dto.goalsDTO;
+import dto.usersDTO;
 import model.calc;
 
 @WebServlet("/weekfeedback")
 public class weekFeedbackServlet extends HttpServlet {
-    double goalexcersize;
-    double goalstudy;
-    double goalsleep;
-    double doexcersize;
-    double dostudy;
-    double dosleep;
-    double weekLevel;
-    String yourLastFeed;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();//セッション取得
-        Integer userId = (Integer) session.getAttribute("user_id");//ログイン時にキーとペアでsession.setAttribute()した時のキーを使う
+        HttpSession session = request.getSession(false);
 
-        if (userId != null) {
-            doexcersize = Double.parseDouble(request.getParameter("doex"));
-            dostudy = Double.parseDouble(request.getParameter("dost"));
-            dosleep = Double.parseDouble(request.getParameter("dosl"));
+        if (session != null) {
+            usersDTO user = (usersDTO) session.getAttribute("userinfo");
+            if (user != null) {
+                int userId = user.getId();
 
+                try {
+                    double doExercise = Double.parseDouble(request.getParameter("doex"));
+                    double doStudy = Double.parseDouble(request.getParameter("dost"));
+                    double doSleep = Double.parseDouble(request.getParameter("dosl"));
 
-           
-            goalsDAO goalsdao = new goalsDAO();
-            resultsDAO resultsdao = new resultsDAO();
+                    goalsDAO goalsdao = new goalsDAO();
+                    resultsDAO resultsdao = new resultsDAO();
 
-            goalsDTO goalsdto = goalsdao.selectGoal(userId);//userIdで各goal値を取得するメソッド 戻り値はgoalsDTO型   をもとにインスタンス作成＆宣言
-            goalexcersize = goalsdto.getExercise_goal();//引数で使う値を変数にセット
-            goalstudy = goalsdto.getStudy_goal();
-            goalsleep = goalsdto.getSleep_goal();
-            List<Double> levelList = resultsdao.getAllLevel(userId);//userIdを引数に格納されている全ての日ごとの進捗率を取得　戻り値list<Double>
+                    goalsDTO goalsdto = goalsdao.selectGoal(userId);
+                    double goalExercise = goalsdto.getExercise_goal();
+                    double goalStudy = goalsdto.getStudy_goal();
+                    double goalSleep = goalsdto.getSleep_goal();
 
-            calc cc = new calc();
-            //達成度をmodelで算出して格納 リストも引数として追加　
-            weekLevel = cc.weekLevelCheck(doexcersize, dostudy, dosleep, goalexcersize, goalstudy, goalsleep, levelList);
-            yourLastFeed = cc.buildWeekFeedback(weekLevel);
+                    List<Double> levelList = resultsdao.getAllLevel(userId);
 
-            request.setAttribute("level",weekLevel);//値をリクエストスコープに格納
-            request.setAttribute("feedback",yourLastFeed);
+                    calc cc = new calc();
+                    double weekLevel = cc.weekLevelCheck(
+                        doExercise, doStudy, doSleep,
+                        goalExercise, goalStudy, goalSleep,
+                        levelList
+                    );
+                    String yourLastFeed = cc.buildWeekFeedback(weekLevel);
 
-            //最後のフィードバックはインサート不要resultsdao.setResults(userId, dayLevel, yourFeed);//resultsDAOのメソッドでデータベースに進捗率、フィードバックをインサート
+                    request.setAttribute("level", weekLevel);
+                    request.setAttribute("feedback", yourLastFeed);
 
+                } catch (NumberFormatException e) {
+                    request.setAttribute("error", "数値の取得に失敗しました。");//
+                }
+
+            } else {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+        } else {
+            response.sendRedirect("login.jsp");
+            return;
         }
-        //forwardで値をセットしたまま画面遷移
-        RequestDispatcher dispatcher = request.getRequestDispatcher("resultWeek.jsp");
-        dispatcher.forward(request, response);//ff
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("lastfeedback.jsp");
+        dispatcher.forward(request, response);
     }
 }
-
