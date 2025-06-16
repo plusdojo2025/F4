@@ -23,10 +23,6 @@ public class homeServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public homeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,46 +34,47 @@ public class homeServlet extends HttpServlet {
 		
 		//セッションからユーザー情報を所得する
 		usersDTO user = (usersDTO) request.getSession().getAttribute("user");
-		String name=null;
-		Integer userId=null;
+		String name;
+		int userId;
+		
+		//目標時間を格納する変数の宣言
+		 double exercise_do;
+		 double  study_do;
+		 double  sleep_do;
+		
 		
 		if(user!=null) {
 			//名前を取得
-	        name = (String)(user.getUser_name());
+	        name = user.getUser_name();
 	        //ユーザーのIDの取得
-	        userId = (Integer)(user.getId());
-		}
-		
-		
-				
-		//名前を格納
-        request.setAttribute("name",name);
+	        userId = user.getId();
+	        
+	        //名前を格納
+	        request.setAttribute("name",name);
 
-		
-        //実施時間を格納する変数の宣言
-		 Double exercise_do = (double)0;
-		 Double  study_do = (double)0;
-		 Double  sleep_do = (double)0;
-		        	 
-		 if(user != null) {
-			 //目標の取得
+	        //目標の取得
 			 goalsDAO gDao = new goalsDAO();
 			 goalsDTO goal = gDao.selectGoal(userId);
-			        
+				        
 			 exercise_do = goal.getExercise_goal();
 			 study_do = goal.getStudy_goal();
 			 sleep_do = goal.getSleep_goal();
-		 }
-		        
-		        //目標の格納
-		        request.setAttribute("exercise_do", exercise_do);
-		        request.setAttribute("study_do", study_do);
-		        request.setAttribute("sleep_do", sleep_do);
-		        
-		        //ホーム画面にフォアード
-		        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-		        dispatcher.forward(request, response);
-		        
+			 
+			        
+			 //目標の格納
+			 request.setAttribute("exercise_do", exercise_do);
+			 request.setAttribute("study_do", study_do);
+			 request.setAttribute("sleep_do", sleep_do);
+			        
+			 //ホーム画面にフォアード
+			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+			 dispatcher.forward(request, response);
+		}
+	/*	else {
+			//ログインにリダイレクト
+			response.sendRedirect("/F4/loginServlet.java");
+			return;
+		}*/
   
 		        
 	}
