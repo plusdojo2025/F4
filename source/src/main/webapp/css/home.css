@@ -1,4 +1,8 @@
 /* ログアウトボタン */
+a {
+    text-decoration: none;
+}
+
 .logoutContainer {
     display: flex;
     justify-content: flex-end;
@@ -25,4 +29,12 @@
 }
 .home span {
 	color: black;
+}
+.logoutForm {
+	display: flex;
+    justify-content: flex-end;
+}
+.logoutButton {
+    background: none;     /* 背景色をなくす */
+    border: none;         /* 枠線をなくす */
 }

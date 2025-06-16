@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-context-path="<%= request.getContextPath() %>">
     <!-- ヘッダー -->
     <div class="headerH2">
         <h2>ようこそ<%= request.getAttribute("name") %>さん</h2>
@@ -57,18 +57,20 @@
     </div>
 
     <!-- ログアウト -->
-    <a href="/F4/loginServlet">
-    <div class="logoutContainer">
-        <p>ログアウトする</p>
-        <div class="logoutIcon">
-           <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M7 3.49996H6C3.643 3.49996 2.464 3.49996 1.732 4.23196C1 4.96396 1 6.14296 1 8.49996V8.99996M7 18.5H6C3.643 18.5 2.464 18.5 1.732 17.768C1 17.035 1 15.857 1 13.5V13M11.658 1.34696C9.496 0.969964 8.415 0.781964 7.708 1.40896C7.001 2.03596 7 3.18296 7 5.47596V16.524C7 18.817 7 19.964 7.707 20.591C8.414 21.218 9.495 21.03 11.657 20.653L13.987 20.247C16.381 19.829 17.578 19.62 18.289 18.742C19 17.863 19 16.593 19 14.052V7.94796C19 5.40796 19 4.13796 18.29 3.25896C17.814 2.67196 17.122 2.38396 16 2.13296M10 9.99996V12" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
-           </svg>
-        </div>
-     </div>
-     </a>
+	<form class="logoutForm" id="logoutForm" action="<%= request.getContextPath() %>/logoutServlet" method="get">
+	    <button type="submit" class="logoutButton logoutContainer">
+	        <p>ログアウトする</p>
+	        <div class="logoutIcon">
+	            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+	              <path d="M7 3.49996H6C3.643 3.49996 2.464 3.49996 1.732 4.23196C1 4.96396 1 6.14296 1 8.49996V8.99996M7 18.5H6C3.643 18.5 2.464 18.5 1.732 17.768C1 17.035 1 15.857 1 13.5V13M11.658 1.34696C9.496 0.969964 8.415 0.781964 7.708 1.40896C7.001 2.03596 7 3.18296 7 5.47596V16.524C7 18.817 7 19.964 7.707 20.591C8.414 21.218 9.495 21.03 11.657 20.653L13.987 20.247C16.381 19.829 17.578 19.62 18.289 18.742C19 17.863 19 16.593 19 14.052V7.94796C19 5.40796 19 4.13796 18.29 3.25896C17.814 2.67196 17.122 2.38396 16 2.13296M10 9.99996V12" stroke="#FF0000" stroke-width="1.5" stroke-linecap="round"/>
+	          	</svg>
+	        </div>
+	    </button>
+	</form>
 
     <!-- フッター -->
     <jsp:include page="footerMenu.jsp" />
+    <script type="module" src="js/init.js"></script>
+
 </body>
 </html>

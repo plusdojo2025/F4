@@ -1,14 +1,14 @@
 // 初期化する
-
 import {
     initAddTodo,
     initDeleteButtons,
     initCheckboxes,
-    initRegistTime
+    initRegistTime,
+    initLogoutConfirm
 } from './module.js';
 
-//console.log('init.js 読み込まれた');
-
+/*console.log('init.js 読み込まれた');
+*/
 document.addEventListener('DOMContentLoaded', () => {
     const contextPath = document.body.dataset.contextPath || '';
     const userId = 1;
@@ -26,4 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registForm) {
         initRegistTime('registTime', contextPath);
     } 
+    
+    // ✅ ログアウト確認処理の追加
+  	initLogoutConfirm('logoutForm');    
+    
+
 });
