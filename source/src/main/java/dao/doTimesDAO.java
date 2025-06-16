@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dto.doTimesDTO;
@@ -76,5 +77,38 @@ public class doTimesDAO {
         }
 
         return result;
+    }
+    
+    public double getDoTimes(int id) {
+    	Connection conn = null;
+    	double allDoTimes = 0;
+    	try {
+    		conn = dbConnectionDAO.getConnection();
+    		String sql = "SELECT exercise_do, study_do, sleep_do FROM do_times WHERE id=?";
+    		PreparedStatement pStmt = conn.prepareStatement(sql);
+    		pStmt.setInt(1, id);
+            ResultSet rs = pStmt.executeQuery();
+            if(rs != null) {
+	            while(rs.next()) {
+	            	double exdo = rs.getDouble("exercise_do");
+	            	double stdo = rs.getDouble("study_do");
+	            	double sldo = rs.getDouble("sleep_do");
+	            	allDoTimes += (exdo + stdo + sldo);
+	            }
+            }
+    	} catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // データベースを切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    	
+    	return allDoTimes;
     }
 }

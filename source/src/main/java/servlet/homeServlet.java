@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.doTimesDAO;
 import dao.goalsDAO;
 import dto.goalsDTO;
 import dto.usersDTO;
@@ -38,9 +39,9 @@ public class homeServlet extends HttpServlet {
 		int userId;
 		
 		//目標時間を格納する変数の宣言
-		 double exercise_do;
-		 double study_do;
-		 double sleep_do;
+		 double exercise_goal;
+		 double study_goal;
+		 double sleep_goal;
 		
 		
 		if(user!=null) {
@@ -51,24 +52,32 @@ public class homeServlet extends HttpServlet {
 	        
 	        //名前を格納
 	        request.setAttribute("name",name);
-
+	        
 	        //目標の取得
-			 goalsDAO gDao = new goalsDAO();
-			 goalsDTO goal = gDao.selectGoal(userId);
-				        
-			 exercise_do = goal.getExercise_goal();
-			 study_do = goal.getStudy_goal();
-			 sleep_do = goal.getSleep_goal();
-			 
-			        
-			 //目標の格納
-			 request.setAttribute("exercise_do", exercise_do);
-			 request.setAttribute("study_do", study_do);
-			 request.setAttribute("sleep_do", sleep_do);
-			        
-			 //ホーム画面にフォアード
-			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
-			 dispatcher.forward(request, response);
+	        goalsDAO gDao = new goalsDAO();
+	        goalsDTO goal = gDao.selectGoal(userId);
+	        exercise_goal = goal.getExercise_goal();
+	        study_goal = goal.getStudy_goal();
+	        sleep_goal = goal.getSleep_goal();
+	        
+	        //実施時間の取得
+	        doTimesDAO ddao = new doTimesDAO();
+	        double doTimes = ddao.getDoTimes(userId);
+	        double goals = (exercise_goal + study_goal + sleep_goal) * 7;
+	        double level = Math.round((doTimes / goals * 100) * 10) / 10;
+	        
+	        //実施時間の進捗を格納
+	        request.setAttribute("goals", goals);
+	        request.setAttribute("level", level);
+	        
+	        //目標の格納
+	        request.setAttribute("exercise_goal", exercise_goal);
+	        request.setAttribute("study_goal", study_goal);
+	        request.setAttribute("sleep_goal", sleep_goal);
+	        
+	        //ホーム画面にフォアード
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+	        dispatcher.forward(request, response);
 		}
 	/*	else {
 			//ログインにリダイレクト
