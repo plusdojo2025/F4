@@ -70,7 +70,7 @@ public class feedbackServlet extends HttpServlet {
             return;
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("feedback.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("resultDay.jsp");
         dispatcher.forward(request, response);
     }
 }
