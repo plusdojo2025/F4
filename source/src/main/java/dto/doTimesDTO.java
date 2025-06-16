@@ -1,6 +1,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class doTimesDTO implements Serializable {
 
@@ -9,6 +10,7 @@ public class doTimesDTO implements Serializable {
     private double exercise_do;   // 運動時間（Not null）
     private double study_do;      // 勉強時間（Not null）
     private double sleep_do;      // 睡眠時間（Not null）
+    private Date date;
 
     public doTimesDTO(int do_time_id, int id, double exercise_do, double study_do, double sleep_do) {
 		this.do_time_id = do_time_id;
@@ -16,14 +18,10 @@ public class doTimesDTO implements Serializable {
 		this.exercise_do = exercise_do; 	
 		this.study_do = study_do;
 		this.sleep_do = sleep_do;
+		
 	}
-
-    public doTimesDTO(int id, double exercise_do, double study_do, double sleep_do) {
-        this.id = id;
-		this.exercise_do = exercise_do; 	
-		this.study_do = study_do;
-		this.sleep_do = sleep_do;
-	}
+    
+    
     
 	public doTimesDTO() {
 		this.do_time_id = 0; 
