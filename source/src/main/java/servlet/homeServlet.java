@@ -33,14 +33,14 @@ public class homeServlet extends HttpServlet {
 		
 		
 		//セッションからユーザー情報を所得する
-		usersDTO user = (usersDTO) request.getSession().getAttribute("user");
+		usersDTO user = (usersDTO) request.getSession().getAttribute("userinfo");
 		String name;
 		int userId;
 		
 		//目標時間を格納する変数の宣言
 		 double exercise_do;
-		 double  study_do;
-		 double  sleep_do;
+		 double study_do;
+		 double sleep_do;
 		
 		
 		if(user!=null) {
