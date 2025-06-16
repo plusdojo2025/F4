@@ -1,19 +1,29 @@
-
-//初期化する
+// 初期化する
 
 import {
     initAddTodo,
     initDeleteButtons,
-    initCheckboxes
+    initCheckboxes,
+    initRegistTime
 } from './module.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const contextPath = document.body.dataset.contextPath; // アプリのルートパス現在は/F4が入っている
-    const userId = 1; // セッション管理で動的に取得すべき
+//console.log('init.js 読み込まれた');
 
-    //関数呼び出し（引数）
-    initAddTodo('todoForm', 'todoInput', contextPath, userId);
-    initDeleteButtons('deleteButton', contextPath);
-    initCheckboxes('checkbox', contextPath);
+document.addEventListener('DOMContentLoaded', () => {
+    const contextPath = document.body.dataset.contextPath || '';
+    const userId = 1;
+
+    // ToDo画面の初期化
+    const todoForm = document.getElementById('todoForm');
+    if (todoForm) {
+        initAddTodo('todoForm', 'todoInput', contextPath, userId);
+        initDeleteButtons('deleteButton', contextPath);
+        initCheckboxes('checkbox', contextPath);
+    }
+    
+    // 登録画面の初期化
+    const registForm = document.getElementById('registTime');
+    if (registForm) {
+        initRegistTime('registTime', contextPath);
+    } 
 });
- 

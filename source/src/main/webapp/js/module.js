@@ -1,6 +1,6 @@
 // js/todoModule.js
 
-// 確認ダイアログ
+// 確認アラート
 export function showConfirm(message = '本当に削除しますか？') {
     return window.confirm(message);
 }
@@ -76,6 +76,42 @@ export function initCheckboxes(checkboxClass, contextPath) {
             .catch(err => {
                 console.error('チェック状態更新失敗:', err);
             });
+        });
+    });
+}
+
+// 時間登録処理
+export function initRegistTime(formId, contextPath) {
+    const form = document.getElementById(formId);
+    if (!form) {
+  		console.error(`フォームID "${formId}" が見つかりません`);
+  		return;
+	}
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const exercise = formData.get('exercise');
+        const study = formData.get('study');
+        const sleep = formData.get('sleep');
+
+		const params = new URLSearchParams();
+		params.append('exercise', exercise);
+		params.append('study', study);
+		params.append('sleep', sleep);
+		
+		if (!showConfirm('登録しますか？')) return;
+		
+        fetch(`${contextPath}/registTimeServlet`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('登録エラー');
+            location.reload();
+        })
+        .catch(err => {
+            console.error('登録失敗:', err);
         });
     });
 }

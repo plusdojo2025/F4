@@ -17,11 +17,6 @@ import dto.usersDTO;
 @WebServlet("/registTimeServlet")
 public class registTimeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//実施時間の登録画面へフォアード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registTime.jsp");
-	    dispatcher.forward(request, response);
-	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -38,4 +33,10 @@ public class registTimeServlet extends HttpServlet {
         doTimesDTO doTime = new doTimesDTO(0, id, exercise_do, study_do, sleep_do);
         doTimesDAO.insert(doTime);
 	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//実施時間の登録画面へフォアード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registTime.jsp");
+	    dispatcher.forward(request, response);
+	}
+	
 }

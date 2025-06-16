@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/registTime.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-context-path="<%= request.getContextPath() %>">
     <!-- ヘッダー -->
      <div class="headerH2">
          <h2>お疲れさまでした！</h2>
@@ -20,9 +20,8 @@
      </div>
 
     <!-- 目標設定フォーム -->
-    <!-- こことボタンに処理を書く -->
      <div class="form">
-        <form action="#" method="post">
+        <form class="registTime" id="registTime">
             <input type="number" class="input" name="exercise" placeholder="運動時間" required>
             <input type="number" class="input" name="study" placeholder="勉強時間" required>
             <input type="number" class="input" name="sleep" placeholder="睡眠時間" required>
@@ -34,9 +33,9 @@
         </form>
      </div>
 
-    
-
      <!-- フッター -->
     <jsp:include page="footerMenu.jsp" />
+    <script type="module" src="js/init.js"></script>
+    
 </body>
 </html>

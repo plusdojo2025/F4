@@ -20,7 +20,6 @@
      </div>
 
     <!-- 目標設定フォーム -->
-    <!-- こことボタンに処理を書く -->
      <div class="form">
         <form action="/F4/registGoalServlet" method="post">
             <input type="number" class="input" name="exercise" placeholder="一日の運動時間　(推奨1時間)" required>
@@ -46,6 +45,5 @@
      		</div>
         </form>
      </div>
-
 </body>
 </html>
