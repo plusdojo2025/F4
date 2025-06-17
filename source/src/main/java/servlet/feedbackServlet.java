@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.doTimesDAO;
 import dao.goalsDAO;
 import dao.resultsDAO;
 import dto.goalsDTO;
@@ -52,6 +53,17 @@ public class feedbackServlet extends HttpServlet {
                     String sleepfeed = cc.sleepCheck(doSleep);
                     String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
 
+                    doTimesDAO dtdao = new doTimesDAO();
+                    List<Double> timesList = dtdao.getTimes(userId);
+                    double extime = timesList.get(0);   // 運動時間
+                    double sttime = timesList.get(1);   // 勉強時間
+                    double sltime = timesList.get(2);   // 睡眠時間
+                    
+                    HttpSession session2 = request.getSession();
+                    session2.setAttribute("extime", extime);
+                    session2.setAttribute("sttime", sttime);
+                    session2.setAttribute("sltime", sltime);
+                    
                     request.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
                     request.setAttribute("feedback", yourFeed);
 
@@ -69,6 +81,7 @@ public class feedbackServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
+        
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("resultDay.jsp");
         dispatcher.forward(request, response);
