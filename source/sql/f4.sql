@@ -23,12 +23,12 @@ create table goals(
 CREATE TABLE do_times (
     do_time_id INT AUTO_INCREMENT PRIMARY KEY,
     id INT NOT NULL,
-    date DATE NOT NULL, -- CURRENT_DATE を除外
+    date DATE NOT NULL,
     exercise_do DOUBLE NOT NULL,
     study_do DOUBLE NOT NULL,
     sleep_do DOUBLE NOT NULL,
     FOREIGN KEY (id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE (id, date) -- ユーザーごとに1日1回制限
+    UNIQUE (id, date)
 );
 
 create table todo_lists(
