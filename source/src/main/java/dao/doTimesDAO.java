@@ -132,7 +132,7 @@ public class doTimesDAO {
 			while(rs.next()) {
 				timesList.add(rs.getDouble("exercise_do"));
 				timesList.add(rs.getDouble("study_do"));
-				timesList.add(rs.getDouble("sleep_do"));)
+				timesList.add(rs.getDouble("sleep_do"));
 	        }
 			/*
 			else {
