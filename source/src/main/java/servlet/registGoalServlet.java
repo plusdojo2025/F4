@@ -43,7 +43,7 @@ public class registGoalServlet extends HttpServlet {
 	        
 	        if (userdto == null) {
 				System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
-				response.sendRedirect(request.getContextPath() + "/loginServlet");
+				response.sendRedirect(request.getContextPath() + "/login");
 				return;
 			}
 	        
@@ -58,7 +58,7 @@ public class registGoalServlet extends HttpServlet {
 	            goalsDTO goal = new goalsDTO(0, userId, exercise_goal, study_goal, sleep_goal);
 	            goalsDAO dao = new goalsDAO();
 	            if(dao.insertGoal(goal)) {
-	            	response.sendRedirect(request.getContextPath() + "/homeServlet");
+	            	response.sendRedirect(request.getContextPath() + "/home");
 	            }
 	        } 
 	        else {

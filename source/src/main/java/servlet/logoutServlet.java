@@ -23,6 +23,6 @@ public class logoutServlet extends HttpServlet {
 		session.invalidate();
 
 		// ログインページにリダイレクトする
-		response.sendRedirect(request.getContextPath() + "/loginServlet");
+		response.sendRedirect(request.getContextPath() + "/login");
     }
 }

@@ -81,7 +81,7 @@ public class homeServlet extends HttpServlet {
 		}
 	/*	else {
 			//ログインにリダイレクト
-			response.sendRedirect("/F4/loginServlet.java");
+			response.sendRedirect("/F4/login.java");
 			return;
 		}*/
   

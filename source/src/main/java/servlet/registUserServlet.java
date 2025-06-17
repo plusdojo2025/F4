@@ -48,7 +48,7 @@ public class registUserServlet extends HttpServlet {
 		// 登録処理を行う
 		usersDAO udao = new usersDAO();
 		if (udao.insert(new usersDTO(0, user_name, mail, pw))) {
-			response.sendRedirect(request.getContextPath() + "/loginServlet");
+			response.sendRedirect(request.getContextPath() + "/login");
 		} 
 		else {
 			System.out.println("登録エラー");

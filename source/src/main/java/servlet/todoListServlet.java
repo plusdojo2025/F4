@@ -28,7 +28,7 @@ public class todoListServlet extends HttpServlet {
 
 		if (loginUser == null) {
 			System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
-			response.sendRedirect(request.getContextPath() + "/loginServlet");
+			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		}
 
