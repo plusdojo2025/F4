@@ -32,8 +32,6 @@
         </form>
     </div>
 
-    
-
     <!-- 登録リンク -->
     <div class="createAccountLink">
         <div class="line">
