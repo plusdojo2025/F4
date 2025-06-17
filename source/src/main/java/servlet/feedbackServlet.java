@@ -78,7 +78,7 @@ public class feedbackServlet extends HttpServlet {
                     if (count == 0) {
                     	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
                     }
-                    else if (count < 6) {
+                    else if (count <= 6) {
                     	request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
                     }
                     else {
