@@ -40,6 +40,7 @@ public class feedbackServlet extends HttpServlet {
                     double doSleep = Double.parseDouble(request.getParameter("dosl"));
                     */
                 	doTimesDAO dtdao = new doTimesDAO();
+                	int count = dtdao.countDotimes(userId);
                     List<Double> timesList = dtdao.getTimes(userId);
                     double extime = timesList.get(0);   // 運動時間
                     double sttime = timesList.get(1);   // 勉強時間
@@ -61,10 +62,6 @@ public class feedbackServlet extends HttpServlet {
                     String sleepfeed = cc.sleepCheck(sltime);
                     String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
                     
-                    
-
-                    
-                    
                     HttpSession session2 = request.getSession();
                     session2.setAttribute("extime", extime);
                     session2.setAttribute("sttime", sttime);
@@ -74,11 +71,22 @@ public class feedbackServlet extends HttpServlet {
                     request.setAttribute("feedback", yourFeed);
 
                     resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
-
+         
+                    
+                    
+                    if (count == 0) {
+                    	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
+                    }
+                    else if (count < 6) {
+                    	request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
+                    }
+                    else {
+                    	
+                    }
+             
                 } catch (NumberFormatException e) {
                     request.setAttribute("error", "入力された値が不正です。");
                 }
-
             } else {
                 response.sendRedirect("login.jsp");
                 return;
@@ -87,8 +95,6 @@ public class feedbackServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
-        
-
         request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
     }
 }
