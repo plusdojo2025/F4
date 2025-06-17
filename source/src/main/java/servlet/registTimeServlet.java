@@ -14,7 +14,7 @@ import dao.doTimesDAO;
 import dto.doTimesDTO;
 import dto.usersDTO;
 
-@WebServlet("/registTimeServlet")
+@WebServlet("/registTime")
 public class registTimeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

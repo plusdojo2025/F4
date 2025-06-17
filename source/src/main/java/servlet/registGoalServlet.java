@@ -18,7 +18,7 @@ import dto.usersDTO;
 /**
  * Servlet implementation class registGoalServlet
  */
-@WebServlet("/registGoalServlet")
+@WebServlet("/registGoal")
 public class registGoalServlet extends HttpServlet {
 	
 	/**

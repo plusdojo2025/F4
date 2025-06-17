@@ -15,7 +15,7 @@ import dto.usersDTO;
 /**
  * Servlet implementation class RegistServlet
  */
-@WebServlet("/registUserServlet")
+@WebServlet("/registUser")
 public class registUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

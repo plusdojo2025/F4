@@ -13,7 +13,7 @@ public class doTimesDAOTest {
 		
 		// insert()のテスト
 		System.out.println("---------- insert()のテスト ----------");
-		doTimesDTO timeInfo = new doTimesDTO(0, 1, 2, 3, 7);
+		doTimesDTO timeInfo = new doTimesDTO(1, 2, 3, 7);
 		if (dao.insert(timeInfo)) {
 			System.out.println("登録成功！");
 			

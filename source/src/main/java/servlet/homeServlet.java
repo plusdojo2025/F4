@@ -17,7 +17,7 @@ import dto.usersDTO;
 /**
  * Servlet implementation class homeServlet
  */
-@WebServlet("/homeServlet")
+@WebServlet("/home")
 public class homeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

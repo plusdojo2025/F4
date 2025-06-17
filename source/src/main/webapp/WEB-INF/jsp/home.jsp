@@ -57,7 +57,7 @@
     </div>
 
     <!-- ログアウト -->
-	<form class="logoutForm" id="logoutForm" action="<%= request.getContextPath() %>/logoutServlet" method="get">
+	<form class="logoutForm" id="logoutForm" action="<%= request.getContextPath() %>/logout" method="get">
 	    <button type="submit" class="logoutButton logoutContainer">
 	        <p>ログアウトする</p>
 	        <div class="logoutIcon">

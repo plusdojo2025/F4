@@ -22,7 +22,7 @@
     <!-- ログインフォーム -->
      <!-- こことボタンに処理を記入 -->
     <div class="form">
-        <form action="/F4/loginServlet" method="post">
+        <form action="/F4/login" method="post">
             <input type="text" class="input" name="mail" placeholder="メールアドレス" required>
             <input type="password" class="input" name="pw" placeholder="パスワード" required>
             <!-- ボタン -->
@@ -39,7 +39,7 @@
         <div class="line">
             <span>または</span>
         </div>
-        <a href="/F4/registUserServlet">アカウントを作成する</a>
+        <a href="/F4/registUser">アカウントを作成する</a>
     </div>
 </body>
 </html>
