@@ -11,7 +11,7 @@ public class resultsDAO {
 
     // 進捗率とフィードバックを保存
     public void setResults(int userId, double level, String feedback) {
-        String sql = "INSERT INTO results (user_id, day_toward, feedback) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO results (id, day_toward, feedback) VALUES (?, ?, ?)";
 
         try (Connection conn = dbConnectionDAO.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -28,7 +28,7 @@ public class resultsDAO {
 
     public List<Double> getAllLevel(int userId){
         List<Double> levelList = new ArrayList<>();
-        String sql = "SELECT day_toward FROM results WHERE user_id = ? ORDER BY results_id ASC LIMIT 6";//１～６日までの達成度取得
+        String sql = "SELECT day_toward FROM results WHERE id = ? ORDER BY results_id ASC LIMIT 6";//１～６日までの達成度取得
 
         try (Connection conn = dbConnectionDAO.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -48,7 +48,7 @@ public class resultsDAO {
 
     //-----------------------------------------------データのレコードを全て消す処理--------------------------------------
     public void deleteAllResult(int userId){
-        String sql = "DELETE FROM results WHERE user_id = ?";//次の目標登録ボタンでuserIdを得る
+        String sql = "DELETE FROM results WHERE id = ?";//次の目標登録ボタンでuserIdを得る
 
         try (Connection conn = dbConnectionDAO.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -62,7 +62,7 @@ public class resultsDAO {
     }
     
     public int countResult(int userId) {
-        String sql = "SELECT COUNT(*) FROM results WHERE user_id = ?";
+        String sql = "SELECT COUNT(*) FROM results WHERE id = ?";
         int count = 0;
 
         try (Connection conn = dbConnectionDAO.getConnection();
