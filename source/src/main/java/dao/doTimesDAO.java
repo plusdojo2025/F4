@@ -129,17 +129,17 @@ public class doTimesDAO {
 	    	PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, userId);
 			ResultSet rs = pStmt.executeQuery();
-			while(rs.next()) {
-				timesList.add(rs.getDouble("exercise_do"));
-				timesList.add(rs.getDouble("study_do"));
-				timesList.add(rs.getDouble("sleep_do"));
+			if (rs.next()) {
+	            timesList.add(rs.getDouble("exercise_do"));
+	            timesList.add(rs.getDouble("study_do"));
+	            timesList.add(rs.getDouble("sleep_do"));
+	        } else {
+	            // データがなかった場合に 0.0 を追加
+	            timesList.add(0.0);
+	            timesList.add(0.0);
+	            timesList.add(0.0);
 	        }
-			/*
-			else {
-				timesList.add(0.0);
-				timesList.add(0.0);
-				timesList.add(0.0);
-			}*/
+			
     	} catch (Exception e) {
             e.printStackTrace();
         } finally {
