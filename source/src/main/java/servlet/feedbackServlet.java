@@ -82,7 +82,8 @@ public class feedbackServlet extends HttpServlet {
                     	request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
                     }
                     else {
-                    	request.getRequestDispatcher("/WEB-INF/jsp/resultWeek.jsp").forward(request, response);
+                    	//request.getRequestDispatcher("/WEB-INF/jsp/resultWeek.jsp").forward(request, response);
+                    	response.sendRedirect(request.getContextPath() + "/weekFeedback");
                     }
              
                 } catch (NumberFormatException e) {

@@ -17,7 +17,7 @@ import dto.goalsDTO;
 import dto.usersDTO;
 import model.calc;
 
-@WebServlet("/weekfeedback")
+@WebServlet("/weekFeedback")
 public class weekFeedbackServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
