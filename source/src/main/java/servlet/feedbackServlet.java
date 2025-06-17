@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +25,9 @@ public class feedbackServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false); // falseで既存セッションのみ取得
 
+        
+        System.out.println("白下");
+        
         if (session != null) {
             usersDTO user = (usersDTO) session.getAttribute("userinfo");
             if (user != null) {
@@ -87,7 +89,6 @@ public class feedbackServlet extends HttpServlet {
         }
         
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("resultDay.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
     }
 }
