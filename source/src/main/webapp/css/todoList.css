@@ -65,6 +65,6 @@ input.checkbox:checked + label {
     color: gray;
   }
 
-.liText {
+.liText li{
 	color: gray;
 }
