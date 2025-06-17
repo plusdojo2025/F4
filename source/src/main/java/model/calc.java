@@ -20,8 +20,8 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
         	 return list;
         }
 
-        double excersizelevel = doexcersize / goalexcersize;
-        double studylevel = dostudy / goalstudy;
+        double excersizelevel = doexcersize / goalexcersize *100;
+        double studylevel = dostudy / goalstudy *100;
         double dayLevel = totalDayDo / totalDayGoal * 100;
 
         list.add(Math.round(dayLevel * 10.0) / 10.0);
@@ -68,13 +68,13 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
         for(int i = 1; i < dayLevelList.size(); i++){
             switch (i) {
                 case 1:
-                    if(dayLevelList.get(i) >=90){
+                    if(dayLevelList.get(dayLevelList.size() - i) >=90){
                         efeed = book.getBestExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
-                    }else if(dayLevelList.get(i) >= 70){
+                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 70){
                         efeed = book.getGoodExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
-                    }else if(dayLevelList.get(i) >= 40){
+                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 40){
                         efeed = book.getSosoExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
                     }else{
@@ -83,13 +83,13 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
                     }
                     break;
                 case 2:
-                    if(dayLevelList.get(i) >=90){
+                    if(dayLevelList.get(dayLevelList.size() - i) >=90){
                         sfeed = book.getBestStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
-                    }else if(dayLevelList.get(i) >= 70){
+                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 70){
                         sfeed = book.getGoodStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
-                    }else if(dayLevelList.get(i) >= 40){
+                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 40){
                         sfeed = book.getSosoStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
                     }else{

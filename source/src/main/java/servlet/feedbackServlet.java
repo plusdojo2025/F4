@@ -60,6 +60,7 @@ public class feedbackServlet extends HttpServlet {
                         goalExercise, goalStudy, goalSleep
                     );
                     String sleepfeed = cc.sleepCheck(sltime);
+                    System.out.println(dayLevelList);
                     String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
                     
                     HttpSession session2 = request.getSession();
