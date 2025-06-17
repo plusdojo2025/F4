@@ -21,8 +21,7 @@ import model.calc;
 @WebServlet("/feedback")
 public class feedbackServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false); // falseで既存セッションのみ取得
@@ -33,9 +32,16 @@ public class feedbackServlet extends HttpServlet {
                 int userId = user.getId();
 
                 try {
+                	/*
                     double doExercise = Double.parseDouble(request.getParameter("doex"));
                     double doStudy = Double.parseDouble(request.getParameter("dost"));
                     double doSleep = Double.parseDouble(request.getParameter("dosl"));
+                    */
+                	doTimesDAO dtdao = new doTimesDAO();
+                    List<Double> timesList = dtdao.getTimes(userId);
+                    double extime = timesList.get(0);   // 運動時間
+                    double sttime = timesList.get(1);   // 勉強時間
+                    double sltime = timesList.get(2);   // 睡眠時間
 
                     goalsDAO goalsdao = new goalsDAO();
                     resultsDAO resultsdao = new resultsDAO();
@@ -47,24 +53,22 @@ public class feedbackServlet extends HttpServlet {
 
                     calc cc = new calc();
                     List<Double> dayLevelList = cc.dayLevelCheck(
-                        doExercise, doStudy, doSleep,
+                        extime, sttime, sltime,
                         goalExercise, goalStudy, goalSleep
                     );
-                    String sleepfeed = cc.sleepCheck(doSleep);
+                    String sleepfeed = cc.sleepCheck(sltime);
                     String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
+                    
+                    
 
-                    doTimesDAO dtdao = new doTimesDAO();
-                    List<Double> timesList = dtdao.getTimes(userId);
-                    double extime = timesList.get(0);   // 運動時間
-                    double sttime = timesList.get(1);   // 勉強時間
-                    double sltime = timesList.get(2);   // 睡眠時間
+                    
                     
                     HttpSession session2 = request.getSession();
                     session2.setAttribute("extime", extime);
                     session2.setAttribute("sttime", sttime);
                     session2.setAttribute("sltime", sltime);
                     
-                    request.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
+                    session.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
                     request.setAttribute("feedback", yourFeed);
 
                     resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
