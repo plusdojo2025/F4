@@ -40,7 +40,7 @@ public class feedbackServlet extends HttpServlet {
                     double doSleep = Double.parseDouble(request.getParameter("dosl"));
                     */
                 	doTimesDAO dtdao = new doTimesDAO();
-                	int count = dtdao.countDotimes(userId);
+                	
                     List<Double> timesList = dtdao.getTimes(userId);
                     double extime = timesList.get(0);   // 運動時間
                     double sttime = timesList.get(1);   // 勉強時間
@@ -72,7 +72,7 @@ public class feedbackServlet extends HttpServlet {
 
                     resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
          
-                    
+                    int count = dtdao.countDotimes(userId);
                     
                     if (count == 0) {
                     	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
