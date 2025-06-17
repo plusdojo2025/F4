@@ -9,10 +9,7 @@ public class resultsDAOTest {
         //doTimesDTO dTDto = new doTimesDTO();
         resultsDAO dao = new resultsDAO();
 		
-		// insert()のテスト
-		System.out.println("---------- countResult()のテスト ----------");
-		int count = dao.countResult(1);
-		System.out.println(count);
+		
 	}
 
 }

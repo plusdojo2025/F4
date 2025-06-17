@@ -35,7 +35,10 @@ public class doTimesDAOTest {
 		}
 		
 		
-		
+		// insert()のテスト
+		System.out.println("---------- countResult()のテスト ----------");
+		int count = dao.countDotimes(1);
+		System.out.println(count);
 		
 		
 	}
