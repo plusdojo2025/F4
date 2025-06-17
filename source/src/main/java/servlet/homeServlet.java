@@ -79,12 +79,6 @@ public class homeServlet extends HttpServlet {
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
 	        dispatcher.forward(request, response);
 		}
-	/*	else {
-			//ログインにリダイレクト
-			response.sendRedirect("/F4/login.java");
-			return;
-		}*/
-  
 		        
 	}
 
