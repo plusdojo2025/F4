@@ -73,7 +73,7 @@ public class feedbackServlet extends HttpServlet {
                     resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
          
                     int count = dtdao.countDotimes(userId);
-                    
+                    System.out.println(count+"ですよ");                    
                     if (count == 0) {
                     	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
                     }
@@ -86,6 +86,9 @@ public class feedbackServlet extends HttpServlet {
              
                 } catch (NumberFormatException e) {
                     request.setAttribute("error", "入力された値が不正です。");
+                }catch(Exception e) {
+                    System.out.println(e.getMessage());
+
                 }
             } else {
                 response.sendRedirect("login.jsp");

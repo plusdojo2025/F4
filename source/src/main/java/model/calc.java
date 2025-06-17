@@ -13,7 +13,12 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
         List<Double>list = new ArrayList<Double>();
         double totalDayDo = doexcersize + dostudy + dosleep;
         double totalDayGoal = goalexcersize + goalstudy + goalsleep;
-        if (totalDayDo == 0) return list;
+        if (totalDayDo == 0) {
+        	list.add(0.0);
+        	list.add(0.0);
+        	list.add(0.0);
+        	 return list;
+        }
 
         double excersizelevel = doexcersize / goalexcersize;
         double studylevel = dostudy / goalstudy;
