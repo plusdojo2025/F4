@@ -16,7 +16,7 @@
 
     <!-- アカウント作成フォーム -->
     <div class="form">
-        <form action="/F4/registUser" method="post">
+        <form action="<%= request.getContextPath() %>/registUser" method="post">
             <input type="text" class="input" name="username" placeholder="ユーザー名" required>
             <input type="email" class="input" name="email" placeholder="メールアドレス" required>
             <input type="password" class="input" name="password" placeholder="パスワード" required>
@@ -33,7 +33,7 @@
 
     <!-- ログインリンク -->
     <div class="loginLink">
-        <a href="/F4/login">すでにアカウントをお持ちですか？ログイン</a>
+        <a href="<%= request.getContextPath() %>/login">すでにアカウントをお持ちですか？ログイン</a>
     </div>
     
     <!-- 規約 -->
