@@ -68,7 +68,7 @@ public class feedbackServlet extends HttpServlet {
                     session2.setAttribute("sltime", sltime);
                     
                     session.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
-                    request.setAttribute("feedback", yourFeed);
+                    session.setAttribute("feedback", yourFeed);
 
                     resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
          
