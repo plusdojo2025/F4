@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dto.doTimesDTO;
 
@@ -116,5 +118,40 @@ public class doTimesDAO {
         }
     	
     	return allDoTimes;
+    }
+    
+    public List<Double> getTimes(int userId) {
+    	Connection conn = null;
+    	List<Double> timesList = new ArrayList<Double>();
+    	try {
+	    	conn = dbConnectionDAO.getConnection();
+	    	String sql = "SELECT exercise_do, study_do, sleep_do FROM do_times WHERE id=? ORDER BY date DESC LIMIT 1";
+	    	PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userId);
+			ResultSet rs = pStmt.executeQuery();
+			while(rs.next()) {
+				timesList.add(rs.getDouble("exercise_do"));
+				timesList.add(rs.getDouble("study_do"));
+				timesList.add(rs.getDouble("sleep_do"));
+	        }
+			/*
+			else {
+				timesList.add(0.0);
+				timesList.add(0.0);
+				timesList.add(0.0);
+			}*/
+    	} catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // データベースを切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    	return timesList;
     }
 }
