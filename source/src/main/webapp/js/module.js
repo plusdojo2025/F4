@@ -101,7 +101,7 @@ export function initRegistTime(formId, contextPath) {
 		
 		if (!showConfirm('登録しますか？')) return;
 		
-        fetch(`${contextPath}/registTimeServlet`, {
+        fetch(`${contextPath}/registTime`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString()
