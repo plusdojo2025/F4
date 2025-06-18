@@ -21,7 +21,7 @@ import dto.usersDTO;
 /**
  * Servlet implementation class loginServlet
  */
-@WebServlet(urlPatterns = {"", "/login"})
+@WebServlet("/login")
 public class loginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
