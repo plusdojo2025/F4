@@ -20,8 +20,7 @@ import model.calc;
 @WebServlet("/weekFeedback")
 public class weekFeedbackServlet extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
@@ -75,6 +74,7 @@ public class weekFeedbackServlet extends HttpServlet {
             // レベルとフィードバック計算
             calc cc = new calc();
             double weekLevel = cc.weekLevelCheck(extime, sttime, sltime, goalExercise, goalStudy, goalSleep, levelList);
+            System.out.println("weeklevelは" + weekLevel);
             String yourLastFeed = cc.buildWeekFeedback(weekLevel);
 
             // セッションに格納してJSPへ
@@ -90,5 +90,5 @@ public class weekFeedbackServlet extends HttpServlet {
         }
 
         request.getRequestDispatcher("/WEB-INF/jsp/resultWeek.jsp").forward(request, response);
-    }
+	}
 }
