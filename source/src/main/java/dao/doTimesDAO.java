@@ -175,5 +175,44 @@ public class doTimesDAO {
         return count;
     }
     
+    public double getDoTimes2(int id) {//最初の実施時間登録から６日目までで登録されたdo_timesテーブルの値を出す
+    	Connection conn = null;
+    	double weekDoTimes = 0;
+    	try {
+    		conn = dbConnectionDAO.getConnection();
+    		String sql = "SELECT exercise_do, study_do, sleep_do FROM do_times WHERE id=?"
+    				+ " AND date BETWEEN"
+    				+ " (SELECT MIN(date) FROM do_times WHERE id = ?)"
+    				+ " AND (SELECT DATE_ADD(MIN(date), INTERVAL 5 DAY)"
+    				+ " FROM do_times WHERE id = ?)";
+    		PreparedStatement pStmt = conn.prepareStatement(sql);
+    		
+    		pStmt.setInt(1, id);
+    		pStmt.setInt(2, id);
+    		pStmt.setInt(3, id);
+    		
+            ResultSet rs = pStmt.executeQuery();
+            
+            while(rs.next()) {
+            	double exdo = rs.getDouble("exercise_do");
+            	double stdo = rs.getDouble("study_do");
+            	double sldo = rs.getDouble("sleep_do");
+            	weekDoTimes += (exdo + stdo + sldo);
+            }
+            
+    	}catch(SQLException e){
+    		System.out.println(e.getMessage());
+    	}finally{
+    		if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    	return weekDoTimes;
+    }
+    
     
 }

@@ -75,7 +75,7 @@ public class weekFeedbackServlet extends HttpServlet {
             // レベルとフィードバック計算
             calc cc = new calc();
             doTimesDAO ddao = new doTimesDAO();
-	        double doTimes = ddao.getDoTimes(userId);
+	        double doTimes = ddao.getDoTimes2(userId);
 	        double goals = (goalExercise + goalStudy + goalSleep) * 7;
 	        double level = Math.round((doTimes / goals * 100) * 10) / 10;
             System.out.println("weeklevelは" + level);
