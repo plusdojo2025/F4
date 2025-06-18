@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.doTimesDAO;
 import dao.goalsDAO;
-import dao.resultsDAO;
 import dto.goalsDTO;
 import dto.usersDTO;
 import model.calc;
@@ -49,9 +48,11 @@ public class weekFeedbackServlet extends HttpServlet {
                 return;
             }
 
+            /*
             double extime = timesList.get(0);   // 運動
             double sttime = timesList.get(1);   // 勉強
             double sltime = timesList.get(2);   // 睡眠
+            */
 
             // 目標時間の取得
             goalsDAO goalsdao = new goalsDAO();
@@ -68,20 +69,21 @@ public class weekFeedbackServlet extends HttpServlet {
             double goalSleep = goalsdto.getSleep_goal();
 
             // 過去のレベル履歴を取得
-            resultsDAO resultsdao = new resultsDAO();
-            List<Double> levelList = resultsdao.getAllLevel(userId);
+            //resultsDAO resultsdao = new resultsDAO();
+            //List<Double> levelList = resultsdao.getAllLevel(userId);
 
             // レベルとフィードバック計算
             calc cc = new calc();
-            double weekLevel = cc.weekLevelCheck(extime, sttime, sltime, goalExercise, goalStudy, goalSleep, levelList);
-            System.out.println("weeklevelは" + weekLevel);
-            String yourLastFeed = cc.buildWeekFeedback(weekLevel);
+            doTimesDAO ddao = new doTimesDAO();
+	        double doTimes = ddao.getDoTimes(userId);
+	        double goals = (goalExercise + goalStudy + goalSleep) * 7;
+	        double level = Math.round((doTimes / goals * 100) * 10) / 10;
+            System.out.println("weeklevelは" + level);
+            String yourLastFeed = cc.buildWeekFeedback(level);
 
             // セッションに格納してJSPへ
-            session.setAttribute("extime", extime);
-            session.setAttribute("sttime", sttime);
-            session.setAttribute("sltime", sltime);
-            session.setAttribute("level", weekLevel);
+            
+            session.setAttribute("level", level);
             session.setAttribute("feedback", yourLastFeed);
 
         } catch (Exception e) {
