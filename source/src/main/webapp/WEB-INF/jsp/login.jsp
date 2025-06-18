@@ -46,7 +46,7 @@
     </div> --%>
     
     <div class="form">
-	    <form id="loginForm" action="<%= request.getContextPath() %>/login" method="post" onsubmit="return initCheckForm(this);">
+	    <form id="loginForm" action="<%= request.getContextPath() %>/login" method="post">
 	        <input type="text" class="input" name="mail" placeholder="メールアドレス" required
 	               oninvalid="this.setCustomValidity('メールアドレスを入力してください')"
 	               oninput="this.setCustomValidity('')">
@@ -69,7 +69,6 @@
         </div>
         <a href="<%= request.getContextPath() %>/registUser">アカウントを作成する</a>
     </div>
-    	<script type="module" src="js/init.js"></script>
     
 </body>
 </html>

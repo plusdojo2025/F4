@@ -28,11 +28,19 @@
 
     <!-- アカウント作成フォーム -->
     <div class="form">
-        <form action="<%= request.getContextPath() %>/registUser" method="post">
-            <input type="text" class="input" name="username" placeholder="ユーザー名" required>
-            <input type="email" class="input" name="email" placeholder="メールアドレス" required>
-            <input type="password" class="input" name="password" placeholder="パスワード" required>
-            <input type="password" class="input" name="confirm_password" placeholder="パスワード確認" required>
+        <form id="registUserForm" action="<%= request.getContextPath() %>/registUser" method="post">
+            <input type="text" class="input" name="username" placeholder="ユーザー名" required
+            	oninvalid="this.setCustomValidity('ユーザーネームを入力してください')"
+	           	oninput="this.setCustomValidity('')">
+            <input type="email" class="input" name="email" placeholder="メールアドレス" required
+            	oninvalid="this.setCustomValidity('メールアドレスを入力してください')"
+	            oninput="this.setCustomValidity('')">
+            <input type="password" class="input" name="password" placeholder="パスワード" required
+            	oninvalid="this.setCustomValidity('パスワードを入力してください')"
+	            oninput="this.setCustomValidity('')">
+            <input type="password" class="input" name="confirm_password" placeholder="パスワード確認" required
+            	oninvalid="this.setCustomValidity('パスワードを再入力してください')"
+	            oninput="this.setCustomValidity('')">
             
             <!-- アカウント作成ボタン -->
     		<div class="buttonContainer">
@@ -52,5 +60,6 @@
     <div class="terms">
         <p><span>続行することで、あなたは我々のサービス利用規約<br>およびプライバシーポリシーに同意することになります。</span></p>
     </div>
+        
 </body>
 </html>

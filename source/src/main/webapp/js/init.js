@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✅ ログアウト確認処理の追加
   	initLogoutConfirm('logoutForm');    
   	
-  	initCheckForm('loginForm')
     
+  	 
 
 });
