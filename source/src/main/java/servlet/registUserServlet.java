@@ -51,7 +51,7 @@ public class registUserServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/login");
 		} 
 		else {
-			System.out.println("登録エラー");
+			request.setAttribute("errorMessage", "このメールアドレスは使用されています。");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registUser.jsp");
 		    dispatcher.forward(request, response);
 		}
