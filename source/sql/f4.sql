@@ -12,7 +12,7 @@ create table users(
 
 create table goals(
     goals_id int AUTO_INCREMENT primary key,
-    id int,
+    id int not null,
     exercise_goal double not null,
     study_goal double not null,
     sleep_goal double not null,
@@ -33,7 +33,7 @@ CREATE TABLE do_times (
 
 create table todo_lists(
     todo_list_id int AUTO_INCREMENT primary key,
-    id int,
+    id int not null,
     list_content varchar(30) not null,
     checkbox boolean default false,
      FOREIGN KEY (id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -42,7 +42,7 @@ create table todo_lists(
 
 create table results(
     result_id int AUTO_INCREMENT primary key,
-    id int,
+    id int not null,
     day_toward double not null,
     feedback varchar(50) not null,
     do_time_id int,
