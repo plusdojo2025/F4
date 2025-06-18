@@ -56,7 +56,7 @@ public class loginServlet extends HttpServlet {
 		    HttpSession session = request.getSession();
 		    session.setAttribute("userinfo", udto);
 
-		    if (gdto != null) {
+		    if (gdto != null) {//テスト必須
 		        response.sendRedirect(request.getContextPath() + "/home");
 		    } else {
 		        response.sendRedirect(request.getContextPath() + "/registGoal");

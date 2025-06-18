@@ -28,7 +28,7 @@ public class registGoalServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
-	    //System.out.println("✅ registGoalServlet にアクセスがありました");
+	    System.out.println("✅ registGoalServlet にアクセスがありました");
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
 	    dispatcher.forward(request, response);
 	}
@@ -44,13 +44,13 @@ public class registGoalServlet extends HttpServlet {
 	        if (userdto == null) {
 				System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
 				response.sendRedirect(request.getContextPath() + "/login");
-				return;
+				//return;
 			}
 	        
 	        int userId = userdto.getId();
 	        System.out.println("userId:"+userId);
 
-	        if (userId >= 1) {
+	        if (userId >= 1) {//←要変更
 	            double exercise_goal = Double.parseDouble(request.getParameter("exercise"));
 	            double study_goal = Double.parseDouble(request.getParameter("study"));
 	            double sleep_goal = Double.parseDouble(request.getParameter("sleep"));
@@ -58,13 +58,21 @@ public class registGoalServlet extends HttpServlet {
 	            goalsDTO goal = new goalsDTO(0, userId, exercise_goal, study_goal, sleep_goal);
 	            goalsDAO dao = new goalsDAO();
 	            if(dao.insertGoal(goal)) {
-	            	response.sendRedirect(request.getContextPath() + "/home");
+	            	response.sendRedirect(request.getContextPath() + "/home");//homeservletのdoGetが呼ばれる
+	            	System.out.println(request.getContextPath());
+	            	
 	            }
+	            else 
+	            {
+		        	System.out.println("登録エラー");
+		        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+		        	dispatcher.forward(request, response);
+		        }
 	        } 
-	        else {
-	        	System.out.println("登録エラー");
-	        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
-	        	dispatcher.forward(request, response);
+	        else 
+	        {
+	        	System.out.println("yu-zaIDみつからない");
+	        	response.sendRedirect(request.getContextPath() + "/login");
 	        }
 	        
     }
