@@ -4,7 +4,8 @@ import {
     initDeleteButtons,
     initCheckboxes,
     initRegistTime,
-    initLogoutConfirm
+    initLogoutConfirm,
+    initCheckForm
 } from './module.js';
 
 /*console.log('init.js 読み込まれた');
@@ -29,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // ✅ ログアウト確認処理の追加
   	initLogoutConfirm('logoutForm');    
+  	
+  	initCheckForm('loginForm')
     
 
 });

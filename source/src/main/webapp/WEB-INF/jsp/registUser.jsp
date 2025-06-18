@@ -13,6 +13,18 @@
     <div class="headerH1">
         <h1>アカウントを作成</h1>
     </div>
+    
+    <!-- エラーメッセージ表示（高さは常に確保） -->
+    <div class="errorMessageArea">
+        <%
+		    String error = (String) request.getAttribute("errorMessage");
+		    if (error != null && !error.trim().isEmpty()) {
+		%>
+    		<div class="errorMessage"><%= error %></div>
+		<%
+		    }
+		%>
+    </div>
 
     <!-- アカウント作成フォーム -->
     <div class="form">

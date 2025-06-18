@@ -18,10 +18,23 @@
     <div class="loginText">
         <p>ログインして良い一日をスタートしましょう！</p>
     </div>
+    
+    <!-- エラーメッセージ表示（高さは常に確保） -->
+    <div class="errorMessageArea">
+        <%
+		    String error = (String) request.getAttribute("errorMessage");
+		    if (error != null && !error.trim().isEmpty()) {
+		%>
+    		<div class="errorMessage"><%= error %></div>
+		<%
+		    }
+		%>
+    </div>
+    
 
     <!-- ログインフォーム -->
      <!-- こことボタンに処理を記入 -->
-    <div class="form">
+    <%-- <div class="form">
         <form action="<%= request.getContextPath() %>/login" method="post">
             <input type="text" class="input" name="mail" placeholder="メールアドレス" required>
             <input type="password" class="input" name="pw" placeholder="パスワード" required>
@@ -30,7 +43,24 @@
         		<button type="submit" class="button">ログイン</button>
     		</div>
         </form>
-    </div>
+    </div> --%>
+    
+    <div class="form">
+	    <form id="loginForm" action="<%= request.getContextPath() %>/login" method="post" onsubmit="return initCheckForm(this);">
+	        <input type="text" class="input" name="mail" placeholder="メールアドレス" required
+	               oninvalid="this.setCustomValidity('メールアドレスを入力してください')"
+	               oninput="this.setCustomValidity('')">
+	
+	        <input type="password" class="input" name="pw" placeholder="パスワード" required
+	               oninvalid="this.setCustomValidity('パスワードを入力してください')"
+	               oninput="this.setCustomValidity('')">
+	
+	        <div class="buttonContainer">
+	            <button type="submit" class="button">ログイン</button>
+	        </div>
+	    </form>
+	</div>
+    
 
     <!-- 登録リンク -->
     <div class="createAccountLink">
@@ -39,5 +69,7 @@
         </div>
         <a href="<%= request.getContextPath() %>/registUser">アカウントを作成する</a>
     </div>
+    	<script type="module" src="js/init.js"></script>
+    
 </body>
 </html>

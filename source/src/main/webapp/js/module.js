@@ -128,3 +128,35 @@ export function initLogoutConfirm(formId) {
         });
     }
 }
+
+
+export function initCheckForm(formId) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    const mail = form.querySelector('input[name="mail"]');
+    const pw = form.querySelector('input[name="pw"]');
+    let isValid = true;
+
+    if (!mail.value) {
+      mail.setCustomValidity("メールアドレスを入力してください");
+      mail.reportValidity();
+      isValid = false;
+    } else {
+      mail.setCustomValidity("");
+    }
+
+    if (!pw.value) {
+      pw.setCustomValidity("パスワードを入力してください");
+      pw.reportValidity();
+      isValid = false;
+    } else {
+      pw.setCustomValidity("");
+    }
+
+    if (!isValid) {
+      e.preventDefault(); // サーバー送信を防ぐ
+    }
+  });
+}

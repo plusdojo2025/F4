@@ -22,7 +22,7 @@ p {
 
 /* ヘッダー */
 .headerH1 {
-    margin: 120px 0 10px;
+    margin: 70px 0 10px;
     text-align: center;
     font-size: 17px;
     font-weight: bold;
@@ -178,3 +178,14 @@ p {
     
 }
 /* ------------------------------------------------- */
+.errorMessageArea {
+            min-height: 1.5em; /* 高さを固定してフォームのズレ防止 */
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .errorMessage {
+            color: red;
+            font-weight: bold;
+        }
+

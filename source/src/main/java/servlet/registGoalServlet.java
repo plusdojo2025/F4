@@ -64,7 +64,7 @@ public class registGoalServlet extends HttpServlet {
 	            }
 	            else 
 	            {
-		        	System.out.println("登録エラー");
+		        	System.out.println("a登録エラー");
 		        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
 		        	dispatcher.forward(request, response);
 		        }
