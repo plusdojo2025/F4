@@ -57,17 +57,23 @@ public class registGoalServlet extends HttpServlet {
 
 	            goalsDTO goal = new goalsDTO(0, userId, exercise_goal, study_goal, sleep_goal);
 	            goalsDAO dao = new goalsDAO();
-	            if(dao.insertGoal(goal)) {
-	            	response.sendRedirect(request.getContextPath() + "/home");//homeservletのdoGetが呼ばれる
-	            	System.out.println(request.getContextPath());
-	            	
+	            try {
+		            if(dao.insertGoal(goal)) {
+		            	response.sendRedirect(request.getContextPath() + "/home");//homeservletのdoGetが呼ばれる
+		            	System.out.println(request.getContextPath());
+		            	
+		            }
+		            else 
+		            {
+			        	System.out.println("a登録エラー");
+			        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+			        	dispatcher.forward(request, response);
+			        }
+	            } catch (Exception e){
+	            	String er = e.getMessage();
+	            	session.setAttribute("error", er);
+	            	response.sendRedirect("");
 	            }
-	            else 
-	            {
-		        	System.out.println("a登録エラー");
-		        	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
-		        	dispatcher.forward(request, response);
-		        }
 	        } 
 	        else 
 	        {
