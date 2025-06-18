@@ -19,15 +19,15 @@
         <p>今週の達成率</p>
         <!-- ここのwidthをjspで変更してください -->
         <div class="progressBar">
-            <div class="progressBarFill" style="width: 75.5%;"></div>
+            <div class="progressBarFill" style="width: <%=session.getAttribute("level") %>%;"></div>
         </div>
-        <p><span>jsp%</span></p>
+        <p><span><%=session.getAttribute("level") %>%</span></p>
     </div>
 
     <!-- テキスト -->
     <!-- jspで生成 -->
     <div>
-        <p>全体の達成率は58.3%で、特に睡眠は比較的確保できていますが、勉強と運動はやや不足しているため、無理のない小さな目標から習慣化を目指すと効果的です。完璧を求めず、少しずつでも継続することが成長につながります。</p>
+        <p><%=session.getAttribute("feedback") %></p>
     </div>
 
     <div class="resultText">

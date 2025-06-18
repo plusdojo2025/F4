@@ -26,59 +26,67 @@ public class weekFeedbackServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
 
-        if (session != null) {
-            usersDTO user = (usersDTO) session.getAttribute("userinfo");
-            if (user != null) {
-                int userId = user.getId();
-
-                try {
-                	/*
-                    double doExercise = Double.parseDouble(request.getParameter("doex"));
-                    double doStudy = Double.parseDouble(request.getParameter("dost"));
-                    double doSleep = Double.parseDouble(request.getParameter("dosl"));
-					*/
-                	doTimesDAO dtdao = new doTimesDAO();
-                	List<Double> timesList = dtdao.getTimes(userId);
-                    double extime = timesList.get(0);   // 運動時間
-                    double sttime = timesList.get(1);   // 勉強時間
-                    double sltime = timesList.get(2);   // 睡眠時間
-                	
-                    goalsDAO goalsdao = new goalsDAO();
-                    resultsDAO resultsdao = new resultsDAO();
-
-                    goalsDTO goalsdto = goalsdao.selectGoal(userId);
-                    double goalExercise = goalsdto.getExercise_goal();
-                    double goalStudy = goalsdto.getStudy_goal();
-                    double goalSleep = goalsdto.getSleep_goal();
-
-                    List<Double> levelList = resultsdao.getAllLevel(userId);
-
-                    calc cc = new calc();
-                    double weekLevel = cc.weekLevelCheck(
-                        extime, sttime, sltime,
-                        goalExercise, goalStudy, goalSleep,
-                        levelList
-                    );
-                    String yourLastFeed = cc.buildWeekFeedback(weekLevel);
-                    HttpSession session2 = request.getSession();
-                    session2.setAttribute("extime", extime);
-                    session2.setAttribute("sttime", sttime);
-                    session2.setAttribute("sltime", sltime);
-
-                    session2.setAttribute("level", weekLevel);
-                    session2.setAttribute("feedback", yourLastFeed);
-
-                } catch (NumberFormatException e) {
-                    request.setAttribute("error", "数値の取得に失敗しました。");//
-                }
-
-            } else {
-                response.sendRedirect("login.jsp");
-                return;
-            }
-        } else {
+        if (session == null) {
             response.sendRedirect("login.jsp");
             return;
+        }
+
+        usersDTO user = (usersDTO) session.getAttribute("userinfo");
+        if (user == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        int userId = user.getId();
+
+        try {
+            // 実施時間の取得
+            doTimesDAO dtdao = new doTimesDAO();
+            List<Double> timesList = dtdao.getTimes(userId);
+
+            if (timesList == null || timesList.size() < 3) {
+                request.setAttribute("error", "時間データの取得に失敗しました。");
+                request.getRequestDispatcher("/WEB-INF/jsp/resultWeek.jsp").forward(request, response);
+                return;
+            }
+
+            double extime = timesList.get(0);   // 運動
+            double sttime = timesList.get(1);   // 勉強
+            double sltime = timesList.get(2);   // 睡眠
+
+            // 目標時間の取得
+            goalsDAO goalsdao = new goalsDAO();
+            goalsDTO goalsdto = goalsdao.selectGoal(userId);
+
+            if (goalsdto == null) {
+                request.setAttribute("error", "目標データが登録されていません。");
+                request.getRequestDispatcher("/WEB-INF/jsp/resultWeek.jsp").forward(request, response);
+                return;
+            }
+
+            double goalExercise = goalsdto.getExercise_goal();
+            double goalStudy = goalsdto.getStudy_goal();
+            double goalSleep = goalsdto.getSleep_goal();
+
+            // 過去のレベル履歴を取得
+            resultsDAO resultsdao = new resultsDAO();
+            List<Double> levelList = resultsdao.getAllLevel(userId);
+
+            // レベルとフィードバック計算
+            calc cc = new calc();
+            double weekLevel = cc.weekLevelCheck(extime, sttime, sltime, goalExercise, goalStudy, goalSleep, levelList);
+            String yourLastFeed = cc.buildWeekFeedback(weekLevel);
+
+            // セッションに格納してJSPへ
+            session.setAttribute("extime", extime);
+            session.setAttribute("sttime", sttime);
+            session.setAttribute("sltime", sltime);
+            session.setAttribute("level", weekLevel);
+            session.setAttribute("feedback", yourLastFeed);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "予期せぬエラーが発生しました。");
         }
 
         request.getRequestDispatcher("/WEB-INF/jsp/resultWeek.jsp").forward(request, response);
