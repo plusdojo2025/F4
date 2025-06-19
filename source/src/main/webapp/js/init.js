@@ -5,7 +5,6 @@ import {
     initCheckboxes,
     initRegistTime,
     initLogoutConfirm,
-    initCheckForm
 } from './module.js';
 
 /*console.log('init.js 読み込まれた');
