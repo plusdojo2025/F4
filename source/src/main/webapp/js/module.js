@@ -128,7 +128,7 @@ export function initConfirmOnSubmit(formId, message = "実行しますか？"){
 		})
 	}
 }
-
+/*
 export function registPwMatch(registUserForm){ 
 	form.addEventListener('submit',function(e){
 		const password = document.getElementsByName(password).values;
@@ -137,12 +137,22 @@ export function registPwMatch(registUserForm){
 			console.log("不一致");
 			e.preventDefault();
 		}
-	
 	});
-	
+}*/
+
+export function registPwMatch(formId) {
+    const form = document.getElementById(formId);
+    
+    form.addEventListener('submit', function(e) {
+        const password = form.querySelector('[name="password"]').value;
+        const confirm = form.querySelector('[name="confirm_password"]').value;
+
+        if (password !== confirm) {
+            console.log("不一致");
+            e.preventDefault(); // 送信を止める
+        }
+    });
 }
-
-
 
 
 

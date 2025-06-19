@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         initCheckboxes('checkbox', contextPath);
     }
  
+ 
     console.log('📄 DOMContentLoaded: ページ読み込み完了');
-
     document.getElementById('registUserForm') && (
         console.log('✅ registUserForm: 確認処理を呼び出し'),
         initConfirmOnSubmit('registUserForm', 'この内容ので間違いないですか？')
@@ -44,10 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
 	//ユーザー情報登録画面のパスワード確認の判定
-  	document.getElementsById('submit').addEventListListener('click',()=>{
+  	/*document.getElementsById('submit').addEventListListener('click',()=>{
 		const registUserForm = document.getElementById('registUserForm');
 	  	 if(registUserForm){
 			registPwMatch('registUserForm', contextPath);
 		}
-	}
+	}*/
+	
+	document.addEventListener('DOMContentLoaded', () => {
+		console.log('✅ registUserForm: 処理を呼び出し'),
+    	registPwMatch('registUserForm');
+	});
 });
