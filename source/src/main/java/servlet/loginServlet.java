@@ -68,6 +68,7 @@ public class loginServlet extends HttpServlet {
 		    
 		    //差が7以上なら実施時間・目標時間・評価を削除
 		    if(judge >= 7) {
+		    	request.setAttribute("message", "7日が経過しました。新しい目標を決めましょう❣");
 		    	dtdao.delete(userid);
 		    	gdao.deleteGoal(userid);
 		    	rdao.deleteAllResult(userid);
@@ -84,7 +85,6 @@ public class loginServlet extends HttpServlet {
 		    } else {
 		        response.sendRedirect(request.getContextPath() + "/registGoal");
 		    }
-		    
 		} else {
 		    request.setAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています。");
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
