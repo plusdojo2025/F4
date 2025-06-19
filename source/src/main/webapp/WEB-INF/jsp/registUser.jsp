@@ -46,6 +46,7 @@
     		<div class="buttonContainer">
         		<button type="submit" class="button">サインアップ</button>
     		</div>
+    		<script type="module" src="js/init.js"></script>
         </form>
     </div>
 

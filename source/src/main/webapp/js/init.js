@@ -3,7 +3,8 @@ import {
     initAddTodo,
     initDeleteButtons,
     initCheckboxes,
-    initConfirmOnSubmit
+    initConfirmOnSubmit,
+    registPwMatch,
 } from './module.js';
 
 console.log('init.js 読み込まれた');
@@ -42,4 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
         initConfirmOnSubmit('registTime','入力内容は間違いないですか？')
     );
 
+	//ユーザー情報登録画面のパスワード確認の判定
+  	document.getElementsById('submit').addEventListListener('click',()=>{
+		const registUserForm = document.getElementById('registUserForm');
+	  	 if(registUserForm){
+			registPwMatch('registUserForm', contextPath);
+		}
+	}
 });
