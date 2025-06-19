@@ -48,4 +48,7 @@ create table results(
     FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+insert into users values(0, 'dojouser1', 'dojouser1@plusdojo.jp', '#SEplus2025SEplus');
+
+insert into users values(0, 'dojouser2', 'dojouser2@plusdojo.jp', '#SEplus2025SEplus');
 
