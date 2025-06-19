@@ -16,8 +16,19 @@
 
     <!-- テキスト -->
      <div class="registText">
-        <h3>今日の各時間を入力してください<br>※一日に一度しか入力できません</h3>
+        <h3>今日の各時間を入力してください</h3>
      </div>
+     
+     <div class="errorMessageArea">
+        <%
+		    String error = (String) request.getAttribute("errorMessage");
+		    if (error != null && !error.trim().isEmpty()) {
+		%>
+    		<div class="errorMessage"><%= error %></div>
+		<%
+		    }
+		%>
+    </div>
 
     <!-- 目標設定フォーム -->
      <div class="form">
