@@ -120,7 +120,7 @@ public class doTimesDAO {
     	return allDoTimes;
     }
     
-    public List<Double> getTimes(int userId) {
+    public List<Double> getTimes(int userId) {//最新の一件
     	Connection conn = null;
     	List<Double> timesList = new ArrayList<Double>();
     	try {

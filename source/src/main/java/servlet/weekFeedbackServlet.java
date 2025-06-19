@@ -40,7 +40,7 @@ public class weekFeedbackServlet extends HttpServlet {
         try {
             // 実施時間の取得
             doTimesDAO dtdao = new doTimesDAO();
-            List<Double> timesList = dtdao.getTimes(userId);
+            List<Double> timesList = dtdao.getTimes(userId);//最新の一件の実施時間のリスト
 
             if (timesList == null || timesList.size() < 3) {
                 request.setAttribute("error", "時間データの取得に失敗しました。");
@@ -48,12 +48,13 @@ public class weekFeedbackServlet extends HttpServlet {
                 return;
             }
 
-            /*
+            
             double extime = timesList.get(0);   // 運動
             double sttime = timesList.get(1);   // 勉強
             double sltime = timesList.get(2);   // 睡眠
-            */
-
+            
+            double lastdaydo = extime + sttime + sltime;
+            
             // 目標時間の取得
             goalsDAO goalsdao = new goalsDAO();
             goalsDTO goalsdto = goalsdao.selectGoal(userId);
@@ -75,9 +76,9 @@ public class weekFeedbackServlet extends HttpServlet {
             // レベルとフィードバック計算
             calc cc = new calc();
             doTimesDAO ddao = new doTimesDAO();
-	        double doTimes = ddao.getDoTimes2(userId);
+	        double doTimes = ddao.getDoTimes2(userId);//6日目までの値を取る
 	        double goals = (goalExercise + goalStudy + goalSleep) * 7;
-	        double level = Math.round((doTimes / goals * 100) * 10) / 10;
+	        double level = Math.round((doTimes + lastdaydo / goals * 100) * 10) / 10;
             System.out.println("weeklevelは" + level);
             String yourLastFeed = cc.buildWeekFeedback(level);
 
