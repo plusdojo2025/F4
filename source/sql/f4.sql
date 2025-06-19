@@ -56,20 +56,20 @@ insert into users values(0, 'test1', 'test1@jp', 'test');
 
 insert into users values(0, 'test2', 'test2@jp', 'test');
 insert into goals values(0, 4, 1, 2, 6);
-insert into do_times values(0, 4, '2025-06-13', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-14', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-15', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-16', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-17', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-18', 1, 2, 6);
+insert into do_times values(0, 4, '2025-06-19', 1, 2, 6);
 
 insert into users values(0, 'test3', 'test3@jp', 'test');
 insert into goals values(0, 5, 1, 2, 6);
-insert into do_times values(0, 5, '2025-06-12', 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-13', 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-14', 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-15', 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-16', 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-17', 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-18', 1, 2, 6);
+insert into do_times values(0, 5, '2025-06-19', 1, 2, 6);
 
