@@ -143,3 +143,22 @@ export function initConfirmOnSubmit(formId, message = "実行しますか？"){
 }
 
 
+export function registPwMatch(registUserForm){ 
+	form.addEventListener('submit',function(e){
+		const password = document.getElementsByName(password).values;
+		const confirm = document.getElementsByName(confirm_password).values;
+		if(password != confirm){
+			console.log("不一致");
+			e.preventDefault();
+		}
+	
+	});
+	
+}
+
+
+
+
+
+
+

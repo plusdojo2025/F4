@@ -5,6 +5,7 @@ import {
     initCheckboxes,
     initRegistTime,
     initLogoutConfirm,
+    registPwMatch,
 } from './module.js';
 
 /*console.log('init.js 読み込まれた');
@@ -30,7 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✅ ログアウト確認処理の追加
   	initLogoutConfirm('logoutForm');    
   	
-    
+    //ユーザー情報登録画面のパスワード確認の判定
+  	 document.getElementsById('submit').addEventListListener('click',()=>{
+	const registUserForm = document.getElementById('registUserForm');
+  	 if(registUserForm){
+		registPwMatch('registUserForm', contextPath);
+	}
+
   	 
 
 });
