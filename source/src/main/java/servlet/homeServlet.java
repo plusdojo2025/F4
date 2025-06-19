@@ -37,6 +37,12 @@ public class homeServlet extends HttpServlet {
 		usersDTO user = (usersDTO) request.getSession().getAttribute("userinfo");
 		String name;
 		int userId;
+		// ログイン失敗
+		if (user == null) {
+			System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
 		
 		//目標時間を格納する変数の宣言
 		 double exercise_goal;
