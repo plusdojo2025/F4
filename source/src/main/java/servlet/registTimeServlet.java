@@ -22,21 +22,27 @@ public class registTimeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         HttpSession session = request.getSession(false);
-        if(session == null) {
-        	System.out.println("セッションnull");        }
+        
         usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
-        int id = userdto.getId();
-        System.out.println("userId:"+id);
-        
-        double exercise_do = Double.parseDouble(request.getParameter("exercise"));
-        double study_do = Double.parseDouble(request.getParameter("study"));
-        double sleep_do = Double.parseDouble(request.getParameter("sleep"));
+        if(userdto != null) {
+            int id = userdto.getId();
+            if(id >=1) {
+            	System.out.println("userId:"+id);
+                
+                double exercise_do = Double.parseDouble(request.getParameter("exercise"));
+                double study_do = Double.parseDouble(request.getParameter("study"));
+                double sleep_do = Double.parseDouble(request.getParameter("sleep"));
 
-        doTimesDTO doTime = new doTimesDTO(id, exercise_do, study_do, sleep_do);
+                doTimesDTO doTime = new doTimesDTO(id, exercise_do, study_do, sleep_do);
 
-        doTimesDAO.insert(doTime);
-        
-        
+                doTimesDAO.insert(doTime);
+            }
+            else {
+            	response.sendRedirect(request.getContextPath() + "/login");
+            }
+        }else {
+        	response.sendRedirect(request.getContextPath() + "/login");    
+        }
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//実施時間の登録画面へフォアード
