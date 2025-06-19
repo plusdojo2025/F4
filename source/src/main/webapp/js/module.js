@@ -115,27 +115,14 @@ export function initRegistTime(formId, contextPath) {
         });
     });
 }
-/*
-// ログアウト確認の初期化
-export function initLogoutConfirm(formId) {
-    const logoutForm = document.getElementById(formId);
-    if (logoutForm) {
-        logoutForm.addEventListener('submit', (e) => {
-            const confirmed = window.confirm('本当にログアウトしますか？');
-            if (!confirmed) {
-                e.preventDefault();
-            }
-        });
-    }
-}*/
 
-
+//確認の表示
 export function initConfirmOnSubmit(formId, message = "実行しますか？"){
-	const formId = document.getElementById(formId);
-	if(formId) {
+	const form = document.getElementById(formId);
+	if(form) {
 		form.addEventListener('submit', (e) => {
 			const confirmed = showConfirm(message);
-			if (confirmed) {
+			if (!confirmed) {
 				e.preventDefault()
 			}
 		})

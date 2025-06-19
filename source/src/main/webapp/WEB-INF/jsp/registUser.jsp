@@ -60,6 +60,7 @@
     <div class="terms">
         <p><span>続行することで、あなたは我々のサービス利用規約<br>およびプライバシーポリシーに同意することになります。</span></p>
     </div>
+                 <script type="module" src="js/init.js"></script>
         
 </body>
 </html>

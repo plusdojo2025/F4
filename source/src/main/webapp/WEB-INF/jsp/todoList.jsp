@@ -38,7 +38,7 @@
 						<input type="checkbox" class="checkbox"
 							data-id="${todo.todo_list_id}" ${todo.checkbox ? "checked" : ""}>
 						<label>${todo.list_content}</label>
-						<button class="deleteButton" data-id="${todo.todo_list_id}">
+						<button class="deleteButton" data-id="${todo.todo_list_id}" id="deleteButton" >
 							<svg width="18" height="20" viewBox="0 0 18 20" fill="none"
 								xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd"

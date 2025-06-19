@@ -21,7 +21,7 @@
 
     <!-- 目標設定フォーム -->
      <div class="form">
-        <form action="<%= request.getContextPath() %>/registGoal" method="post">
+        <form id="registGoalForm" action="<%= request.getContextPath() %>/registGoal" method="post">
             <input type="number" class="input" name="exercise" placeholder="一日の運動時間　(推奨1時間)" required>
             <input type="number" class="input" name="study" placeholder="一日の勉強時間　(1~3時間が効果的)" required>
             <input type="number" class="input" name="sleep" placeholder="一日の睡眠時間　(理想は6時間以上)" required>
@@ -45,5 +45,7 @@
      		</div>
         </form>
      </div>
+         <script type="module" src="js/init.js"></script>
+     
 </body>
 </html>

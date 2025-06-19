@@ -3,12 +3,11 @@ import {
     initAddTodo,
     initDeleteButtons,
     initCheckboxes,
-    initRegistTime,
-    initLogoutConfirm,
+    initConfirmOnSubmit
 } from './module.js';
 
-/*console.log('init.js 読み込まれた');
-*/
+console.log('init.js 読み込まれた');
+
 document.addEventListener('DOMContentLoaded', () => {
     const contextPath = document.body.dataset.contextPath || '';
     const userId = 1;
@@ -20,17 +19,27 @@ document.addEventListener('DOMContentLoaded', () => {
         initDeleteButtons('deleteButton', contextPath);
         initCheckboxes('checkbox', contextPath);
     }
-    
-    // 登録画面の初期化
-    const registForm = document.getElementById('registTime');
-    if (registForm) {
-        initRegistTime('registTime', contextPath);
-    } 
-    
-    // ✅ ログアウト確認処理の追加
-  	initLogoutConfirm('logoutForm');    
-  	
-    
-  	 
+ 
+    console.log('📄 DOMContentLoaded: ページ読み込み完了');
+
+    document.getElementById('registUserForm') && (
+        console.log('✅ registUserForm: 確認処理を呼び出し'),
+        initConfirmOnSubmit('registUserForm', 'この内容ので間違いないですか？')
+    );
+
+    document.getElementById('registGoalForm') && (
+        console.log('✅ registGoalForm: 確認処理を呼び出し'),
+        initConfirmOnSubmit('registGoalForm','入力に間違いはないですか？')
+    );
+
+    document.getElementById('logoutForm') && (
+        console.log('✅ logoutForm: 確認処理を呼び出し'),
+        initConfirmOnSubmit('logoutForm','ログアウトしてもよろしいですか？')
+    );
+
+    document.getElementById('registTime') && (
+        console.log('✅ registTime: 確認処理を呼び出し'),
+        initConfirmOnSubmit('registTime','入力内容は間違いないですか？')
+    );
 
 });
