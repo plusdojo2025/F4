@@ -1,9 +1,11 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -214,20 +216,20 @@ public class doTimesDAO {
     	return weekDoTimes;
     }
     
-    public boolean judgeDate(int id) {
+    public LocalDate getFirstDate(int id) {
     	Connection conn = null;
-        boolean result = false;
-
+        LocalDate firstdate = null;
         try {
             conn = dbConnectionDAO.getConnection();
-            String sql = "DELETE date FROM do_times WHERE id = ? ORDER BY date ASC LIMIT 1";
+            String sql = "SELECT date FROM do_times WHERE id = ? ORDER BY date ASC LIMIT 1";
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setInt(1, id);
             ResultSet rs = pStmt.executeQuery();
             
-            
-           
-
+            if (rs.next()) {
+            	Date sqldate = rs.getDate("date");
+            	firstdate = sqldate.toLocalDate();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -241,7 +243,7 @@ public class doTimesDAO {
             }
         }
 
-        return result;
+        return firstdate;
     }
     
 }
