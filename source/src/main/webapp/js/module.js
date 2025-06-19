@@ -140,7 +140,7 @@ export function registPwMatch(registUserForm){
 	});
 }*/
 
-export function registPwMatch(formId) {
+export function registPwMatch(formId,message) {
     const form = document.getElementById(formId);
     
     form.addEventListener('submit', function(e) {
@@ -148,6 +148,7 @@ export function registPwMatch(formId) {
         const confirm = form.querySelector('[name="confirm_password"]').value;
 
         if (password !== confirm) {
+			showConfirm(message);
             console.log("不一致");
             e.preventDefault(); // 送信を止める
         }

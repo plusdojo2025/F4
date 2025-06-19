@@ -37,11 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('✅ logoutForm: 確認処理を呼び出し'),
         initConfirmOnSubmit('logoutForm','ログアウトしてもよろしいですか？')
     );
-
+    
     document.getElementById('registTime') && (
         console.log('✅ registTime: 確認処理を呼び出し'),
         initConfirmOnSubmit('registTime','入力内容は間違いないですか？')
     );
+    
+    document.getElementById('registUserForm') && (
+		console.log('✅ registUserForm: 処理を呼び出し'),
+    	registPwMatch('registUserForm','パスワードが異なります。もう一度確認してください。')
+	);
+
 
 	//ユーザー情報登録画面のパスワード確認の判定
   	/*document.getElementsById('submit').addEventListListener('click',()=>{
@@ -51,8 +57,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}*/
 	
-	document.addEventListener('DOMContentLoaded', () => {
-		console.log('✅ registUserForm: 処理を呼び出し'),
-    	registPwMatch('registUserForm');
-	});
+    
 });
