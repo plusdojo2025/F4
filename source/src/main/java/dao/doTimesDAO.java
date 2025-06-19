@@ -59,7 +59,7 @@ public class doTimesDAO {
     }
 
     // 実施時間の削除
-    public boolean delete(doTimesDTO time) {
+    public boolean delete(int id) {
         Connection conn = null;
         boolean result = false;
 
@@ -67,7 +67,7 @@ public class doTimesDAO {
             conn = dbConnectionDAO.getConnection();
             String sql = "DELETE FROM do_times WHERE id = ?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setInt(1, time.getId());
+            pStmt.setInt(1, id);
             int rs = pStmt.executeUpdate();
             if (rs == 1) {
                 result = true;
