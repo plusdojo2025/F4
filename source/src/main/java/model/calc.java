@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -147,5 +149,10 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
             return ng;
         }
     } 
+    
+    public long judgeDate(LocalDate firstdate, LocalDate nowdate) {
+    	long judge = ChronoUnit.DAYS.between(firstdate, nowdate);
+    	return judge;
+    }
 
 }
