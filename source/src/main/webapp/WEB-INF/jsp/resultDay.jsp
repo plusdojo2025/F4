@@ -59,7 +59,7 @@
 
     <!-- フィードバック -->
     <div>
-        <p><%=session.getAttribute("feedback") %>></p>
+        <p><%=session.getAttribute("feedback") %></p>
     </div>
 
     <!-- フッター -->

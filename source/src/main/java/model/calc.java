@@ -68,10 +68,10 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
         for(int i = 1; i < dayLevelList.size(); i++){
             switch (i) {
                 case 1:
-                    if(dayLevelList.get(dayLevelList.size() - i) >=90){
+                    if(dayLevelList.get(dayLevelList.size() - i) >=80){
                         efeed = book.getBestExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
-                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 70){
+                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 60){
                         efeed = book.getGoodExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
                     }else if(dayLevelList.get(dayLevelList.size() - i) >= 40){
@@ -83,10 +83,10 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
                     }
                     break;
                 case 2:
-                    if(dayLevelList.get(dayLevelList.size() - i) >=90){
+                    if(dayLevelList.get(dayLevelList.size() - i) >=80){
                         sfeed = book.getBestStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
-                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 70){
+                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 60){
                         sfeed = book.getGoodStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
                     }else if(dayLevelList.get(dayLevelList.size() - i) >= 40){
@@ -129,7 +129,7 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
         stringBookDTO book = new stringBookDTO();//テンプレート文DTOのインスタンス作成
         Random rand = new Random();
         
-        if (weekLevel >= 90) {
+        if (weekLevel >= 80) {
             List<String> list = book.getBestWeekfeed();
             String best = list.get(rand.nextInt(list.size()));
             return best;
@@ -137,7 +137,7 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
             List<String> list = book.getGoodWeekfeed();
             String good = list.get(rand.nextInt(list.size()));
             return good;
-        } else if (weekLevel >= 30) {
+        } else if (weekLevel >= 40) {
             List<String> list = book.getSosoWeekfeed();
             String soso = list.get(rand.nextInt(list.size()));
             return soso;
