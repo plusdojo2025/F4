@@ -16,7 +16,7 @@ create table goals(
     exercise_goal double not null,
     study_goal double not null,
     sleep_goal double not null,
-    FOREIGN KEY (id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -27,7 +27,7 @@ CREATE TABLE do_times (
     exercise_do DOUBLE NOT NULL,
     study_do DOUBLE NOT NULL,
     sleep_do DOUBLE NOT NULL,
-    FOREIGN KEY (id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     UNIQUE (id, date)
 );
 
@@ -36,7 +36,7 @@ create table todo_lists(
     id int not null,
     list_content varchar(30) not null,
     checkbox boolean default false,
-     FOREIGN KEY (id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE
+     FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -46,7 +46,7 @@ create table results(
     day_toward double not null,
     feedback varchar(50) not null,
     do_time_id int,
-    FOREIGN KEY (id) REFERENCES USERS(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (do_time_id) REFERENCES do_times(do_time_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
