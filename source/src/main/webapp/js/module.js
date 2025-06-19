@@ -139,7 +139,7 @@ export function registPwMatch(registUserForm){
 		}
 	});
 }*/
-
+/*
 export function registPwMatch(formId,message) {
     const form = document.getElementById(formId);
     
@@ -154,6 +154,30 @@ export function registPwMatch(formId,message) {
         }
     });
 }
+*/
+
+export function registPwMatch(formId, mismatchMessage = 'パスワードが一致しません', confirmMessage = 'この内容で登録してよろしいですか？') {
+    const form = document.getElementById(formId);
+
+    form.addEventListener('submit', function(e) {
+        const password = form.querySelector('[name="password"]').value;
+        const confirm = form.querySelector('[name="confirm_password"]').value;
+
+        if (password !== confirm) {
+            console.warn("パスワード不一致");
+            alert(mismatchMessage);
+            e.preventDefault(); 
+            return;
+        }
+
+        // パスワード一致した場合
+        const ok = showConfirm(confirmMessage);
+        if (!ok) {
+            e.preventDefault();
+        }
+    });
+}
+
 
 
 

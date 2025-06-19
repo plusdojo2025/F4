@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
  
  
     console.log('📄 DOMContentLoaded: ページ読み込み完了');
-    document.getElementById('registUserForm') && (
+    /*document.getElementById('registUserForm') && (
         console.log('✅ registUserForm: 確認処理を呼び出し'),
-        initConfirmOnSubmit('registUserForm', 'この内容ので間違いないですか？')
-    );
+        initConfirmOnSubmit('registUserForm', 'この入力内容で間違いないですか？')
+    );*/
 
     document.getElementById('registGoalForm') && (
         console.log('✅ registGoalForm: 確認処理を呼び出し'),
@@ -43,10 +43,22 @@ document.addEventListener('DOMContentLoaded', () => {
         initConfirmOnSubmit('registTime','入力内容は間違いないですか？')
     );
     
-    document.getElementById('registUserForm') && (
+    /*document.getElementById('registUserForm') && (
 		console.log('✅ registUserForm: 処理を呼び出し'),
     	registPwMatch('registUserForm','パスワードが異なります。もう一度確認してください。')
 	);
+	*/
+	
+	document.getElementById('registUserForm') && (
+		console.log('✅ registUserForm: 処理を呼び出し'),
+		registPwMatch(
+	        'registUserForm',
+	        'パスワードが一致しません。もう一度確認してください。',
+	        '入力内容に間違いはありませんか？'
+	   	)
+	);
+
+
 
 
 	//ユーザー情報登録画面のパスワード確認の判定
