@@ -1,7 +1,7 @@
 package dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class doTimesDTO implements Serializable {
 
@@ -10,7 +10,7 @@ public class doTimesDTO implements Serializable {
     private double exercise_do;   // 運動時間（Not null）
     private double study_do;      // 勉強時間（Not null）
     private double sleep_do;      // 睡眠時間（Not null）
-    private Date date;			  //日付
+    private LocalDate date;			  //日付
 
     public doTimesDTO(int id, double exercise_do, double study_do, double sleep_do) {
 		this.do_time_id = 0;
@@ -22,7 +22,7 @@ public class doTimesDTO implements Serializable {
 	}
 
     //SELECT用DTO
-    public doTimesDTO(int id, double exercise_do, double study_do, double sleep_do, Date date) {
+    public doTimesDTO(int id, double exercise_do, double study_do, double sleep_do, LocalDate date) {
         this.do_time_id = 0;
         this.id = id;
         this.date = date;
@@ -83,11 +83,11 @@ public class doTimesDTO implements Serializable {
         this.sleep_do = sleep_do;
     }
     
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
