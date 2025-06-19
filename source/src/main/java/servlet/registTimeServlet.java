@@ -33,7 +33,10 @@ public class registTimeServlet extends HttpServlet {
         double sleep_do = Double.parseDouble(request.getParameter("sleep"));
 
         doTimesDTO doTime = new doTimesDTO(id, exercise_do, study_do, sleep_do);
+
         doTimesDAO.insert(doTime);
+        
+        
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//実施時間の登録画面へフォアード

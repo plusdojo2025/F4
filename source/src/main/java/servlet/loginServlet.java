@@ -58,6 +58,7 @@ public class loginServlet extends HttpServlet {
 
 		    if (gdto != null) {//テスト必須
 		        response.sendRedirect(request.getContextPath() + "/home");
+		        
 		    } else {
 		        response.sendRedirect(request.getContextPath() + "/registGoal");
 		    }
