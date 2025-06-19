@@ -25,10 +25,10 @@ public class doTimesDTO implements Serializable {
     public doTimesDTO(int id, double exercise_do, double study_do, double sleep_do, LocalDate date) {
         this.do_time_id = 0;
         this.id = id;
-        this.date = date;
         this.exercise_do = exercise_do;
         this.study_do = study_do;
         this.sleep_do = sleep_do;
+        this.date = date;
     }
 
     
