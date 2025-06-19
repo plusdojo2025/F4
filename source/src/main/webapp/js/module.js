@@ -115,7 +115,7 @@ export function initRegistTime(formId, contextPath) {
         });
     });
 }
-
+/*
 // ログアウト確認の初期化
 export function initLogoutConfirm(formId) {
     const logoutForm = document.getElementById(formId);
@@ -127,5 +127,19 @@ export function initLogoutConfirm(formId) {
             }
         });
     }
+}*/
+
+
+export function initConfirmOnSubmit(formId, message = "実行しますか？"){
+	const formId = document.getElementById(formId);
+	if(formId) {
+		form.addEventListener('submit', (e) => {
+			const confirmed = showConfirm(message);
+			if (confirmed) {
+				e.preventDefault()
+			}
+		})
+	}
 }
+
 
