@@ -1,5 +1,6 @@
 package test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import dao.doTimesDAO;
@@ -40,7 +41,26 @@ public class doTimesDAOTest {
 		int count = dao.countDotimes(1);
 		System.out.println(count);
 		
-		
+		//古い日付取得のテスト
+		System.out.println("--------------古い日付取得のテスト--------------------");
+		LocalDate result = dao.getFirstDate(1);
+		if(result != null) {
+			System.out.println(result);
+			
+		}else {
+			System.out.println("失敗");
+		}
+	
+	
+	
+	
 	}
-
+	
+	
+	
+	
+	
+	
+	
+	
 }
