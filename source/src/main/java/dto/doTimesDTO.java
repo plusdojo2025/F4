@@ -21,8 +21,6 @@ public class doTimesDTO implements Serializable {
 		
 	}
     
-    
-    
 	public doTimesDTO() {
 		this.do_time_id = 0; 
         this.id = 0;
