@@ -44,10 +44,8 @@ create table results(
     result_id int AUTO_INCREMENT primary key,
     id int not null,
     day_toward double not null,
-    feedback varchar(50) not null,
-    do_time_id int,
-    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (do_time_id) REFERENCES do_times(do_time_id) ON DELETE CASCADE ON UPDATE CASCADE
+    feedback varchar(70) not null,
+    FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 

@@ -93,11 +93,11 @@ public class feedbackServlet extends HttpServlet {
 
                 }
             } else {
-                response.sendRedirect("login.jsp");
+            	response.sendRedirect(request.getContextPath() + "/login");
                 return;
             }
         } else {
-            response.sendRedirect("login.jsp");
+        	response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
         //request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
