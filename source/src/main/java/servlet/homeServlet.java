@@ -37,6 +37,7 @@ public class homeServlet extends HttpServlet {
 		usersDTO user = (usersDTO) request.getSession().getAttribute("userinfo");
 		String name;
 		int userId;
+		
 		// ログイン失敗
 		if (user == null) {
 			System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
