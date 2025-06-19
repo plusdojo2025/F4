@@ -64,16 +64,20 @@ public class loginServlet extends HttpServlet {
 		    LocalDate firstdate = dtdao.getFirstDate(userid);
 		    LocalDate nowdate = LocalDate.now();
 		    calc cc = new calc();
-		    long judge = cc.judgeDate(firstdate, nowdate);
 		    
-		    //差が7以上なら実施時間・目標時間・評価を削除
-		    if(judge >= 7) {
-		    	request.setAttribute("message", "7日が経過しました。");
-		    	request.setAttribute("message2", "新しい目標を決めましょう❣");
-		    	dtdao.delete(userid);
-		    	gdao.deleteGoal(userid);
-		    	rdao.deleteAllResult(userid);
+		    if (firstdate != null) {
+		    	long judge = cc.judgeDate(firstdate, nowdate);
+		    	//差が7以上なら実施時間・目標時間・評価を削除
+			    if(judge >= 7) {
+			    	request.setAttribute("message", "7日が経過しました。");
+			    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+			    	dtdao.delete(userid);
+			    	gdao.deleteGoal(userid);
+			    	rdao.deleteAllResult(userid);
+			    }
 		    }
+		    
+		    
 		    //目標時間を取得
 		    goalsDTO gdto = gdao.selectGoal(udto.getId());
 		   
