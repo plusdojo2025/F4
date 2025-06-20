@@ -33,7 +33,7 @@
 
     <!-- 登録ボタン -->
     <div class="buttonContainer">
-        <button type="submit" class="button">活動内容を登録</button>
+        <a href="<%= request.getContextPath() %>/registTime"><button type="submit" class="button">活動内容を登録</button></a>
     </div>
 
     <!-- フッター -->
