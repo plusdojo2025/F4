@@ -19,6 +19,25 @@
         <h1>今週の目標を決めましょう</h1>
      </div>
 
+	<div class="weekMessageArea">
+    <%
+        String msg1 = (String) request.getAttribute("message");
+        String msg2 = (String) request.getAttribute("message2");
+
+        if ((msg1 != null && !msg1.trim().isEmpty()) || (msg2 != null && !msg2.trim().isEmpty())) {
+    %>
+        <% if (msg1 != null && !msg1.trim().isEmpty()) { %>
+            <div class="weekMessage"><%= msg1 %></div>
+        <% } %>
+        <% if (msg2 != null && !msg2.trim().isEmpty()) { %>
+            <div class="weekMessage"><%= msg2 %></div>
+        <% } %>
+    <%
+        } 
+    %>
+</div>
+	
+
     <!-- 目標設定フォーム -->
      <div class="form">
         <form id="registGoalForm" action="<%= request.getContextPath() %>/registGoal" method="post">

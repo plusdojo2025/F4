@@ -40,6 +40,22 @@
 }
 /* ------------------------------------------------- */
 
+/* エラーメッセージ */
+.weekMessageArea {
+    min-height: 40px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.weekMessage {
+    color: #000; /* 黒文字 */
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* ------------------------------------------------- */
+
 
 /* ボタンコンテナの設定 */
 .buttonContainer {

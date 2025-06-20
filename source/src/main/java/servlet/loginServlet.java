@@ -88,7 +88,9 @@ public class loginServlet extends HttpServlet {
 		        response.sendRedirect(request.getContextPath() + "/home");
 		        
 		    } else {
-		        response.sendRedirect(request.getContextPath() + "/registGoal");
+		        //response.sendRedirect(request.getContextPath() + "/registGoal");
+		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+			    dispatcher.forward(request, response);
 		    }
 		} else {
 		    request.setAttribute("errorMessage", "メールアドレスまたはパスワードが間違っています。");

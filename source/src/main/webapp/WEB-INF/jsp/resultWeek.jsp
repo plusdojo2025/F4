@@ -39,7 +39,7 @@
         <p>来週の自分が、少しでも心地よく過ごせるように、がんばることだけが目標じゃない。<br>安心できるペースで、やりたいことを少しずつ形にしていこう！</p>
     </div>
 
-<!-- 
+
     <div class="textH2">
         <h2>来週の目標を登録しましょう！</h2>
         <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,11 +47,11 @@
         </svg>
     </div> 
 
-    登録ボタン
+    <!-- 登録ボタン -->
      <div class="buttonContainer">
         <button type="submit" class="button">目標を登録する</button>
      </div>
-      -->
+
      
 
     <!-- フッター -->
