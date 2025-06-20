@@ -80,6 +80,55 @@ export function initCheckboxes(checkboxClass, contextPath) {
     });
 }
 
+//目標登録が24時間以内であるかの確認
+export function registGoalCheck (formId, overMessage = '合計24時間以内に収めてください', contextPath){
+	const form = document.getElementById(formId);
+	if (!form) {
+  		console.error(`フォームID "${formId}" が見つかりません`);
+  		return;
+	}
+
+	form.addEventListener('submit',function(e){
+		const exercise =Number(form.querySelector('[name = exercise]').value) ;
+		const study = Number(form.querySelector('[name = study]').value);
+		const sleep = Number(form.querySelector('[name = sleep]').value);
+		const time = exercise+study+sleep;
+		
+		if(time > 24){
+			console.warn("24h間越え");
+			alert(overMessage);
+			e.preventDefault();
+		}
+		else{
+			console.warn("送るでぇ");
+			const formData = new FormData(form);
+		    const exercise = formData.get('exercise');
+		    const study = formData.get('study');
+		    const sleep = formData.get('sleep');
+		
+			const params = new URLSearchParams();
+			params.append('exercise', exercise);
+			params.append('study', study);
+			params.append('sleep', sleep);
+				
+			if (!showConfirm('登録しますか？')) return;
+		
+		    fetch(`${contextPath}/registTime`, {
+				method: 'POST',
+		      	headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		        body: params.toString()
+		        })
+		    .then(res => {
+		        if (!res.ok) throw new Error('登録エラー');
+		       		 location.reload();
+		     })
+		    .catch(err => {
+		        console.error('登録失敗:', err);
+		     });
+		}
+	});
+}	
+/*
 // 時間登録処理
 export function initRegistTime(formId, contextPath) {
     const form = document.getElementById(formId);
@@ -115,7 +164,7 @@ export function initRegistTime(formId, contextPath) {
         });
     });
 }
-
+*/
 //確認の表示
 export function initConfirmOnSubmit(formId, message = "実行しますか？"){
 	const form = document.getElementById(formId);
