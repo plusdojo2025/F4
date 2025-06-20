@@ -38,7 +38,7 @@ public class doTimesDAO {
             // SQL文を実行する
             int rs = pStmt.executeUpdate();
             // 結果を確認
-            if (rs == 1) {
+            if (rs >= 1) {
                 result = true;
             }
 

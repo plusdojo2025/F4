@@ -36,6 +36,7 @@ public class registTimeServlet extends HttpServlet {
                 doTimesDTO doTime = new doTimesDTO(id, exercise_do, study_do, sleep_do);
 
                 doTimesDAO.insert(doTime);
+                
             }
             else {
             	response.sendRedirect(request.getContextPath() + "/login");
@@ -55,7 +56,7 @@ public class registTimeServlet extends HttpServlet {
 	    if (deleted) {
 	        System.out.println("古いデータを削除しました（userId: " + userId + "）");
 	        request.setAttribute("message", "7日が経過しました。");
-	    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+	    	request.setAttribute("message2", "新しい目標を決めましょう!");
 
 	        // 削除された場合はゴール再登録画面へ
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
