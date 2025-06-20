@@ -45,8 +45,26 @@ public class registTimeServlet extends HttpServlet {
         }
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//実施時間の登録画面へフォアード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registTime.jsp");
+		
+		HttpSession session = request.getSession(false);
+		
+	    usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
+	    int userId = userdto.getId();
+
+	    boolean deleted = deleteTables.delete(userId);
+	    if (deleted) {
+	        System.out.println("古いデータを削除しました（userId: " + userId + "）");
+	        request.setAttribute("message", "7日が経過しました。");
+	    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+
+	        // 削除された場合はゴール再登録画面へ
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+	        dispatcher.forward(request, response);
+	        return;
+	    }
+
+	    // 削除されなかった場合は実施時間登録画面へ
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registTime.jsp");
 	    dispatcher.forward(request, response);
 	}
 	
