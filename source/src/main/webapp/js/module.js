@@ -111,7 +111,11 @@ export function registGoalCheck (formId, overMessage = '合計24時間以内に�
 			params.append('study', study);
 			params.append('sleep', sleep);
 				
-			if (!showConfirm('登録しますか？')) return;
+			if (!showConfirm('登録しますか？')) {
+				console.log('iie');
+				e.preventDefault();
+				return;
+			}
 		
 		    fetch(`${contextPath}/registTime`, {
 				method: 'POST',
