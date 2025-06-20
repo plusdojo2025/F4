@@ -5,6 +5,7 @@ import {
     initCheckboxes,
     initConfirmOnSubmit,
     registPwMatch,
+    initRegistTime,
 } from './module.js';
 
 console.log('init.js 読み込まれた');
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('registTime') && (
         console.log('✅ registTime: 確認処理を呼び出し'),
-        initConfirmOnSubmit('registTime','入力内容は間違いないですか？')
+        initRegistTime('registTime', contextPath)
     );
   
 	document.getElementById('registUserForm') && (
