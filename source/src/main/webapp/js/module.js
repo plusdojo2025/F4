@@ -128,7 +128,7 @@ export function registGoalCheck (formId, overMessage = '合計24時間以内に�
 		}
 	});
 }	
-/*
+
 // 時間登録処理
 export function initRegistTime(formId, contextPath) {
     const form = document.getElementById(formId);
@@ -164,7 +164,7 @@ export function initRegistTime(formId, contextPath) {
         });
     });
 }
-*/
+
 //確認の表示
 export function initConfirmOnSubmit(formId, message = "実行しますか？"){
 	const form = document.getElementById(formId);

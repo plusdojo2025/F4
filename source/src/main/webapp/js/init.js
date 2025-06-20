@@ -5,8 +5,8 @@ import {
     initCheckboxes,
     initConfirmOnSubmit,
     registPwMatch,
-   
-    registGoalCheck,
+    initRegistTime,
+    registGoalCheck
 } from './module.js';
 
 console.log('init.js 読み込まれた');
