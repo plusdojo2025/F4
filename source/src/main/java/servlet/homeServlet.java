@@ -52,11 +52,20 @@ public class homeServlet extends HttpServlet {
 		
 		
 		if(user!=null) {
+			
 			//名前を取得
 	        name = user.getUser_name();
 	        //ユーザーのIDの取得
 	        userId = user.getId();
-	        
+	        //8日目なら次のサイクルに移行するために各テーブル削除
+	        boolean deleted = deleteTables.delete(userId);
+	        if(deleted) {
+	        	request.setAttribute("message", "7日が経過しました。");
+		    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+			    dispatcher.forward(request, response);
+				return;
+	        }
 	        //名前を格納
 	        request.setAttribute("name",name);
 	        
