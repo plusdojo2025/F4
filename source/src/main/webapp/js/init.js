@@ -5,8 +5,7 @@ import {
     initCheckboxes,
     initConfirmOnSubmit,
     registPwMatch,
-    initRegistTime,
-    registGoalCheck
+    registCheck
 } from './module.js';
 
 console.log('init.js 読み込まれた');
@@ -38,7 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('registTime') && (
         console.log('✅ registTime: 確認処理を呼び出し'),
-        initRegistTime('registTime', contextPath)
+/*        initRegistTime('registTime', contextPath)
+*/        registCheck('registTime','合計24時間以内に収めてください', contextPath, 'registTime')
+
     );
   
 	document.getElementById('registUserForm') && (
@@ -52,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	document.getElementById('registGoalForm') && (
 		console.log('✅ registGoalForm: 内容確認処理を呼び出し'),
-		registGoalCheck('registGoalForm','合計24時間以内に収めてください','入力に間違いはないですか？')
+/*		registGoalCheck('registGoalForm','合計24時間以内に収めてください','入力に間違いはないですか？')
+*/		registCheck('registGoalForm','合計24時間以内に収めてください', contextPath, 'registGoal')
 		);
 
 });

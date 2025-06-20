@@ -81,7 +81,7 @@ export function initCheckboxes(checkboxClass, contextPath) {
 }
 
 //目標登録が24時間以内であるかの確認
-export function registGoalCheck (formId, overMessage = '合計24時間以内に収めてください', contextPath){
+export function registCheck (formId, overMessage = '合計24時間以内に収めてください', contextPath, registEndpoint){
 	const form = document.getElementById(formId);
 	if (!form) {
   		console.error(`フォームID "${formId}" が見つかりません`);
@@ -117,7 +117,7 @@ export function registGoalCheck (formId, overMessage = '合計24時間以内に�
 				return;
 			}
 		
-		    fetch(`${contextPath}/registTime`, {
+		    fetch(`${contextPath}/${registEndpoint}`, {
 				method: 'POST',
 		      	headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		        body: params.toString()
@@ -133,6 +133,8 @@ export function registGoalCheck (formId, overMessage = '合計24時間以内に�
 	});
 }	
 
+
+/*
 // 時間登録処理
 export function initRegistTime(formId, contextPath) {
     const form = document.getElementById(formId);
@@ -168,6 +170,16 @@ export function initRegistTime(formId, contextPath) {
         });
     });
 }
+*/
+
+
+
+
+
+
+
+
+
 
 //確認の表示
 export function initConfirmOnSubmit(formId, message = "実行しますか？"){
