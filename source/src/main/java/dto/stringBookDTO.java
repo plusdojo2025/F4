@@ -55,9 +55,9 @@ public class stringBookDTO{//これはデータベースとは関係ない　デ
         sosoexfeed.add("目標を意識しながら運動しましょう！");
         sosoexfeed.add("諦めずに運動を継続しましょう！");
         ngexfeed = new ArrayList<String>();
-        ngexfeed.add("運動があまりできていないようですね");
-        ngexfeed.add("切り替えて運動しましょう");
-        ngexfeed.add("運動時間を確保できていないようです");
+        ngexfeed.add("運動があまりできていないようですね。");
+        ngexfeed.add("切り替えて運動しましょう。");
+        ngexfeed.add("運動時間を確保できていないようです。");
         //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
         beststfeed = new ArrayList<String>();
         beststfeed.add("計画的な学習を心がけていますね！");
@@ -65,16 +65,16 @@ public class stringBookDTO{//これはデータベースとは関係ない　デ
         beststfeed.add("学習の意欲が非常に高いですね！");
         goodstfeed = new ArrayList<String>();
         goodstfeed.add("学習の習慣がついてきていますね！");
-        goodstfeed.add("学習が少しづつ習慣化されています！");
+        goodstfeed.add("学習が少しずつ習慣化されています！");
         goodstfeed.add("あと少しで学習目標を達成できます！");
         sosostfeed = new ArrayList<String>();
-        sosostfeed.add("少しづつ学習時間を増やしていきましょう！");
+        sosostfeed.add("少しずつ学習時間を増やしていきましょう！");
         sosostfeed.add("学習の時間をきちんと確保しましょう！");
         sosostfeed.add("諦めずに学習を取り組みましょう！");
         ngstfeed = new ArrayList<String>();
-        ngstfeed.add("学習ができていないようです");
-        ngstfeed.add("切り替えて学習をしていきましょう");
-        ngstfeed.add("学習時間が取れていないようです");
+        ngstfeed.add("学習ができていないようです。");
+        ngstfeed.add("切り替えて学習をしていきましょう。");
+        ngstfeed.add("学習時間が取れていないようです。");
         //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
         bestslfeed = new ArrayList<String>();
         bestslfeed.add("完璧な睡眠時間をとれていますね！");
@@ -86,8 +86,8 @@ public class stringBookDTO{//これはデータベースとは関係ない　デ
         longslfeed.add("長すぎる睡眠は逆効果です！");
         longslfeed.add("寝すぎは体に毒ですよ！");
         shortslfeed = new ArrayList<String>();
-        shortslfeed.add("睡眠不足は万病のもとです");
-        shortslfeed.add("睡眠時間はしっかり確保しましょう");
+        shortslfeed.add("睡眠不足は万病のもとです。");
+        shortslfeed.add("睡眠時間はしっかり確保しましょう。");
     }
 
     public List<String> getBestExfeed(){
