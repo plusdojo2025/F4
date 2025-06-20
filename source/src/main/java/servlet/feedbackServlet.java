@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +34,16 @@ public class feedbackServlet extends HttpServlet {
             usersDTO user = (usersDTO) session.getAttribute("userinfo");
             if (user != null) {
                 int userId = user.getId();
-
+                
                 try {
+                	boolean deleted = deleteTables.delete(userId);
+                	if(deleted) {
+                		request.setAttribute("message", "7日が経過しました。");
+        		    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+        		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+        			    dispatcher.forward(request, response);
+                	}
+                	
                 	/*
                     double doExercise = Double.parseDouble(request.getParameter("doex"));
                     double doStudy = Double.parseDouble(request.getParameter("dost"));
