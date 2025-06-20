@@ -85,15 +85,15 @@ public class feedbackServlet extends HttpServlet {
                     
                     System.out.println(count+"ですよ"); 
                     System.out.println(date+"ですよ");
-                    if (date >=6 && lastinsert == 0) {
-                    	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
+                    if (date >= 6 && lastinsert == 0) {
+                    	response.sendRedirect(request.getContextPath() + "/weekFeedback");
                     }
                     else if (count <= 6) {
                     	request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
                     }
                     else {
                     	//request.getRequestDispatcher("/WEB-INF/jsp/resultWeek.jsp").forward(request, response);
-                    	response.sendRedirect(request.getContextPath() + "/weekFeedback");
+                    	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
                     }
              
                 } catch (NumberFormatException e) {
