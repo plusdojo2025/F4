@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -73,9 +74,18 @@ public class feedbackServlet extends HttpServlet {
 
                     resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
          
-                    int count = dtdao.countDotimes(userId);
-                    System.out.println(count+"ですよ");                    
-                    if (count == 0) {
+                    //分岐処理変更
+                    
+        		    LocalDate firstdate = dtdao.getFirstDate(userId);
+        		    LocalDate lastdate = dtdao.getLastTimes(userId);
+        		    LocalDate nowdate = LocalDate.now();
+                    int count = dtdao.countDotimes(userId);//ここのダオ処理を変える
+                    long date = cc.judgeDate(firstdate, nowdate);//最初の登録と今の時刻を比較
+                    long lastinsert = cc.judgeDate(lastdate, nowdate);//最後の実施登録が今日か
+                    
+                    System.out.println(count+"ですよ"); 
+                    System.out.println(date+"ですよ");
+                    if (date >=6 && lastinsert == 0) {
                     	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
                     }
                     else if (count <= 6) {

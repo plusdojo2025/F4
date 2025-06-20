@@ -157,7 +157,7 @@ public class doTimesDAO {
     	return timesList;
     }
     
-    public int countDotimes(int userId) {
+    public int countDotimes(int userId) {//
         String sql = "SELECT COUNT(*) FROM do_times WHERE id = ?";
         int count = 0;
 
@@ -244,6 +244,35 @@ public class doTimesDAO {
         }
 
         return firstdate;
+    }
+    public LocalDate getLastTimes(int id) {//最新の一件のdateをみる
+    	Connection conn = null;
+        LocalDate lastdate = null;
+        try {
+            conn = dbConnectionDAO.getConnection();
+            String sql = "SELECT date FROM do_times WHERE id = ? ORDER BY date DESC LIMIT 1";
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setInt(1, id);
+            ResultSet rs = pStmt.executeQuery();
+            
+            if (rs.next()) {
+            	Date sqldate = rs.getDate("date");
+            	lastdate = sqldate.toLocalDate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // データベースを切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return lastdate;
     }
     
 }
