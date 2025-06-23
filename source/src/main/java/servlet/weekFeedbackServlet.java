@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.doTimesDAO;
 import dao.goalsDAO;
+import dao.resultsDAO;
 import dto.goalsDTO;
 import dto.usersDTO;
 import model.calc;
@@ -76,17 +78,31 @@ public class weekFeedbackServlet extends HttpServlet {
             // レベルとフィードバック計算
             calc cc = new calc();
             doTimesDAO ddao = new doTimesDAO();
+            resultsDAO resultsdao = new resultsDAO();
 	        double doTimes = lastdaydo + ddao.getDoTimes2(userId);//6日目までの値を取る
 	        System.out.println(doTimes);
 	        double goals = (goalExercise + goalStudy + goalSleep) * 7;
 	        double level = Math.round(((doTimes / goals) * 100) * 10) / 10;
             System.out.println("weeklevelは" + level);
             String yourLastFeed = cc.buildWeekFeedback(level);
-
+            
+            //
+            LocalDate firstdate = dtdao.getFirstDate(userId);
+		    if(firstdate != null) {
+		    	LocalDate lastdate = dtdao.getLastTimes(userId);
+    		    LocalDate nowdate = LocalDate.now();
+                long date = cc.judgeDate(firstdate, nowdate);//最初の登録と今の時刻を比較
+                long lastinsert = cc.judgeDate(lastdate, nowdate);//最後の実施登録が今日か
+                
+                if(level != resultsdao.getNewLevel(userId) && date >= 6 && lastinsert == 0 || cc.judgeFeed(resultsdao.getNewFeedback(userId)) == false) {
+                	resultsdao.setResults(userId, level, yourLastFeed);
+                }
+		    }
+            String yourNewFeed = resultsdao.getNewFeedback(userId);
             // セッションに格納してJSPへ
             
             session.setAttribute("level", level);
-            session.setAttribute("feedback", yourLastFeed);
+            session.setAttribute("feedback", yourNewFeed);
 
         } catch (Exception e) {
             e.printStackTrace();

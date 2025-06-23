@@ -155,4 +155,34 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
     	return judge;
     }
 
+    public boolean judgeFeed(String feed) {
+    	boolean feedcheck = false;
+    	stringBookDTO book = new stringBookDTO();
+    	List<String> best = book.getBestWeekfeed();
+    	List<String> good = book.getGoodWeekfeed();
+    	List<String> soso = book.getSosoWeekfeed();
+    	List<String> ng = book.getNgWeekfeed();
+    	
+    	for(int i = 0; i < best.size(); i++) {
+    		if(feed.equals(best.get(i))){
+        		feedcheck = true;
+        	}
+    	}
+    	for(int i = 0; i < good.size(); i++) {
+    		if(feed.equals(good.get(i))){
+        		feedcheck = true;
+        	}
+    	}
+    	for(int i = 0; i < soso.size(); i++) {
+    		if(feed.equals(soso.get(i))){
+        		feedcheck = true;
+        	}
+    	}
+    	for(int i = 0; i < ng.size(); i++) {
+    		if(feed.equals(ng.get(i))){
+        		feedcheck = true;
+        	}
+    	}
+    	return feedcheck;
+    }
 }
