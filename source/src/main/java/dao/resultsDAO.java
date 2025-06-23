@@ -90,7 +90,7 @@ public class resultsDAO {
                ResultSet rs = ps.executeQuery();
 
                if(rs.next()){
-            	   feed = rs.getString("day_toward");
+            	   feed = rs.getString("feedback");
                }
                
            }catch(SQLException e){

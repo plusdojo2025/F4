@@ -52,6 +52,7 @@ public class feedbackServlet extends HttpServlet {
                 	doTimesDAO dtdao = new doTimesDAO();
                 	
                     List<Double> timesList = dtdao.getTimes(userId);
+                    System.out.println(timesList);
                     double extime = timesList.get(0);   // 運動時間
                     double sttime = timesList.get(1);   // 勉強時間
                     double sltime = timesList.get(2);   // 睡眠時間
@@ -78,11 +79,12 @@ public class feedbackServlet extends HttpServlet {
                     	resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
                     }
                     String yourNewFeed = resultsdao.getNewFeedback(userId);
+                    System.out.println(yourNewFeed);
                     
-                    HttpSession session2 = request.getSession();
-                    session2.setAttribute("extime", extime);
-                    session2.setAttribute("sttime", sttime);
-                    session2.setAttribute("sltime", sltime);
+                    
+                    session.setAttribute("extime", extime);
+                    session.setAttribute("sttime", sttime);
+                    session.setAttribute("sltime", sltime);
                     
                     session.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
                     
