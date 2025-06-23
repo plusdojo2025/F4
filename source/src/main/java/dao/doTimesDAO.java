@@ -259,6 +259,7 @@ public class doTimesDAO {
             	Date sqldate = rs.getDate("date");
             	lastdate = sqldate.toLocalDate();
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -274,5 +275,70 @@ public class doTimesDAO {
 
         return lastdate;
     }
-    
+    public List<Double> getTwoRecords(int userId) {//最新の一件
+    	Connection conn = null;
+    	List<Double> dorecords = new ArrayList<Double>();
+    	
+    	try {
+	    	conn = dbConnectionDAO.getConnection();
+	    	String sql = "SELECT exercise_do, study_do, sleep_do FROM do_times WHERE id=? ORDER BY date DESC LIMIT 2";
+	    	PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userId);
+			ResultSet rs = pStmt.executeQuery();
+			double exdo = 0;
+			double stdo = 0;
+			double sldo = 0;
+			while (rs.next()) {
+				exdo = rs.getDouble("exercise_do");
+				stdo = rs.getDouble("study_do");
+				sldo = rs.getDouble("sleep_do");
+			   dorecords.add(exdo);
+			   dorecords.add(stdo);
+			   dorecords.add(sldo);
+	        }
+			if (dorecords.size() <= 3) {
+				dorecords.add(exdo);
+				dorecords.add(stdo);
+				dorecords.add(sldo);
+			}
+    	} catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // データベースを切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    	return dorecords;
+    }
+    public boolean doCheck(int userId) {//最新の一件
+    	Connection conn = null;
+    	boolean check = false;
+    	try {
+	    	conn = dbConnectionDAO.getConnection();
+	    	String sql = "SELECT exercise_do, study_do, sleep_do FROM do_times WHERE id=? ORDER BY date DESC LIMIT 1";
+	    	PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userId);
+			ResultSet rs = pStmt.executeQuery();
+			if (rs.next()) {
+	            check = true;
+	        }
+    	} catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // データベースを切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    	return check;
+    }
 }

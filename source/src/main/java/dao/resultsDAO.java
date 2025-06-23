@@ -45,7 +45,7 @@ public class resultsDAO {
         }
         return levelList;
     }
-
+    
     //-----------------------------------------------データのレコードを全て消す処理--------------------------------------
     public void deleteAllResult(int userId){
         String sql = "DELETE FROM results WHERE id = ?";//次の目標登録ボタンでuserIdを得る
@@ -59,6 +59,38 @@ public class resultsDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public String getFeedback(int userId) {
+    	String feedback = "";
+    	String sql = "SELECT feedback FROM results WHERE id = ? ORDER BY result_id DESC LIMIT 1";
+    	try (Connection conn = dbConnectionDAO.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+    		ps.setInt(1, userId);
+    		ResultSet rs = ps.executeQuery();
+    		if(rs.next()){
+    			feedback = rs.getString("feedback");//
+            }
+    	}catch(SQLException e){
+            e.printStackTrace();
+        }
+    	return feedback;
+    }
+    
+    public double getLevel(int userId) {
+    	double level = 0.0;
+    	String sql = "SELECT day_toward FROM results WHERE id = ? ORDER BY result_id DESC LIMIT 1";
+    	try (Connection conn = dbConnectionDAO.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+    		ps.setInt(1, userId);
+    		ResultSet rs = ps.executeQuery();
+    		if(rs.next()){
+    			level = rs.getDouble("day_toward");//
+            }
+    	}catch(SQLException e){
+            e.printStackTrace();
+        }
+    	return level;
     }
     
     

@@ -39,7 +39,7 @@ public class feedbackServlet extends HttpServlet {
                 	boolean deleted = deleteTables.delete(userId);
                 	if(deleted) {
                 		request.setAttribute("message", "7日が経過しました。");
-        		    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+        		    	request.setAttribute("message2", "新しい目標を決めましょう！");
         		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
         			    dispatcher.forward(request, response);
                 	}
@@ -49,40 +49,58 @@ public class feedbackServlet extends HttpServlet {
                     double doStudy = Double.parseDouble(request.getParameter("dost"));
                     double doSleep = Double.parseDouble(request.getParameter("dosl"));
                     */
-                	doTimesDAO dtdao = new doTimesDAO();
-                	
-                    List<Double> timesList = dtdao.getTimes(userId);
-                    double extime = timesList.get(0);   // 運動時間
-                    double sttime = timesList.get(1);   // 勉強時間
-                    double sltime = timesList.get(2);   // 睡眠時間
-
-                    goalsDAO goalsdao = new goalsDAO();
+                	goalsDAO goalsdao = new goalsDAO();
                     resultsDAO resultsdao = new resultsDAO();
+                	doTimesDAO dtdao = new doTimesDAO();
+                	calc cc = new calc();
+                	boolean check = dtdao.doCheck(userId);
+                	
+                	if (check) {
+                		List<Double> timesList = dtdao.getTwoRecords(userId);
+                		double extime = timesList.get(0);   // 運動時間
+                        double sttime = timesList.get(1);   // 勉強時間
+                        double sltime = timesList.get(2);   // 睡眠時間
+                        double extime2 = timesList.get(3);   // 運動時間
+                        double sttime2 = timesList.get(4);   // 勉強時間
+                        double sltime2 = timesList.get(5);   // 睡眠時間
+                        double level;
+                        String yourFeed;
+                      
+                		if (extime == extime2 && sttime == sttime2 && sltime == sltime2) {
+                			level = resultsdao.getLevel(userId);
+                			yourFeed = resultsdao.getFeedback(userId);
+                		}
+                		else {
+                			goalsDTO goalsdto = goalsdao.selectGoal(userId);//sessionで取得したIDでユーザに応じたゴールDTOを作る
+                            double goalExercise = goalsdto.getExercise_goal();
+                            double goalStudy = goalsdto.getStudy_goal();
+                            double goalSleep = goalsdto.getSleep_goal();
 
-                    goalsDTO goalsdto = goalsdao.selectGoal(userId);//sessionで取得したIDでユーザに応じたゴールDTOを作る
-                    double goalExercise = goalsdto.getExercise_goal();
-                    double goalStudy = goalsdto.getStudy_goal();
-                    double goalSleep = goalsdto.getSleep_goal();
-
-                    calc cc = new calc();
-                    List<Double> dayLevelList = cc.dayLevelCheck(
-                        extime, sttime, sltime,
-                        goalExercise, goalStudy, goalSleep
-                    );
-                    String sleepfeed = cc.sleepCheck(sltime);
-                    System.out.println(dayLevelList);
-                    String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
-                    
-                    HttpSession session2 = request.getSession();
-                    session2.setAttribute("extime", extime);
-                    session2.setAttribute("sttime", sttime);
-                    session2.setAttribute("sltime", sltime);
-                    
-                    session.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
-                    session.setAttribute("feedback", yourFeed);
-
-                    resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
-         
+                            
+                            List<Double> dayLevelList = cc.dayLevelCheck(
+                                extime, sttime, sltime,
+                                goalExercise, goalStudy, goalSleep
+                            );
+                            String sleepfeed = cc.sleepCheck(sltime);
+                            System.out.println(dayLevelList);
+                            yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
+                            
+                            level = dayLevelList.get(0);
+                           
+                            resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
+                			
+                		}
+                		HttpSession session2 = request.getSession();
+                        session2.setAttribute("extime", extime);
+                        session2.setAttribute("sttime", sttime);
+                        session2.setAttribute("sltime", sltime);
+                        session.setAttribute("level", level);//進捗率取得して　リクエストスコープにセット
+                        session.setAttribute("feedback", yourFeed);
+                	}
+                	else {
+                		request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
+                	}
+       
                     //分岐処理変更
                     
         		    LocalDate firstdate = dtdao.getFirstDate(userId);
