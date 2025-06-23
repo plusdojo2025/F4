@@ -28,9 +28,9 @@
     <!-- 目標設定フォーム -->
      <div class="form">
         <form class="registTime" id="registTime">
-            <input type="number" class="input" name="exercise" placeholder="運動時間" required>
-            <input type="number" class="input" name="study" placeholder="勉強時間" required>
-            <input type="number" class="input" name="sleep" placeholder="睡眠時間" required>
+            <input type="number" min="0" class="input" name="exercise" placeholder="運動時間" required>
+            <input type="number" min="0" class="input" name="study" placeholder="勉強時間" required>
+            <input type="number" min="0" class="input" name="sleep" placeholder="睡眠時間" required>
             
             <!-- 登録ボタン -->
      		<div class="buttonContainer">
