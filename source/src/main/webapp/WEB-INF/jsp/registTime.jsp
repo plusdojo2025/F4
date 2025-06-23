@@ -23,43 +23,23 @@
 		<h3>今日の各時間を入力してください</h3>
 	</div>
 
-<<<<<<< HEAD
-	<div class="errorMessageArea">
-		<div id="messageBox" class="successMessage"></div>
-	</div>
-=======
-    <!-- 目標設定フォーム -->
-     <div class="form">
-        <form class="registTime" id="registTime">
-            <input type="number" min="0" class="input" name="exercise" placeholder="運動時間" required>
-            <input type="number" min="0" class="input" name="study" placeholder="勉強時間" required>
-            <input type="number" min="0" class="input" name="sleep" placeholder="睡眠時間" required>
-            
-            <!-- 登録ボタン -->
-     		<div class="buttonContainer">
-        		<button type="submit" class="button">登録</button>
-     		</div>
-        </form>
-     </div>
->>>>>>> branch 'main' of https://github.com/plusdojo2025/F4.git
-
 
 	<!-- 目標設定フォーム -->
 	<div class="form">
 		<form class="registTime" id="registTime">
 
 			<div class="form-group">
-				<input type="number" name="exercise" id="time-exercise" required
+				<input type="number" min="0" name="exercise" id="time-exercise" required
 					placeholder=" " /> <label for="time-exercise">運動時間</label>
 			</div>
 
 			<div class="form-group">
-				<input type="number" name="study" id="time-study" required
+				<input type="number" min="0" name="study" id="time-study" required
 					placeholder=" " /> <label for="time-study">勉強時間</label>
 			</div>
 
 			<div class="form-group">
-				<input type="number" name="sleep" id="time-sleep" required
+				<input type="number" min="0" name="sleep" id="time-sleep" required
 					placeholder=" " /> <label for="time-sleep">睡眠時間</label>
 			</div>
 
