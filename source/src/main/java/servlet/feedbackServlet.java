@@ -81,7 +81,11 @@ public class feedbackServlet extends HttpServlet {
                     session.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
                     session.setAttribute("feedback", yourFeed);
 
-                    resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
+                    //↓DBにある最新の進捗率と今回の計算出た値が異なる　＆　進捗率がDBに一つもない
+                    if(dayLevelList.get(0) != resultsdao.getNewLevel(userId) || resultsdao.getAllLevel(userId) == null) {
+                    	resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
+                    }
+                    
          
                     //分岐処理変更
                     
