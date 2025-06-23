@@ -61,6 +61,23 @@ public class resultsDAO {
         }
     }
     
-    
+    public double getNewLevel(int userId) {
+    	double level =0.0;
+    	String sql = "SELECT day_toward FROM results WHERE id = ? ORDER BY result_id DESC LIMIT 1";
+    	try (Connection conn = dbConnectionDAO.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+               ps.setInt(1, userId);
+               ResultSet rs = ps.executeQuery();
+
+               if(rs.next()){
+            	   level = rs.getDouble("day_toward");
+               }
+               
+           }catch(SQLException e){
+               e.printStackTrace();
+           }
+           return level;
+    }
 
 }
