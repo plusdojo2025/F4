@@ -39,7 +39,7 @@ public class feedbackServlet extends HttpServlet {
                 	boolean deleted = deleteTables.delete(userId);
                 	if(deleted) {
                 		request.setAttribute("message", "7日が経過しました。");
-        		    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+        		    	request.setAttribute("message2", "新しい目標を決めましょう!");
         		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
         			    dispatcher.forward(request, response);
                 	}
