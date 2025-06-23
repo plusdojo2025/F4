@@ -148,38 +148,74 @@ p {
 
 
 /* 入力フィールド */
-.input {
-    background-color: #EBEDF2;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 25px;
-    font-size: 16px;
-    border: 1px solid #DDDDDD;
-    width: 100%;
+.form-group {
+  position: relative;
+  margin-bottom: 24px;
 }
 
-.form {
-  text-align: center;
+/* 入力欄 */
+.form-group input {
+  width: 100%;
+  padding: 16px 12px;
+  font-size: 16px;
+  border: 2px solid #DDDDDD;
+  border-radius: 16px;
+  background-color: #FFF;
+  box-shadow: 0 4px 8px rgba(255, 200, 120, 0.1);
+  transition: border-color 0.2s ease;
 }
 
+/* ラベル */
+.form-group label {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  font-size: 16px;
+  color: #999;
+  background-color: #ffffff;
+  padding: 0 4px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* フォーカス時または入力時：ラベルを上に小さく移動 */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 13px;
+  color: #3c6f8f;
+}
+ 
 /* ------------------------------------------------- */
 
 
 /* ボタン */
+
 .button {
-    background-color: #B2D1E5;
-    border-radius: 50px;
-    padding: 10px 0;
-    font-size: 16px;
+    background: linear-gradient(135deg, #B2D1E5, #8CBAD9);
+    border-radius: 40px;
+    padding: 12px 20px;
+    font-size: 18px;
     font-weight: bold;
+    font-family: 'Segoe UI', 'Rounded Mplus 1c', sans-serif;
     color: #0F1417;
     border: none;
     width: 100%;
-    
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.button:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 /* ------------------------------------------------- */
+/* メッセージ表示 */
 .errorMessageArea {
-            min-height: 1.5em; /* 高さを固定してフォームのズレ防止 */
+            min-height: 1.5em;
             text-align: center;
             margin: 10px 0;
         }
@@ -191,6 +227,5 @@ p {
         
         .successMessage {
             color: #00ff00;
-            font-weight: bold;
         }
 

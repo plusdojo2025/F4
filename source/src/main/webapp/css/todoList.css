@@ -1,23 +1,73 @@
 /* Todoリストフォーム */
-.todoForm {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    gap: 8px;
-    align-items: center; /* 縦方向中央揃え */
+/* 横並びにするためのflex設定 */
+.todoForm-wrapper {
+  display: flex;
+  align-items: flex-end; /* 下揃え */
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
 }
 
-.input {
-    border-radius: 50px;
-    padding: 15px;
-    width: 80%;
-    margin: 0;
+/* 入力欄とラベル */
+.todoForm-group {
+  position: relative;
+  flex-grow: 1;
 }
 
-.button {
-    padding: 15px;
-    width: 20%;
+/* 入力欄 */
+.todoForm-group input {
+  width: 100%;
+  height: 56px;
+  padding: 16px 12px;
+  font-size: 16px;
+  border: 2px solid #DDDDDD;
+  border-radius: 16px;
+  background-color: #FFF;
+  box-shadow: 0 4px 8px rgba(255, 200, 120, 0.1);
 }
+
+/* フローティングラベル */
+.todoForm-group label {
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  font-size: 16px;
+  color: #999;
+  background-color: #fff;
+  padding: 0 4px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.todoForm-group input:focus + label,
+.todoForm-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 13px;
+  color: #3c6f8f;
+}
+
+/* ボタン */
+.todoForm-button {
+  height: 56px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #B2D1E5;
+  border: none;
+  border-radius: 28px;
+  color: #0F1417;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.todoForm-button:hover {
+  background-color: #A0C0D8;
+  transform: scale(1.03);
+}
+
+
 /* ------------------------------------------------- */
 
 
