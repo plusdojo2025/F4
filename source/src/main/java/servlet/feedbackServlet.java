@@ -100,11 +100,9 @@ public class feedbackServlet extends HttpServlet {
         		    if(firstdate != null) {
         		    	LocalDate lastdate = dtdao.getLastTimes(userId);
             		    LocalDate nowdate = LocalDate.now();
-                        int count = dtdao.countDotimes(userId);//ここのダオ処理を変える
                         long date = cc.judgeDate(firstdate, nowdate);//最初の登録と今の時刻を比較
                         long lastinsert = cc.judgeDate(lastdate, nowdate);//最後の実施登録が今日か
                         
-                        System.out.println(count+"ですよ"); 
                         System.out.println(date+"ですよ");
                         if (date >= 6 && lastinsert == 0) {
                         	response.sendRedirect(request.getContextPath() + "/weekFeedback");
