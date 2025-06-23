@@ -130,7 +130,7 @@ export function registCheck(formId, overMessage = '合計24時間以内に収め
 			.then(() => {
 				const messageBox = document.getElementById('messageBox');
 				if (messageBox) {
-					messageBox.innerText = '私白下が責任をもって登録しておきましたよ！\nフィードバックも見てちょ　by白下';
+					messageBox.innerText = '登録が完了しました！\n評価を確認してみましょう';
 					messageBox.style.display = 'block';
 				}
 				form.reset();
