@@ -22,7 +22,7 @@ p {
 
 /* ヘッダー */
 .headerH1 {
-    margin: 70px 0 10px;
+    margin: 50px 0 10px;
     text-align: center;
     font-size: 17px;
     font-weight: bold;
@@ -30,7 +30,7 @@ p {
 
 
 .headerH2 {
-    margin: 70px 0 30px;
+    margin: 30px 0 10px;
     text-align: center;
     font-size: 15px;
     font-weight: bold;
@@ -107,6 +107,8 @@ p {
 
 /* フッターメニュー */
 .footerMenu {
+	min-width: 320px;
+    max-width: 414px;
 	background-color: fff;
 	position: fixed;
 	left: 0;                
