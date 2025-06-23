@@ -188,4 +188,9 @@ p {
             color: red;
             font-weight: bold;
         }
+        
+        .successMessage {
+            color: #00ff00;
+            font-weight: bold;
+        }
 

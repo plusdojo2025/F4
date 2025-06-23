@@ -81,57 +81,66 @@ export function initCheckboxes(checkboxClass, contextPath) {
 }
 
 //目標登録が24時間以内であるかの確認
-export function registCheck (formId, overMessage = '合計24時間以内に収めてください', contextPath, registEndpoint){
+export function registCheck(formId, overMessage = '合計24時間以内に収めてください', contextPath, registEndpoint) {
 	const form = document.getElementById(formId);
 	if (!form) {
-  		console.error(`フォームID "${formId}" が見つかりません`);
-  		return;
+		console.error(`フォームID "${formId}" が見つかりません`);
+		return;
 	}
 
-	form.addEventListener('submit',function(e){
-		const exercise =Number(form.querySelector('[name = exercise]').value) ;
-		const study = Number(form.querySelector('[name = study]').value);
-		const sleep = Number(form.querySelector('[name = sleep]').value);
-		const time = exercise+study+sleep;
-		
-		if(time > 24){
-			console.warn("24h間越え");
+	form.addEventListener('submit', function (e) {
+
+		const exercise = Number(form.querySelector('[name=exercise]').value);
+		const study = Number(form.querySelector('[name=study]').value);
+		const sleep = Number(form.querySelector('[name=sleep]').value);
+		const total = exercise + study + sleep;
+
+		if (total > 24) {
 			alert(overMessage);
-			e.preventDefault();
+			e.preventDefault(); // ここは常に止めておかないとエラー送信される
+			return;
 		}
-		else{
-			console.warn("送るでぇ");
-			const formData = new FormData(form);
-		    const exercise = formData.get('exercise');
-		    const study = formData.get('study');
-		    const sleep = formData.get('sleep');
-		
-			const params = new URLSearchParams();
-			params.append('exercise', exercise);
-			params.append('study', study);
-			params.append('sleep', sleep);
-				
-			if (!showConfirm('登録しますか？')) {
-				console.log('iie');
-				e.preventDefault();
-				return;
-			}
-		
-		    fetch(`${contextPath}/${registEndpoint}`, {
-				method: 'POST',
-		      	headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		        body: params.toString()
-		        })
-		    .then(res => {
-		        if (!res.ok) throw new Error('登録エラー');
-		       		 location.reload();
-		     })
-		    .catch(err => {
-		        console.error('登録失敗:', err);
-		     });
+
+		if (!showConfirm('登録しますか？')) {
+			e.preventDefault(); // これも止める
+			return;
 		}
+
+		// 非同期を使わないパターン（registGoal のとき）
+		if (registEndpoint === 'registGoal') {
+			// ↓↓ 通常送信させる（fetch も preventDefault もしない）
+			return; 
+		}
+
+		// 非同期処理：ここから先は fetch による送信
+		e.preventDefault();
+
+		const formData = new FormData(form);
+		const params = new URLSearchParams(formData);
+
+		fetch(`${contextPath}/${registEndpoint}`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: params.toString()
+		})
+			.then(res => {
+				if (!res.ok) throw new Error('登録エラー');
+				return res.text();
+			})
+			.then(() => {
+				const messageBox = document.getElementById('messageBox');
+				if (messageBox) {
+					messageBox.innerText = '私白下が責任をもって登録しておきましたよ！\nフィードバックも見てちょ　by白下';
+					messageBox.style.display = 'block';
+				}
+				form.reset();
+			})
+			.catch(err => {
+				console.error('登録失敗:', err);
+				alert('登録に失敗しました。再度お試しください。');
+			});
 	});
-}	
+}
 
 
 /*
@@ -171,11 +180,6 @@ export function initRegistTime(formId, contextPath) {
     });
 }
 */
-
-
-
-
-
 
 
 

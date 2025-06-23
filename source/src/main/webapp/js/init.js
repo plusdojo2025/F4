@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	);
 	
 	document.getElementById('registGoalForm') && (
-		console.log('✅ registGoalForm: 内容確認処理を呼び出し'),
+		console.log('✅ registGoalForm: 内容確認処理を呼び出し'+ contextPath),
 /*		registGoalCheck('registGoalForm','合計24時間以内に収めてください','入力に間違いはないですか？')
 */		registCheck('registGoalForm','合計24時間以内に収めてください', contextPath, 'registGoal')
 		);

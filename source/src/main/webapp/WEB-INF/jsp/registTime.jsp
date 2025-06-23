@@ -20,15 +20,10 @@
      </div>
      
      <div class="errorMessageArea">
-        <%
-		    String error = (String) request.getAttribute("errorMessage");
-		    if (error != null && !error.trim().isEmpty()) {
-		%>
-    		<div class="errorMessage"><%= error %></div>
-		<%
-		    }
-		%>
+            <div id="messageBox" class="successMessage"></div>
+        
     </div>
+    
 
     <!-- 目標設定フォーム -->
      <div class="form">

@@ -8,7 +8,8 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/registGoal.css">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body data-context-path="<%= request.getContextPath() %>">
+
     <!-- ヘッダー -->
      <div class="headerH2">
          <h2>目標設定</h2>
