@@ -50,7 +50,6 @@
 		%>
 	</div>
 
-
 	<!-- 目標設定フォーム -->
 	<div class="form">
 		<form id="registGoalForm"
