@@ -56,17 +56,17 @@
 			action="<%=request.getContextPath()%>/registGoal" method="post">
 
 			<div class="form-group">
-				<input type="number" min="0" name="exercise" id="goal-exercise"
+				<input type="number" min="0" step="0.1" name="exercise" id="goal-exercise"
 					required placeholder=" " /> <label for="goal-exercise">一日の運動時間（推奨1時間）</label>
 			</div>
 
 			<div class="form-group">
-				<input type="number" min="0" name="study" id="goal-study" required
+				<input type="number" min="0" step="0.1" name="study" id="goal-study" required
 					placeholder=" " /> <label for="goal-study">一日の勉強時間（1〜3時間が効果的）</label>
 			</div>
 
 			<div class="form-group">
-				<input type="number" min="0" name="sleep" id="goal-sleep" required
+				<input type="number" min="0" step="0.1" name="sleep" id="goal-sleep" required
 					placeholder=" " /> <label for="goal-sleep">一日の睡眠時間（理想は6時間以上）</label>
 			</div>
 

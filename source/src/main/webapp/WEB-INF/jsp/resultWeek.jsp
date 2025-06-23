@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -17,7 +20,6 @@
     <!-- 進捗率表示 -->
     <div class="progressContainer">
         <p>今週の達成率</p>
-        <!-- ここのwidthをjspで変更してください -->
         <div class="progressBar">
             <div class="progressBarFill" style="width: <%=session.getAttribute("level") %>%;"></div>
         </div>

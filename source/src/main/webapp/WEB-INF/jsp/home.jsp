@@ -25,7 +25,6 @@
 	<!-- 進捗率表示 -->
 	<div class="progressContainer">
 		<p>一週間の進捗率</p>
-		<!-- ここのwidthをjspで変更してください -->
 		<div class="progressBar">
 			<div class="progressBarFill"
 				style="width: <%=request.getAttribute("level")%>%"></div>
