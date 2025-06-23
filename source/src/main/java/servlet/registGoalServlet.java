@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import dao.goalsDAO;
 import dao.resultsDAO;
 import dto.goalsDTO;
 import dto.usersDTO;
+import model.calc;
 
 
 /**
@@ -32,20 +34,31 @@ public class registGoalServlet extends HttpServlet {
 	        throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
-		usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
-		int id = userdto.getId();
-				
-		goalsDAO gdao = new goalsDAO();
-		doTimesDAO dtdao = new doTimesDAO();
-		resultsDAO rdao = new resultsDAO();
+	    usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
+	    int id = userdto.getId();
+	    goalsDAO gdao = new goalsDAO();
+	    doTimesDAO dtdao = new doTimesDAO();
+	    resultsDAO rdao = new resultsDAO();
+	    calc cc = new calc();
+	    
+	    LocalDate firstdate = dtdao.getFirstDate(id);
+	    if (firstdate != null) {
+	        LocalDate lastdate = dtdao.getLastTimes(id);
+	        LocalDate nowdate = LocalDate.now();
+	        long date = cc.judgeDate(firstdate, nowdate);
+	        long lastinsert = cc.judgeDate(lastdate, nowdate);
+	        
+	        System.out.println(date + "ですよ");
+	        if (date >= 6 && lastinsert == 0) {
+	            gdao.deleteGoal(id);
+	            dtdao.delete(id);
+	            rdao.deleteAllResult(id);
+	        }
+	        System.out.println("✅ registGoalServlet にアクセスがありました");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+	        dispatcher.forward(request, response);
+	    }
 		
-		gdao.deleteGoal(id);
-		dtdao.delete(id);
-		rdao.deleteAllResult(id);
-		
-	    System.out.println("✅ registGoalServlet にアクセスがありました");
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
-	    dispatcher.forward(request, response);
 	}
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
