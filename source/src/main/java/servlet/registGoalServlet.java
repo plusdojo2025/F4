@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.doTimesDAO;
 import dao.goalsDAO;
+import dao.resultsDAO;
 import dto.goalsDTO;
 import dto.usersDTO;
 
@@ -28,6 +30,19 @@ public class registGoalServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
+		
+		HttpSession session = request.getSession(false);
+		usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
+		int id = userdto.getId();
+				
+		goalsDAO gdao = new goalsDAO();
+		doTimesDAO dtdao = new doTimesDAO();
+		resultsDAO rdao = new resultsDAO();
+		
+		gdao.deleteGoal(id);
+		dtdao.delete(id);
+		rdao.deleteAllResult(id);
+		
 	    System.out.println("✅ registGoalServlet にアクセスがありました");
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
 	    dispatcher.forward(request, response);
