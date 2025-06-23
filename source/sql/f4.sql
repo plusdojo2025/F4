@@ -52,24 +52,19 @@ insert into users values(0, 'dojouser1', 'dojouser1@plusdojo.jp', '#SEplus2025SE
 
 insert into users values(0, 'dojouser2', 'dojouser2@plusdojo.jp', '#SEplus2025SEplus');
 
-insert into users values(0, 'test1', 'test1@jp', 'test');
+insert into users values(0, 'new', 'new@jp', 'test');
 
-insert into users values(0, 'test2', 'test2@jp', 'test');
+insert into users values(0, 'week', 'week@jp', 'test');
 insert into goals values(0, 4, 1, 2, 6);
-insert into do_times values(0, 4, '2025-06-14', 1, 2, 6);
-insert into do_times values(0, 4, '2025-06-15', 1, 2, 6);
-insert into do_times values(0, 4, '2025-06-16', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-17', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-18', 1, 2, 6);
 insert into do_times values(0, 4, '2025-06-19', 1, 2, 6);
+insert into do_times values(0, 4, '2025-06-20', 1, 2, 6);
+insert into do_times values(0, 4, '2025-06-21', 1, 2, 6);
+insert into do_times values(0, 4, '2025-06-22', 1, 2, 6);
 
-insert into users values(0, 'test3', 'test3@jp', 'test');
+insert into users values(0, '8day', '8day@jp', 'test');
 insert into goals values(0, 5, 1, 2, 6);
-insert into do_times values(0, 5, '2025-06-13', 1, 2, 6);
-insert into do_times values(0, 5, '2025-06-14', 1, 2, 6);
-insert into do_times values(0, 5, '2025-06-15', 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-16', 1, 2, 6);
-insert into do_times values(0, 5, '2025-06-17', 1, 2, 6);
-insert into do_times values(0, 5, '2025-06-18', 1, 2, 6);
-insert into do_times values(0, 5, '2025-06-19', 1, 2, 6);
+
 
