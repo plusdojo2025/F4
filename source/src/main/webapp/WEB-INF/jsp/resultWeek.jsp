@@ -49,7 +49,7 @@
 
     <!-- 登録ボタン -->
      <div class="buttonContainer">
-        <button type="submit" class="button">目標を登録する</button>
+        <a href="<%= request.getContextPath() %>/registGoal"><button type="submit" class="button">目標を登録する</button></a>
      </div>
 
      
