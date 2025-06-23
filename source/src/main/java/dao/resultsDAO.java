@@ -79,5 +79,25 @@ public class resultsDAO {
            }
            return level;
     }
+    
+    public String getNewFeedback(int userId) {
+    	String feed ="";
+    	String sql = "SELECT feedback FROM results WHERE id = ? ORDER BY result_id DESC LIMIT 1";
+    	try (Connection conn = dbConnectionDAO.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+               ps.setInt(1, userId);
+               ResultSet rs = ps.executeQuery();
+
+               if(rs.next()){
+            	   feed = rs.getString("day_toward");
+               }
+               
+           }catch(SQLException e){
+               e.printStackTrace();
+           }
+           return feed;
+    }
+    
 
 }

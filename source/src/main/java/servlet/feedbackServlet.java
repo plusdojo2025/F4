@@ -73,18 +73,23 @@ public class feedbackServlet extends HttpServlet {
                     System.out.println(dayLevelList);
                     String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
                     
+                  //↓DBにある最新の進捗率と今回の計算出た値が異なる　＆　進捗率がDBに一つもない
+                    if(dayLevelList.get(0) != resultsdao.getNewLevel(userId) || resultsdao.getAllLevel(userId) == null) {
+                    	resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
+                    }
+                    String yourNewFeed = resultsdao.getNewFeedback(userId);
+                    
                     HttpSession session2 = request.getSession();
                     session2.setAttribute("extime", extime);
                     session2.setAttribute("sttime", sttime);
                     session2.setAttribute("sltime", sltime);
                     
                     session.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
-                    session.setAttribute("feedback", yourFeed);
+                    
+                    session.setAttribute("feedback", yourNewFeed);
+                    
 
-                    //↓DBにある最新の進捗率と今回の計算出た値が異なる　＆　進捗率がDBに一つもない
-                    if(dayLevelList.get(0) != resultsdao.getNewLevel(userId) || resultsdao.getAllLevel(userId) == null) {
-                    	resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
-                    }
+                    
                     
          
                     //分岐処理変更
