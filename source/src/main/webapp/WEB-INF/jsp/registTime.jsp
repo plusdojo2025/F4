@@ -33,17 +33,17 @@
 		<form class="registTime" id="registTime">
 
 			<div class="form-group">
-				<input type="number" min="0" name="exercise" id="time-exercise"
+				<input type="number" min="0" step="0.1" name="exercise" id="time-exercise"
 					required placeholder=" " /> <label for="time-exercise">運動時間</label>
 			</div>
 
 			<div class="form-group">
-				<input type="number" min="0" name="study" id="time-study" required
+				<input type="number" min="0" step="0.1" name="study" id="time-study" required
 					placeholder=" " /> <label for="time-study">勉強時間</label>
 			</div>
 
 			<div class="form-group">
-				<input type="number" min="0" name="sleep" id="time-sleep" required
+				<input type="number" min="0" step="0.1" name="sleep" id="time-sleep" required
 					placeholder=" " /> <label for="time-sleep">睡眠時間</label>
 			</div>
 
