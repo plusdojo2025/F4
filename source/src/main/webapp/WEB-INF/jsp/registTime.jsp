@@ -23,6 +23,10 @@
 		<h3>今日の各時間を入力してください</h3>
 	</div>
 
+	<!-- エラーメッセージ表示（高さは常に確保） -->
+	<div class="errorMessageArea">
+            <div id="messageBox" class="successMessage"></div>
+    </div>
 
 	<!-- 目標設定フォーム -->
 	<div class="form">

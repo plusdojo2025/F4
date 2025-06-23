@@ -70,10 +70,6 @@
 					placeholder=" " /> <label for="goal-sleep">一日の睡眠時間（理想は6時間以上）</label>
 			</div>
 
-			<div class="buttonContainer">
-				<button type="submit" class="button">目標を登録</button>
-			</div>
-
 
 			<!-- テキスト -->
 			<div class="goalSettingTextH3">
@@ -92,7 +88,7 @@
 
 			<!-- 目標設定ボタン -->
 			<div class="buttonContainer">
-				<button type="submit" class="button">完了</button>
+				<button type="submit" class="button">目標を登録</button>
 			</div>
 		</form>
 	</div>
