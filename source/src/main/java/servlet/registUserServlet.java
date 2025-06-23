@@ -45,6 +45,14 @@ public class registUserServlet extends HttpServlet {
 		String mail = request.getParameter("email");
 		String pw = request.getParameter("password");
 		
+		// ユーザー名の長さ制限チェック
+	    if (user_name.length() > 20) {
+	        request.setAttribute("errorMessage", "ユーザー名は20文字以内で入力してください。");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registUser.jsp");
+	        dispatcher.forward(request, response);
+	        return;
+	    }
+		
 		// 登録処理を行う
 		usersDAO udao = new usersDAO();
 		if (udao.insert(new usersDTO(0, user_name, mail, pw))) {
