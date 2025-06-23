@@ -29,8 +29,8 @@
 		<form class="registTime" id="registTime">
 
 			<div class="form-group">
-				<input type="number" min="0" name="exercise" id="time-exercise" required
-					placeholder=" " /> <label for="time-exercise">運動時間</label>
+				<input type="number" min="0" name="exercise" id="time-exercise"
+					required placeholder=" " /> <label for="time-exercise">運動時間</label>
 			</div>
 
 			<div class="form-group">
