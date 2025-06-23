@@ -39,29 +39,33 @@ public class doTimesDAOTest {
 		
 		// insert()のテスト
 		System.out.println("---------- countResult()のテスト ----------");
-		int count = dao.countDotimes(1);
+		int count = dao.countDotimes(12);
 		System.out.println(count);
 		
 		//古い日付取得のテスト
 		System.out.println("--------------古い日付取得のテスト--------------------");
-		LocalDate result = dao.getFirstDate(1);
+		LocalDate result = dao.getFirstDate(12);
 		if(result != null) {
 			System.out.println(result);
 			
 		}else {
 			System.out.println("失敗");
 		}
+		
+		System.out.println("---------- getTwoRecords() のテスト ----------");
+        List<Double> records = dao.getTwoRecords(12);
+        if (records.size() == 6) {
+            System.out.println("getTwoRecords テスト：成功");
+            System.out.println("最新の記録: " + records.get(0) + ", " + records.get(1) + ", " + records.get(2));
+            System.out.println("その前の記録: " + records.get(3) + ", " + records.get(4) + ", " + records.get(5));
+        } else {
+            System.out.println("getTwoRecords テスト：失敗（取得数：" + records.size() + "）");
+        }
+
 	
 	
 	
 	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
