@@ -39,7 +39,7 @@ public class feedbackServlet extends HttpServlet {
                 	boolean deleted = deleteTables.delete(userId);
                 	if(deleted) {
                 		request.setAttribute("message", "7日が経過しました。");
-        		    	request.setAttribute("message2", "新しい目標を決めましょう❣");
+        		    	request.setAttribute("message2", "新しい目標を決めましょう!");
         		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
         			    dispatcher.forward(request, response);
                 	}
@@ -100,11 +100,9 @@ public class feedbackServlet extends HttpServlet {
         		    if(firstdate != null) {
         		    	LocalDate lastdate = dtdao.getLastTimes(userId);
             		    LocalDate nowdate = LocalDate.now();
-                        int count = dtdao.countDotimes(userId);//ここのダオ処理を変える
                         long date = cc.judgeDate(firstdate, nowdate);//最初の登録と今の時刻を比較
                         long lastinsert = cc.judgeDate(lastdate, nowdate);//最後の実施登録が今日か
                         
-                        System.out.println(count+"ですよ"); 
                         System.out.println(date+"ですよ");
                         if (date >= 6 && lastinsert == 0) {
                         	response.sendRedirect(request.getContextPath() + "/weekFeedback");
