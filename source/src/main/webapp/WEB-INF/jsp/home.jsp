@@ -19,7 +19,7 @@
 	<!-- ヘッダー -->
 	<div class="headerH2">
 		<h2>
-			ようこそ<%=request.getAttribute("name")%>さん
+			ようこそ<c:out value="${name}" />さん
 		</h2>
 	</div>
 
