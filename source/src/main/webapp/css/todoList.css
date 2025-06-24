@@ -78,9 +78,10 @@ body {
 
 /* Todoリスト */
 .todoList {
-	    max-height: 60vh; /* 高さを調整（必要に応じて変更） */
-	
-	    overflow-y: auto;  /* 縦方向のスクロールを有効にする */
+	max-height: calc(100vh - 100px); /* 画面高からフッター高さを引いた値（仮に100px） */
+    overflow-y: auto;
+    padding-bottom: 120px; /* フッターの高さ+αを確保 */
+	    
 }
 
 .todoList ul{
@@ -93,6 +94,7 @@ body {
     align-items: center; /* 縦方向中央揃え */
     justify-content: space-between; /* 左右のスペースを均等に */
     margin: 20px 0;
+    
 }
 
 .todoList input {
