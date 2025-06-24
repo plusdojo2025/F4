@@ -96,6 +96,7 @@ public class weekFeedbackServlet extends HttpServlet {
                 
                 if(level != resultsdao.getNewLevel(userId) && date >= 6 && lastinsert == 0 || cc.judgeFeed(resultsdao.getNewFeedback(userId)) == false) {
                 	resultsdao.setResults(userId, level, yourLastFeed);
+                	System.out.println("インサートされました");
                 }
 		    }
             String yourNewFeed = resultsdao.getNewFeedback(userId);

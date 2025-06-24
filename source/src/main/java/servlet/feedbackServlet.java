@@ -22,114 +22,93 @@ import model.calc;
 @WebServlet("/feedback")
 public class feedbackServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession(false); // falseで既存セッションのみ取得
+        HttpSession session = request.getSession(false);
 
-        
-        System.out.println("白下");
-        
-        if (session != null) {
-            usersDTO user = (usersDTO) session.getAttribute("userinfo");
-            if (user != null) {
-                int userId = user.getId();
-                
-                try {
-                	boolean deleted = deleteTables.delete(userId);
-                	if(deleted) {
-                		request.setAttribute("message", "7日が経過しました。");
-        		    	request.setAttribute("message2", "新しい目標を決めましょう!");
-        		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
-        			    dispatcher.forward(request, response);
-                	}
-                	
-                	/*
-                    double doExercise = Double.parseDouble(request.getParameter("doex"));
-                    double doStudy = Double.parseDouble(request.getParameter("dost"));
-                    double doSleep = Double.parseDouble(request.getParameter("dosl"));
-                    */
-                	doTimesDAO dtdao = new doTimesDAO();
-                	
-                    List<Double> timesList = dtdao.getTimes(userId);
-                    System.out.println(timesList);
-                    double extime = timesList.get(0);   // 運動時間
-                    double sttime = timesList.get(1);   // 勉強時間
-                    double sltime = timesList.get(2);   // 睡眠時間
-
-                    goalsDAO goalsdao = new goalsDAO();
-                    resultsDAO resultsdao = new resultsDAO();
-
-                    goalsDTO goalsdto = goalsdao.selectGoal(userId);//sessionで取得したIDでユーザに応じたゴールDTOを作る
-                    double goalExercise = goalsdto.getExercise_goal();
-                    double goalStudy = goalsdto.getStudy_goal();
-                    double goalSleep = goalsdto.getSleep_goal();
-
-                    calc cc = new calc();
-                    List<Double> dayLevelList = cc.dayLevelCheck(
-                        extime, sttime, sltime,
-                        goalExercise, goalStudy, goalSleep
-                    );
-                    String sleepfeed = cc.sleepCheck(sltime);
-                    System.out.println(dayLevelList);
-                    String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
-                    
-                  //↓DBにある最新の進捗率と今回の計算出た値が異なる　＆　進捗率がDBに一つもない
-                    if(dayLevelList.get(0) != resultsdao.getNewLevel(userId) || resultsdao.getAllLevel(userId) == null) {
-                    	resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
-                    }
-                    String yourNewFeed = resultsdao.getNewFeedback(userId);
-                    System.out.println(yourNewFeed);
-                    
-                    
-                    session.setAttribute("extime", extime);
-                    session.setAttribute("sttime", sttime);
-                    session.setAttribute("sltime", sltime);
-                    
-                    session.setAttribute("level", dayLevelList.get(0));//進捗率取得して　リクエストスコープにセット
-                    
-                    session.setAttribute("feedback", yourNewFeed);
-                    
-
-                    
-                    
-         
-                    //分岐処理変更
-                    
-        		    LocalDate firstdate = dtdao.getFirstDate(userId);
-        		    if(firstdate != null) {
-        		    	LocalDate lastdate = dtdao.getLastTimes(userId);
-            		    LocalDate nowdate = LocalDate.now();
-                        long date = cc.judgeDate(firstdate, nowdate);//最初の登録と今の時刻を比較
-                        long lastinsert = cc.judgeDate(lastdate, nowdate);//最後の実施登録が今日か
-                        
-                        System.out.println(date+"ですよ");
-                        if (date >= 6 && lastinsert == 0) {
-                        	response.sendRedirect(request.getContextPath() + "/weekFeedback");
-                        }
-                        else
-                        {
-                        	request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
-                        }
-        		    }
-                    else
-                    {
-                        	request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
-                    }
-                } catch (NumberFormatException e) {
-                    request.setAttribute("error", "入力された値が不正です。");
-                }catch(Exception e) {
-                    System.out.println(e.getMessage());
-
-                }
-            } else {
-            	response.sendRedirect(request.getContextPath() + "/login");
-                return;
-            }
-        } else {
-        	response.sendRedirect(request.getContextPath() + "/login");
+        if (session == null || session.getAttribute("userinfo") == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        //request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
+
+        usersDTO user = (usersDTO) session.getAttribute("userinfo");
+        int userId = user.getId();
+
+        try {
+            doTimesDAO dtdao = new doTimesDAO();
+            calc cc = new calc();
+
+            LocalDate nowdate = LocalDate.now();
+            LocalDate firstdate = dtdao.getFirstDate(userId);
+
+            if (firstdate == null) {
+                // 初回アクセス
+                request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
+                return;
+            }
+
+            LocalDate lastdate = dtdao.getLastTimes(userId);
+            long interval = cc.judgeDate(firstdate, nowdate);
+            long lastInsert = cc.judgeDate(lastdate, nowdate);
+
+            // 週末フィードバックへ
+            if (interval >= 6 && lastInsert == 0) {
+                response.sendRedirect(request.getContextPath() + "/weekFeedback");
+                return;
+            }
+
+            // 7日経過でリセットされた場合（delete成功）
+            boolean deleted = deleteTables.delete(userId);
+            if (deleted) {
+                request.setAttribute("message", "7日が経過しました。");
+                request.setAttribute("message2", "新しい目標を決めましょう!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
+                dispatcher.forward(request, response);
+                return;
+            }
+
+            // ↓ここからDB書き込みなどの処理
+            List<Double> timesList = dtdao.getTimes(userId);
+            double extime = timesList.get(0);
+            double sttime = timesList.get(1);
+            double sltime = timesList.get(2);
+
+            goalsDAO goalsdao = new goalsDAO();
+            resultsDAO resultsdao = new resultsDAO();
+            goalsDTO goalsdto = goalsdao.selectGoal(userId);
+
+            double goalExercise = goalsdto.getExercise_goal();
+            double goalStudy = goalsdto.getStudy_goal();
+            double goalSleep = goalsdto.getSleep_goal();
+
+            List<Double> dayLevelList = cc.dayLevelCheck(
+                extime, sttime, sltime,
+                goalExercise, goalStudy, goalSleep
+            );
+            String sleepfeed = cc.sleepCheck(sltime);
+            String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
+
+            // 最新の進捗率と異なる、または初記録の場合にのみ保存
+            Double latestLevel = resultsdao.getNewLevel(userId);
+            if (latestLevel == null || Math.abs(latestLevel - dayLevelList.get(0)) > 0.001) {
+                resultsdao.setResults(userId, dayLevelList.get(0), yourFeed);
+            }
+
+            String yourNewFeed = resultsdao.getNewFeedback(userId);
+
+            session.setAttribute("extime", extime);
+            session.setAttribute("sttime", sttime);
+            session.setAttribute("sltime", sltime);
+            session.setAttribute("level", dayLevelList.get(0));
+            session.setAttribute("feedback", yourNewFeed);
+
+            request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "予期せぬエラーが発生しました。");
+            request.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);
+        }
     }
 }
