@@ -55,6 +55,7 @@ public class feedbackServlet extends HttpServlet {
             // 週末フィードバックへ
             if (interval >= 6 && lastInsert == 0) {
                 response.sendRedirect(request.getContextPath() + "/weekFeedback");
+                System.out.print("七日目の評価画面に移ります");
                 return;
             }
 
@@ -73,6 +74,8 @@ public class feedbackServlet extends HttpServlet {
             double extime = timesList.get(0);
             double sttime = timesList.get(1);
             double sltime = timesList.get(2);
+            System.out.println(timesList);;
+            
 
             goalsDAO goalsdao = new goalsDAO();
             resultsDAO resultsdao = new resultsDAO();
@@ -86,8 +89,10 @@ public class feedbackServlet extends HttpServlet {
                 extime, sttime, sltime,
                 goalExercise, goalStudy, goalSleep
             );
+            System.out.println(dayLevelList);
             String sleepfeed = cc.sleepCheck(sltime);
             String yourFeed = cc.buildDayFeedback(dayLevelList, sleepfeed);
+            System.out.println(yourFeed);
 
             // 最新の進捗率と異なる、または初記録の場合にのみ保存
             Double latestLevel = resultsdao.getNewLevel(userId);

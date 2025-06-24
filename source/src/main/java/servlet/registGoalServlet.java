@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.doTimesDAO;
 import dao.goalsDAO;
+import dao.resultsDAO;
 import dto.goalsDTO;
 import dto.usersDTO;
+import model.calc;
 
 
 /**
@@ -28,6 +32,42 @@ public class registGoalServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
+		
+		HttpSession session = request.getSession(false);
+		doTimesDAO dtdao = new doTimesDAO();
+		goalsDAO gdao = new goalsDAO();
+		resultsDAO rdao = new resultsDAO();
+		
+        calc cc = new calc();
+        
+		usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
+		if(userdto != null) {
+			int userId = userdto.getId();
+			System.out.println("ID：" + userId);
+			if(userId >= 1) {
+				LocalDate firstdate = dtdao.getFirstDate(userId);
+				if(firstdate != null) {
+					LocalDate nowdate = LocalDate.now();
+			        
+			        long checkdate = cc.judgeDate(firstdate, nowdate);
+					if(checkdate >=6) {//七日目
+						dtdao.delete(userId);
+						rdao.deleteAllResult(userId);
+						gdao.deleteGoal(userId);
+						System.out.println("消されました");
+					}else if(checkdate <= 5 && checkdate >= 0 && gdao.selectGoal(userId) != null) {
+						response.sendRedirect(request.getContextPath() + "/home");
+						System.out.println("ホーム画面にせんいします");
+						return;
+					}else {
+						System.out.println("例外");
+					}
+				}
+				
+			}
+			
+		}
+		
 	    System.out.println("✅ registGoalServlet にアクセスがありました");
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
 	    dispatcher.forward(request, response);

@@ -49,7 +49,7 @@ public class weekFeedbackServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
             return;
         }
-        if(cc2.judgeDate(nowdate2, firstdate2) <=6) {
+        if(cc2.judgeDate(firstdate2, nowdate2) <= 5) {
         	request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
             return;
         }
