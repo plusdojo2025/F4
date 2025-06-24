@@ -6,14 +6,30 @@ export function showConfirm(message = '本当に削除しますか？') {
 }
 
 // ToDo追加処理
+// ToDo追加処理
 export function initAddTodo(formId, inputId, contextPath, userId) {
     const form = document.getElementById(formId);
     const input = document.getElementById(inputId);
+    const messageBox = document.getElementById('messageBox'); // エラーメッセージ表示用
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         const todoText = input.value.trim();
-        if (!todoText) return;
+
+        // エラーメッセージをリセット
+        if (messageBox) messageBox.textContent = '';
+
+        // 入力が空の場合
+        if (!todoText) {
+            if (messageBox) messageBox.textContent = '入力してください。';
+            return;
+        }
+
+        // 50文字を超えている場合
+        if (todoText.length > 50) {
+            if (messageBox) messageBox.textContent = '50文字以内で入力してください。';
+            return;
+        }
 
         fetch(`${contextPath}/addTodo`, {
             method: 'POST',
@@ -22,13 +38,14 @@ export function initAddTodo(formId, inputId, contextPath, userId) {
         })
         .then(res => {
             if (!res.ok) throw new Error('追加エラー');
-            location.reload();
+            location.reload(); // 成功時リロード
         })
         .catch(err => {
             console.error('追加失敗:', err);
         });
     });
 }
+
 
 // ToDo削除処理
 export function initDeleteButtons(buttonClass, contextPath) {
@@ -143,46 +160,6 @@ export function registCheck(formId, overMessage = '合計24時間以内に収め
 }
 
 
-/*
-// 時間登録処理
-export function initRegistTime(formId, contextPath) {
-    const form = document.getElementById(formId);
-    if (!form) {
-  		console.error(`フォームID "${formId}" が見つかりません`);
-  		return;
-	}
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const exercise = formData.get('exercise');
-        const study = formData.get('study');
-        const sleep = formData.get('sleep');
-
-		const params = new URLSearchParams();
-		params.append('exercise', exercise);
-		params.append('study', study);
-		params.append('sleep', sleep);
-		
-		if (!showConfirm('登録しますか？')) return;
-		
-        fetch(`${contextPath}/registTime`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params.toString()
-        })
-        .then(res => {
-            if (!res.ok) throw new Error('登録エラー');
-            location.reload();
-        })
-        .catch(err => {
-            console.error('登録失敗:', err);
-        });
-    });
-}
-*/
-
-
-
 
 
 //確認の表示
@@ -220,9 +197,3 @@ export function registPwMatch(formId, mismatchMessage = 'パスワードが一�
         }
     });
 }
-
-
-
-
-
-

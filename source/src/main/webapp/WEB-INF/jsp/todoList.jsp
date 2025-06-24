@@ -23,20 +23,21 @@
 		<h2>Todoリスト</h2>
 	</div>
 
+	<!-- エラーメッセージ表示（高さは常に確保） -->
+	<div class="errorMessageArea">
+    	<div id="messageBox" class="errorMessage"></div>
+    </div>
+    
 	<!-- Todoリストフォーム -->
-
 	<form class="todoForm" id="todoForm">
 		<div class="todoForm-wrapper">
 			<div class="todoForm-group">
-				<input type="text" id="todoInput" name="todoText" required
-					placeholder=" " /> <label for="todoInput">Todoリスト追加</label>
+				<input type="text" id="todoInput" name="todoText" required maxlength="70" placeholder=" " />
+				<label for="todoInput">Todoリスト追加</label>
 			</div>
 			<button type="submit" class="todoForm-button">追加</button>
 		</div>
 	</form>
-
-
-
 
 	<!-- Todoリスト表示 -->
 	<div class="todoList">

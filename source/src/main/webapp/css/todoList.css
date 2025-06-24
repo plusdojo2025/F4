@@ -1,4 +1,9 @@
 /* Todoリストフォーム */
+body {
+    overflow: hidden; /* ページ全体がスクロールしないように */
+    
+}
+
 /* 横並びにするためのflex設定 */
 .todoForm-wrapper {
   display: flex;
@@ -72,6 +77,12 @@
 
 
 /* Todoリスト */
+.todoList {
+	    max-height: 60vh; /* 高さを調整（必要に応じて変更） */
+	
+	    overflow-y: auto;  /* 縦方向のスクロールを有効にする */
+}
+
 .todoList ul{
     margin-left: 20px;
     padding-left: 0;
