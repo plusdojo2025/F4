@@ -25,6 +25,7 @@ public class weekFeedbackServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
+        doTimesDAO dtdao = new doTimesDAO();
 
         if (session == null) {
             response.sendRedirect("login.jsp");
@@ -38,10 +39,24 @@ public class weekFeedbackServlet extends HttpServlet {
         }
 
         int userId = user.getId();
+        
+        LocalDate nowdate2 = LocalDate.now();
+        LocalDate firstdate2 = dtdao.getFirstDate(userId);
+        calc cc2 = new calc();
+
+        if (firstdate2 == null) {
+            // 初回アクセス
+            request.getRequestDispatcher("/WEB-INF/jsp/resultDefault.jsp").forward(request, response);
+            return;
+        }
+        if(cc2.judgeDate(nowdate2, firstdate2) <=5) {
+        	request.getRequestDispatcher("/WEB-INF/jsp/resultDay.jsp").forward(request, response);
+            return;
+        }
 
         try {
             // 実施時間の取得
-            doTimesDAO dtdao = new doTimesDAO();
+            
             List<Double> timesList = dtdao.getTimes(userId);//最新の一件の実施時間のリスト
 
             if (timesList == null || timesList.size() < 3) {
