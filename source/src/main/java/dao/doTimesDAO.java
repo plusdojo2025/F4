@@ -229,6 +229,8 @@ public class doTimesDAO {
             if (rs.next()) {
             	Date sqldate = rs.getDate("date");
             	firstdate = sqldate.toLocalDate();
+            }else {
+            	firstdate = null;
             }
         } catch (Exception e) {
             e.printStackTrace();

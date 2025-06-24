@@ -63,7 +63,12 @@ public class registGoalServlet extends HttpServlet {
 						System.out.println("例外");
 					}
 				}
-				
+				else 
+				{
+					response.sendRedirect(request.getContextPath() + "/home");
+					System.out.println("ホーム画面にせんいします2");
+					return;
+				}
 			}
 			
 		}
