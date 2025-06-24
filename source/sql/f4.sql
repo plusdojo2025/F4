@@ -67,4 +67,10 @@ insert into users values(0, '8day', '8day@jp', 'test');
 insert into goals values(0, 5, 1, 2, 6);
 insert into do_times values(0, 5, '2025-06-17', 1, 2, 6);
 
-
+insert into users values(0, '6day', '6day@jp', 'test');
+insert into goals values(0, 6, 1, 2, 6);
+insert into do_times values(0, 6, '2025-06-19', 1, 2, 6);
+insert into do_times values(0, 6, '2025-06-20', 1, 2, 6);
+insert into do_times values(0, 6, '2025-06-21', 1, 2, 6);
+insert into do_times values(0, 6, '2025-06-22', 1, 2, 6);
+insert into do_times values(0, 6, '2025-06-23', 1, 2, 6);
