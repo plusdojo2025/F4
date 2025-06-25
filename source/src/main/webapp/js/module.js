@@ -26,8 +26,8 @@ export function initAddTodo(formId, inputId, contextPath, userId) {
         }
 
         // 50文字を超えている場合
-        if (todoText.length > 50) {
-            if (messageBox) messageBox.textContent = '50文字以内で入力してください。';
+        if (todoText.length > 30) {
+            if (messageBox) messageBox.textContent = '30文字以内で入力してください。';
             return;
         }
 

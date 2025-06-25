@@ -52,6 +52,16 @@ public class registUserServlet extends HttpServlet {
 	        dispatcher.forward(request, response);
 	        return;
 	    }
+	    
+	    // メールアドレス形式チェック
+	    String emailPattern = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+$";
+
+	    if (!mail.matches(emailPattern)) {
+	        request.setAttribute("errorMessage", "メールアドレスの形式が正しくありません。");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registUser.jsp");
+	        dispatcher.forward(request, response);
+	        return;
+	    }
 		
 		// 登録処理を行う
 		usersDAO udao = new usersDAO();

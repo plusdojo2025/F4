@@ -38,9 +38,17 @@ public class registGoalServlet extends HttpServlet {
 		goalsDAO gdao = new goalsDAO();
 		resultsDAO rdao = new resultsDAO();
 		
+		
         calc cc = new calc();
         
 		usersDTO userdto = (usersDTO) session.getAttribute("userinfo");
+		
+		if (userdto == null) {
+			System.out.println("ログイン情報がセッションにありません。ログイン画面へリダイレクトします。");
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
+		
 		if(userdto != null) {
 			int userId = userdto.getId();
 			System.out.println("ID：" + userId);
@@ -70,8 +78,8 @@ public class registGoalServlet extends HttpServlet {
 					return;
 				}
 			}
-			
 		}
+		
 		
 	    System.out.println("✅ registGoalServlet にアクセスがありました");
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registGoal.jsp");
