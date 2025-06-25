@@ -31,7 +31,7 @@
 	<form class="todoForm" id="todoForm">
 		<div class="todoForm-wrapper">
 			<div class="todoForm-group">
-				<input type="text" id="todoInput" name="todoText" required maxlength="70" placeholder=" " />
+				<input type="text" id="todoInput" name="todoText" required maxlength="40" placeholder=" " />
 				<label for="todoInput">Todoリスト追加</label>
 			</div>
 			<button type="submit" class="todoForm-button">追加</button>
