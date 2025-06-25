@@ -70,13 +70,13 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
         for(int i = 1; i < dayLevelList.size(); i++){
             switch (i) {
                 case 1:
-                    if(dayLevelList.get(dayLevelList.size() - i) >=80){
+                    if(dayLevelList.get(dayLevelList.size() - i - 1) >=80){
                         efeed = book.getBestExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
-                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 60){
+                    }else if(dayLevelList.get(dayLevelList.size() - i - 1) >= 60){
                         efeed = book.getGoodExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
-                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 40){
+                    }else if(dayLevelList.get(dayLevelList.size() - i - 1) >= 40){
                         efeed = book.getSosoExfeed();
                         efeedback = efeed.get(rand.nextInt(efeed.size()));
                     }else{
@@ -85,13 +85,13 @@ public class calc{//doexcersize dostudy dosleep｜ goalexcersize goalstudy goals
                     }
                     break;
                 case 2:
-                    if(dayLevelList.get(dayLevelList.size() - i) >=80){
+                    if(dayLevelList.get(dayLevelList.size() - i + 1) >=80){
                         sfeed = book.getBestStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
-                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 60){
+                    }else if(dayLevelList.get(dayLevelList.size() - i + 1) >= 60){
                         sfeed = book.getGoodStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
-                    }else if(dayLevelList.get(dayLevelList.size() - i) >= 40){
+                    }else if(dayLevelList.get(dayLevelList.size() - i + 1) >= 40){
                         sfeed = book.getSosoStfeed();
                         sfeedback = sfeed.get(rand.nextInt(sfeed.size()));
                     }else{
