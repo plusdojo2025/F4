@@ -54,7 +54,7 @@ public class registUserServlet extends HttpServlet {
 	    }
 	    
 	    // メールアドレス形式チェック
-	    String emailPattern = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+$";
+	    String emailPattern = "^[A-Za-z0-9._%+-]+@[\\\\p{ASCII}&&[A-Za-z0-9.-]]+\\\\.[A-Za-z]+$";
 
 	    if (!mail.matches(emailPattern)) {
 	        request.setAttribute("errorMessage", "メールアドレスの形式が正しくありません。");
