@@ -40,7 +40,7 @@
 		<h1>一日の目標時間</h1>
 		<!-- 運動時間 -->
 		<div class="goalTimeItem">
-			<div class="icon">
+			<div class="icon bgColorExercise">
 				<svg width="25" height="25" viewBox="0 0 19 21" fill="none"
 					xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -56,7 +56,7 @@
 		</div>
 		<!-- 勉強時間 -->
 		<div class="goalTimeItem">
-			<div class="icon">
+			<div class="icon  bgColorStudy">
 				<svg width="25" height="25" viewBox="0 0 22 19" fill="none"
 					xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -72,7 +72,7 @@
 		</div>
 		<!-- 睡眠時間 -->
 		<div class="goalTimeItem">
-			<div class="icon">
+			<div class="icon  bgColorSleep">
 				<svg width="25" height="25" viewBox="0 0 20 20" fill="none"
 					xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
