@@ -250,7 +250,7 @@ background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);}
  */    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
 }
-
+/* 
 .card {
   border-radius: 16px;            
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
@@ -258,3 +258,156 @@ background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);}
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: 16px auto;
 }
+
+
+
+
+
+@media (hover: none) {
+.card:active {
+  transform: scale(0.95);
+  background-color: #dff9ff; タップ時にほんのり黄色に
+  box-shadow: 0 6px 18px rgba(240, 240, 240, 0.4);
+  animation: popIn 0.5s ease;
+}
+}
+@media (hover: hover) {
+  .card:hover {
+    PCホバー用アニメ
+  transform: scale(0.95);
+  background-color: #dff9ff; タップ時にほんのり黄色に
+  box-shadow: 0 6px 18px rgba(240, 240, 240, 0.4);
+  animation: popIn 0.5s ease;
+}
+}
+
+
+
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+ */
+ 
+ .card {
+  position: relative;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 16px auto;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ==== フェードイン（ふわっと登場） ==== */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==== 常時うっすら表示される光のベース ==== */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 45%,
+    rgba(223, 249, 255, 0.4) 50%,
+    transparent 55%
+  );
+  transform: skewX(-20deg);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==== ホバー時に一度だけ光が走るアニメーション用ライン ==== */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(223, 249, 255, 0.7),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==== shine アニメーション ==== */
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+/* ==== ホバー時に1回だけアニメーションが発動 ==== */
+.card:hover::before {
+  animation: shine 1s ease forwards;
+}
+
+/* ==== ホバー時のスケールと影（やる気感） ==== */
+@media (hover: hover) {
+  .card:hover {
+    transform: scale(0.97);
+	background-image: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);  }
+}
+
+/* ==== タップ時の演出（スマホ） ==== */
+@media (hover: none) {
+  .card:active {
+    transform: scale(0.97);
+	background-image: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);    animation: popIn 0.4s ease;
+  }
+}
+
+
+
+
+/* ==== 軽く跳ねるようなエフェクト ==== */
+@keyframes popIn {
+  0% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(0.97);
+  }
+}
+ 
