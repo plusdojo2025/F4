@@ -83,7 +83,7 @@ body::-webkit-scrollbar {
 /* Todoリスト */
 .todoList {
 	overflow-y: auto;
-	max-height: calc(100vh - 285px);
+	max-height: calc(100dvh - 285px);
 /*     padding-bottom: 120px; フッターの高さ+αを確保
  */	    
 /*  max-height: 60vh;
