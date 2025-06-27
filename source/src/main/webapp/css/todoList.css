@@ -82,12 +82,13 @@ body::-webkit-scrollbar {
 
 /* Todoリスト */
 .todoList {
-/* 	max-height: calc(100vh - 100px); 画面高からフッター高さを引いた値（仮に100px）
- */    overflow-y: auto;
+	overflow-y: auto;
+	max-height: calc(100vh - 285px);
 /*     padding-bottom: 120px; フッターの高さ+αを確保
  */	    
- max-height: 60vh;
-}
+/*  max-height: 60vh;
+ */
+ }
 
 .todoList ul{
     margin-left: 20px;
