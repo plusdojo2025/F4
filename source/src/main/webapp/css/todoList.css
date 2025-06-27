@@ -4,6 +4,10 @@ body {
     
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 /* 横並びにするためのflex設定 */
 .todoForm-wrapper {
   display: flex;
@@ -78,10 +82,11 @@ body {
 
 /* Todoリスト */
 .todoList {
-	max-height: calc(100vh - 100px); /* 画面高からフッター高さを引いた値（仮に100px） */
-    overflow-y: auto;
-    padding-bottom: 120px; /* フッターの高さ+αを確保 */
-	    
+/* 	max-height: calc(100vh - 100px); 画面高からフッター高さを引いた値（仮に100px）
+ */    overflow-y: auto;
+/*     padding-bottom: 120px; フッターの高さ+αを確保
+ */	    
+ max-height: 60vh;
 }
 
 .todoList ul{
