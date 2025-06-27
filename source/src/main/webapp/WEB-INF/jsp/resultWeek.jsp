@@ -30,7 +30,7 @@
 
     <!-- テキスト -->
     <!-- jspで生成 -->
-    <div>
+    <div class="card">
         <p><%=session.getAttribute("feedback") %></p>
     </div>
 

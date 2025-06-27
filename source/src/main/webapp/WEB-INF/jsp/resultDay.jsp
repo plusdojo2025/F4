@@ -66,7 +66,7 @@
     </div>
 
     <!-- フィードバック -->
-    <div>
+    <div class="card">
         <p><%=session.getAttribute("feedback") %></p>
     </div>
 
